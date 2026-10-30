@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPX Hub Thái Nguyên — Đẩy hàng theo tuyến</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#f6f6f6;color:#222}
+header{background:#d32f2f;color:#fff;padding:16px 20px}
+header h1{margin:0;font-size:20px} header p{margin:6px 0 0;opacity:.95}
+main{max-width:980px;margin:0 auto;padding:16px}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:16px;margin-bottom:16px}
+textarea,input[type=file]{width:100%;box-sizing:border-box}
+textarea{min-height:90px;padding:10px;font-size:15px}
+button{background:#d32f2f;color:#fff;border:0;border-radius:8px;padding:10px 16px;font-size:15px;cursor:pointer;margin:4px 4px 4px 0}
+button.secondary{background:#555}
+.result{border:2px solid #d32f2f;border-radius:12px;padding:16px;background:#fff7f7}
+.result h2{margin:0 0 6px}.warn{background:#fff8e1;border-color:#e6a700}
+.small{color:#555;font-size:13px} .tag{display:inline-block;background:#eee;border-radius:20px;padding:2px 10px;margin:2px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1px solid #eee;padding:6px;text-align:left}
+#map{height:340px;border-radius:12px}
+.test{cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+<h1>SPX Hub Thái Nguyên — Đẩy hàng theo tuyến</h1>
+<p>Hub: Tổ dân phố số 5, Phường Tích Lương, TP Thái Nguyên — 21.5439521, 105.8440779. Phụ trách: Tân Lập, Phú Xá, Tích Lương.</p>
+</header>
+<main>
+<div class="card">
+<h2>1. Đưa ảnh nhiệm vụ vào</h2>
+<p class="small">Tải ảnh lên, dán ảnh (Ctrl+V) vào trang, hoặc gõ trực tiếp địa chỉ ở ô dưới. Hệ thống đọc chữ tiếng Việt trong ảnh bằng OCR chạy trên máy của bạn.</p>
+<input type="file" id="img" accept="image/*">
+<div id="preview"></div>
+<p id="ocrStatus" class="small"></p>
+<label><input type="checkbox" id="hasReturn"> Ảnh có chữ “hoàn hàng” / “trả tiền” / “trả hàng” (tự nhận diện từ văn bản, huynh sửa tay nếu OCR đọc sai)</label>
+</div>
+
+<div class="card">
+<h2>2. Địa chỉ / văn bản đọc được</h2>
+<textarea id="addr" placeholder="Ví dụ: Cổng A1 Công nghiệp — hoặc: số nhà 01 ngách 4 ngõ 54 tổ dân phố 19, Phường Tích Lương, Thái Nguyên"></textarea>
+<button id="find">Tìm rider</button>
+<button class="secondary" id="clear">Xóa</button>
+<p class="small">Thử nhanh:
+<span class="tag test" data-t="Cổng A1 Công nghiệp">Cổng A1 Công nghiệp</span>
+<span class="tag test" data-t="Trùm Quế, Tích Lương">Trùm Quế</span>
+<span class="tag test" data-t="Tổ 12, Tích Lương">Tổ 12 Tích Lương</span>
+<span class="tag test" data-t="số nhà 01 ngách 4 ngõ 54 tổ dân phố 19, Phú Xá, Phường Tích Lương, Thái Nguyên">Tổ 19 ngõ 54</span>
+<span class="tag test" data-t="số nhà 500, Tổ 8, Tích Lương">Số 500 Tổ 8</span>
+</p>
+</div>
+
+<div id="out"></div>
+
+<div class="card">
+<h2>3. Bản đồ mốc chia tuyến</h2>
+<div id="map"></div>
+<p class="small">Mốc đã đối chiếu bản đồ thật: Hub (tọa độ huynh cung cấp), ĐH Kỹ thuật Công nghiệp tại 666 Đ. 3/2, GO! Tân Lập, đường Ga Lưu Xá, đường Việt Bắc đoạn Phú Xá, ngõ 272 đường 3/2 Tân Lập. Cây xăng Mạnh Hùng: theo mã huynh cung cấp JQR7+7C5, xã Vô Tranh — vị trí ghim chỉ là khu vực xã Vô Tranh, cần huynh xác nhận lại điểm chính xác trên Google Maps trước khi dùng làm mốc tọa độ.</p>
+</div>
+
+<div class="card">
+<h2>4. Bảng tuyến đầy đủ</h2>
+<input id="q" placeholder="Tìm tên rider, tổ, đường, mốc..." style="padding:8px;width:100%;box-sizing:border-box;margin-bottom:8px">
+<table id="tbl"><thead><tr><th>Mã</th><th>Rider</th><th>Phường</th><th>Tuyến</th></tr></thead><tbody></tbody></table>
+<p class="small">TRẦN ĐĂNG YÊN [162125] đã nghỉ làm tại Hub nên không chia tuyến nữa và không xuất hiện trong kết quả gợi ý.</p>
+</div>
+
+<div class="card">
+<h2>5. Luật áp dụng — đọc kỹ trước khi gửi</h2>
+<ul>
+<li><b>Ưu tiên mốc địa danh</b> rồi mới tới tổ, số nhà, ngõ, đường.</li>
+<li><b>Trùm Quế (Tích Lương)</b> luôn chuyển cho LÊ TUẤN ANH, dù tuyến gốc là DƯƠNG VĂN SƠN.</li>
+<li><b>Mốc 666:</b> ĐH Kỹ thuật Công nghiệp ở 666 Đ. 3/2. “Từ 666 trở ngược lên số nhỏ Tổ 8” nghĩa là số nhà ≤ 666 tại Tổ 8 về LÊ THANH HÀ; số 666–1016 tại Tổ 2 về DƯƠNG TIỀN PHÚ.</li>
+<li><b>Quy tắc dự phòng chỉ áp khi ảnh KHÔNG có chữ “hoàn hàng”, “trả tiền” hay “trả hàng”:</b> Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH. Nếu ảnh có một trong ba chữ đó thì chia theo địa chỉ bình thường, không dùng dự phòng.</li>
+<li><b>Tổ 17 → tính là Phú Xá.</b> Tổ nào không có trong bảng (ví dụ Tổ 19) thì hệ thống báo “chưa xác định được”, không tự đoán rider.</li>
+<li><b>“Người gửi trả phí” không tính</b> là “trả hàng” hay “trả tiền” trong quy tắc dự phòng.</li>
+</ul>
+</div>
+</main>
+<script>
+//__RULES_START__
+const RIDERS = {
+  TUAN:{id:"53634",name:"BÙI VĂN TUẤN",ward:"Tích Lương",route:"Cổng A1 đến Tổ 6"},
+  HA:{id:"16338",name:"LÊ THANH HÀ",ward:"Tích Lương",route:"Cổng chính ĐH Công nghiệp đến cây xăng Mạnh Hùng; từ 666 trở ngược về số nhỏ, Tổ 8"},
+  DAM:{id:"100332",name:"LƯỜNG THỊ ĐẦM",ward:"Tích Lương",route:"Tổ 11, 12, 13, 14, 15"},
+  PHU:{id:"157243",name:"DƯƠNG TIỀN PHÚ",ward:"Tích Lương",route:"Tổ 9, Tổ 10; từ 666 đến 1016, Tổ 2"},
+  SON:{id:"38286",name:"DƯƠNG VĂN SƠN",ward:"Tích Lương",route:"Tổ 4, Tổ 5 (trừ Trùm Quế)"},
+  HIEN_HUU:{id:"36689",name:"NGUYỄN HỮU HIỆN",ward:"Phú Xá",route:"Số nhà 210 đến 58 chẵn; Tổ 2 mặt đường Việt Bắc, ngõ 167 đến nhà 57B lẻ"},
+  THU:{id:"55666",name:"NGUYỄN THỊ THU",ward:"Phú Xá",route:"Tổ 4, mặt lẻ đường 3/2 đến 1149"},
+  CHUNG:{id:"58352",name:"NGUYỄN ĐỨC CHUNG",ward:"Phú Xá",route:"Mặt lẻ Tổ 1 Phú Xá, Tổ 1 Cách mạng Tháng 8"},
+  TRUNG:{id:"79629",name:"ĐẶNG TIẾN TRUNG",ward:"Phú Xá",route:"1151 đến 1477, ngõ 67, ngõ 210; Tổ 7, ngõ 711"},
+  MAI:{id:"164091",name:"HÀ NGỌC MAI",ward:"Phú Xá",route:"Tổ 8, Tổ 10, Tổ 11"},
+  NHUNG:{id:"123498",name:"ĐỖ THỊ NHUNG",ward:"Phú Xá",route:"Cổng GOLICC đến hết đường ga; đường Việt Bắc đến đèn xanh đèn đỏ; Ga Lưu Xá"},
+  HOANG_ANH:{id:"161388",name:"NGUYỄN HOÀNG ANH",ward:"Tân Lập",route:"502 đến Ốc Hương, lẻ đường 3/2; 8xx"},
+  KIEN:{id:"79621",name:"PHẠM TRUNG KIÊN",ward:"Tân Lập",route:"Tổ 1, Tổ 2, GO, đường Việt Bắc"},
+  DUC:{id:"69333",name:"NGUYỄN MẠNH ĐỨC",ward:"Tân Lập",route:"Chẵn Tân Lập, từ ngõ 272 đến số to trung cấp nghề"},
+  THANG:{id:"44207",name:"NGUYỄN XUÂN THẮNG",ward:"Tân Lập",route:"Từ 272 đến số nhỏ, trường nội trú"},
+  HIEN_PHAM:{id:"52224",name:"PHẠM THỊ HIÊN",ward:"Tân Lập",route:"Từ 505 đến số nhỏ"},
+  TUAN_ANH:{id:"139148",name:"LÊ TUẤN ANH",ward:"Tân Lập",route:"Lấy hàng seller, NS tại Tân Lập; nhận Trùm Quế chuyển đẩy; dự phòng Tân Lập/Tích Lương"}
+};
+function norm(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/\s+/g," ").trim();}
+function parse(raw){
+  const t=norm(raw);
+  const hasReturn=/hoan hang|tra tien|tra hang/.test(t);
+  const wards=[]; for(const w of ["tich luong","phu xa","tan lap"]){let i=t.indexOf(w); while(i>=0){wards.push({w,i}); i=t.indexOf(w,i+1);}}
+  wards.sort((a,b)=>a.i-b.i);
+  const wardList=[...new Set(wards.map(x=>x.w))];
+  const ward=wardList.length?wards[wards.length-1].w:null;
+  const toM=t.match(/to\s*(?:dan pho\s*)?(\d+)/); const to=toM?parseInt(toM[1]):null;
+  const hM=t.match(/so nha\s*(\d+)/); const house=hM?parseInt(hM[1]):null;
+  const nM=t.match(/ngo\s*(\d+)/); const ngo=nM?parseInt(nM[1]):null;
+  const road32=/3\/2|d\. 3\/2/.test(t);
+  const le=/(mat le|\ble\b)/.test(t); const chan=/\bchan\b/.test(t);
+  return {t,hasReturn,ward,wardList,to,house,ngo,road32,le,chan};
+}
+function hit(r,conf,reason){return {rider:r,conf,reason};}
+function findRider(raw){
+  const p=parse(raw); const t=p.t;
+  if(/trum que/.test(t)) return hit(RIDERS.TUAN_ANH,95,"Trùm Quế (Tích Lương) chuyển đẩy cho LÊ TUẤN ANH, dù tuyến gốc là DƯƠNG VĂN SƠN.");
+  if(/cong a1|a1 cong nghiep/.test(t)) return hit(RIDERS.TUAN,98,"Cổng A1 Công nghiệp thuộc tuyến cổng A1 đến Tổ 6 của BÙI VĂN TUẤN.");
+  if(/cong chinh/.test(t)&&/cong nghiep/.test(t)) return hit(RIDERS.HA,95,"Cổng chính ĐH Công nghiệp thuộc tuyến của LÊ THANH HÀ.");
+  if(/cay xang manh hung/.test(t)) return hit(RIDERS.HA,92,"Cây xăng Mạnh Hùng là mốc cuối tuyến của LÊ THANH HÀ (đầu kia là cổng chính ĐH Công nghiệp, 666 Đ. 3/2).");
+  if(/golicc|duong ga|ga luu xa/.test(t)) return hit(RIDERS.NHUNG,92,"Cổng GOLICC / đường ga / Ga Lưu Xá thuộc tuyến của ĐỖ THỊ NHUNG.");
+  if(/truong noi tru/.test(t)) return hit(RIDERS.THANG,92,"Trường nội trú thuộc tuyến của NGUYỄN XUÂN THẮNG.");
+  if(/trung cap nghe/.test(t)) return hit(RIDERS.DUC,92,"Trung cấp nghề thuộc tuyến của NGUYỄN MẠNH ĐỨC.");
+  if(/oc huong/.test(t)) return hit(RIDERS.HOANG_ANH,92,"Ốc Hương thuộc tuyến của NGUYỄN HOÀNG ANH.");
+  if(/sieu thi go|go thai nguyen|(^|\s)go(\s|$)/.test(t)) return hit(RIDERS.KIEN,90,"GO thuộc tuyến của PHẠM TRUNG KIÊN (Tân Lập).");
+  if(/seller/.test(t)) return hit(RIDERS.TUAN_ANH,90,"Lấy hàng seller tại Tân Lập thuộc LÊ TUẤN ANH.");
+  // Tổ + phường (phường chính = lần nhắc cuối; nếu tổ khớp ở phường khác được nhắc tới thì ghi rõ)
+  if(p.to!==null){
+    const TL={6:RIDERS.TUAN,4:RIDERS.SON,5:RIDERS.SON,9:RIDERS.PHU,10:RIDERS.PHU,11:RIDERS.DAM,12:RIDERS.DAM,13:RIDERS.DAM,14:RIDERS.DAM,15:RIDERS.DAM};
+    const PX={4:RIDERS.THU,7:RIDERS.TRUNG,8:RIDERS.MAI,10:RIDERS.MAI,11:RIDERS.MAI};
+    const TAN={1:RIDERS.KIEN,2:RIDERS.KIEN};
+    const maps={"tich luong":TL,"phu xa":PX,"tan lap":TAN};
+    if(p.ward&&maps[p.ward]&&maps[p.ward][p.to]) return hit(maps[p.ward][p.to],90,"Tổ "+p.to+" thuộc phường "+p.ward+" theo bảng tuyến.");
+    if(p.ward==="tich luong"&&p.to===8&&p.house!==null&&p.house<=666) return hit(RIDERS.HA,90,"Tổ 8, số nhà "+p.house+" ≤ 666 (trở ngược từ mốc 666) về LÊ THANH HÀ.");
+    if(p.ward==="tich luong"&&p.to===2&&p.house!==null&&p.house>=666&&p.house<=1016) return hit(RIDERS.PHU,90,"Tổ 2, số nhà "+p.house+" trong khoảng 666–1016 về DƯƠNG TIỀN PHÚ.");
+    if(p.ward==="phu xa"&&p.to===1&&p.le) return hit(RIDERS.CHUNG,88,"Tổ 1 Phú Xá, mặt lẻ về NGUYỄN ĐỨC CHUNG.");
+    if(p.ward==="phu xa"&&p.to===2) return hit(RIDERS.HIEN_HUU,85,"Tổ 2 Phú Xá về NGUYỄN HỮU HIỆN (kiểm tra thêm số nhà/ngõ nếu có).");
+  }
+  if(p.road32&&p.house!==null){
+    if(p.ward==="phu xa"&&p.house>=1151&&p.house<=1477) return hit(RIDERS.TRUNG,90,"Đường 3/2 Phú Xá, số nhà "+p.house+" trong khoảng 1151–1477 về ĐẶNG TIẾN TRUNG.");
+    if(p.ward==="phu xa"&&p.house<=1149&&p.le) return hit(RIDERS.THU,90,"Đường 3/2 Phú Xá, mặt lẻ đến 1149 về NGUYỄN THỊ THU.");
+    if(p.ward==="phu xa"&&p.house>=58&&p.house<=210&&p.chan) return hit(RIDERS.HIEN_HUU,88,"Số nhà chẵn "+p.house+" trong khoảng 58–210 (Phú Xá) về NGUYỄN HỮU HIỆN.");
+    if(p.ward==="tan lap"&&p.house>=800&&p.house<=899) return hit(RIDERS.HOANG_ANH,88,"Đường 3/2 Tân Lập, số 8xx về NGUYỄN HOÀNG ANH.");
+  }
+  if(p.ngo!==null){
+    if(p.ward==="phu xa"&&[67,210,711].includes(p.ngo)) return hit(RIDERS.TRUNG,90,"Ngõ "+p.ngo+" (Phú Xá) thuộc tuyến của ĐẶNG TIẾN TRUNG.");
+    if(/viet bac/.test(t)&&p.ngo===167) return hit(RIDERS.HIEN_HUU,90,"Ngõ 167 mặt đường Việt Bắc thuộc tuyến của NGUYỄN HỮU HIỆN.");
+    if(p.ward==="tan lap"&&p.ngo===272){
+      if(/so to|so lon/.test(t)) return hit(RIDERS.DUC,85,"Ngõ 272 về hướng số to thuộc NGUYỄN MẠNH ĐỨC.");
+      if(/so nho/.test(t)) return hit(RIDERS.THANG,85,"Ngõ 272 về hướng số nhỏ thuộc NGUYỄN XUÂN THẮNG.");
+      return {ambiguous:[RIDERS.DUC,RIDERS.THANG],conf:0,reason:"Chỉ có ngõ 272 Tân Lập, chưa rõ về hướng số to (NGUYỄN MẠNH ĐỨC) hay số nhỏ (NGUYỄN XUÂN THẮNG)."};
+    }
+  }
+  if(!p.hasReturn){
+    if(p.to===17) return hit(RIDERS.TRUNG,75,"Tổ 17 tính là Phú Xá, và ảnh không có chữ hoàn hàng/trả tiền/trả hàng nên áp quy tắc dự phòng: Phú Xá → ĐẶNG TIẾN TRUNG.");
+    if(p.ward==="phu xa") return hit(RIDERS.TRUNG,75,"Ảnh không có chữ hoàn hàng/trả tiền/trả hàng nên áp quy tắc dự phòng: Phú Xá → ĐẶNG TIẾN TRUNG.");
+    if(p.ward==="tan lap"||p.ward==="tich luong") return hit(RIDERS.TUAN_ANH,75,"Ảnh không có chữ hoàn hàng/trả tiền/trả hàng nên áp quy tắc dự phòng: Tân Lập/Tích Lương → LÊ TUẤN ANH.");
+  }
+  const reasons=[];
+  if(p.to!==null) reasons.push("Tổ "+p.to+" không có trong bảng tuyến của phường "+(p.ward||"chưa xác định")+".");
+  if(p.hasReturn) reasons.push("Ảnh có chữ hoàn hàng/trả tiền/trả hàng nên KHÔNG áp quy tắc dự phòng theo phường.");
+  if(!reasons.length) reasons.push("Địa chỉ không khớp mốc, tổ, số nhà hay ngõ nào trong bảng tuyến.");
+  return {rider:null,conf:0,reason:reasons.join(" "),parsed:p};
+}
+//__RULES_END__
+const $=id=>document.getElementById(id);
+function render(){
+  const raw=$("addr").value.trim();
+  const hasReturnBox=$("hasReturn").checked;
+  if(!raw){$("out").innerHTML="";return;}
+  const res=findRider(raw);
+  // Nếu huynh tick tay thì tôn trọng ô tick hơn OCR
+  const p=parse(raw);
+  let note="";
+  if(hasReturnBox!==p.hasReturn) note="<p class='small'>Huynh đã tick tay trạng thái hoàn/trả khác với văn bản tự nhận diện — kết quả dưới đây vẫn theo địa chỉ; nếu địa chỉ không khớp, quy tắc dự phòng chỉ áp khi KHÔNG có hoàn/trả.</p>";
+  if(res.rider){
+    $("out").innerHTML="<div class='result'><h2>Đẩy cho "+res.rider.name+" ["+res.rider.id+"]</h2><p>Độ tin cậy: "+res.conf+"% — "+res.reason+"</p><p class='small'>Tuyến: "+res.rider.route+" ("+res.rider.ward+")</p><button id='cp'>Copy câu trả lời</button>"+note+"</div>";
+    $("cp").onclick=()=>{const txt="Đẩy cho "+res.rider.name+" ["+res.rider.id+"] — "+res.reason; navigator.clipboard.writeText(txt).then(()=>alert("Đã copy."));};
+  } else if(res.ambiguous){
+    $("out").innerHTML="<div class='result warn'><h2>Chưa chốt được 1 rider — 2 ứng viên</h2><p>"+res.reason+"</p><ul>"+res.ambiguous.map(r=>"<li>"+r.name+" ["+r.id+"] — "+r.route+"</li>").join("")+"</ul>"+note+"</div>";
+  } else {
+    $("out").innerHTML="<div class='result warn'><h2>Chưa xác định được rider — cần huynh xác nhận</h2><p>"+res.reason+"</p><p class='small'>Đã đọc được: "+(p.to!==null?("Tổ "+p.to+"; "):"")+(p.ward?("Phường "+p.ward+"; "):"")+(p.house!==null?("Số nhà "+p.house+"; "):"")+(p.ngo!==null?("Ngõ "+p.ngo+"; "):"")+(p.hasReturn?"Có chữ hoàn/trả.":"Không có chữ hoàn/trả.")+"</p>"+note+"</div>";
+  }
+}
+$("find").onclick=render;
+$("clear").onclick=()=>{$("addr").value="";$("out").innerHTML="";$("preview").innerHTML="";};
+document.querySelectorAll(".test").forEach(el=>el.onclick=()=>{$("addr").value=el.dataset.t; $("hasReturn").checked=/hoan hang|tra tien|tra hang/i.test(el.dataset.t); render();});
+function runOCR(file){
+  $("ocrStatus").textContent="Đang đọc ảnh...";
+  const img=document.createElement("img"); img.style.maxWidth="100%"; img.src=URL.createObjectURL(file);
+  $("preview").innerHTML=""; $("preview").appendChild(img);
+  if(typeof Tesseract==="undefined"){$("ocrStatus").textContent="Không tải được OCR (cần mạng). Huynh gõ địa chỉ vào ô để tra.";return;}
+  Tesseract.recognize(file,"vie",{logger:m=>{if(m.status==="recognizing text") $("ocrStatus").textContent="Đang đọc ảnh: "+Math.round((m.progress||0)*100)+"%";}}).then(r=>{
+    $("addr").value=r.data.text.trim(); $("hasReturn").checked=/hoàn hàng|trả tiền|trả hàng/i.test(r.data.text);
+    $("ocrStatus").textContent="Đã đọc xong. Huynh kiểm tra lại địa chỉ rồi bấm Tìm rider.";
+    render();
+  }).catch(()=>{$("ocrStatus").textContent="OCR lỗi. Huynh gõ địa chỉ vào ô để tra.";});
+}
+$("img").onchange=e=>{if(e.target.files[0]) runOCR(e.target.files[0]);};
+document.addEventListener("paste",e=>{const f=[...(e.clipboardData||{}).items||[]].find(i=>i.type.indexOf("image")===0); if(f) runOCR(f.getAsFile());});
+// Bảng tuyến
+const tb=$("tbl").querySelector("tbody");
+Object.values(RIDERS).forEach(r=>{const tr=document.createElement("tr"); tr.innerHTML="<td>"+r.id+"</td><td>"+r.name+"</td><td>"+r.ward+"</td><td>"+r.route+"</td>"; tb.appendChild(tr);});
+$("q").oninput=e=>{const q=norm(e.target.value); [...tb.rows].forEach(row=>{row.style.display=norm(row.innerText).includes(q)?"":"none";});};
+// Bản đồ
+const map=L.map("map").setView([21.5439521,105.8440779],13);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(map);
+const pins=[
+ [21.5439521,105.8440779,"Hub SPX — Tổ 5, Tích Lương"],
+ [21.55057,105.84165,"ĐH Kỹ thuật Công nghiệp — 666 Đ. 3/2"],
+ [21.57076,105.83446,"GO! Thái Nguyên — Tân Lập"],
+ [21.55775,105.84426,"Đường Ga Lưu Xá — Phú Xá"],
+ [21.56385,105.84236,"Đường Việt Bắc — Phú Xá"],
+ [21.55622,105.8296,"Ngõ 272, Đ. 3/2 — Tân Lập"],
+ [21.68162,105.75179,"Khu vực xã Vô Tranh (mã JQR7+7C5) — cây xăng Mạnh Hùng, cần xác nhận điểm chính xác"]
+];
+pins.forEach(p=>L.marker(p).addTo(map).bindPopup(p[2]));
+</script>
+</body>
+</html>
