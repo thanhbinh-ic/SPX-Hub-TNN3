@@ -9,15 +9,19 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <style>
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#f6f6f6;color:#222}
-header{background:#d32f2f;color:#fff;padding:16px 20px}
-header h1{margin:0;font-size:20px} header p{margin:6px 0 0;opacity:.95}
+header{background:#eaf1f8;color:#16324f;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+header h1{margin:0;font-size:20px} header p{margin:6px 0 0;color:#44586e}
+.header-info{text-align:right;max-width:520px;font-size:14px}
 main{max-width:980px;margin:0 auto;padding:16px}
 .card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:16px;margin-bottom:16px}
 textarea,input[type=file]{width:100%;box-sizing:border-box}
-textarea{min-height:90px;padding:10px;font-size:15px}
-button{background:#d32f2f;color:#fff;border:0;border-radius:8px;padding:10px 16px;font-size:15px;cursor:pointer;margin:4px 4px 4px 0}
+textarea{min-height:190px;padding:10px;font-size:15px}
+#preview{text-align:center}
+#preview img{width:100%;max-width:520px;height:auto;display:block;margin:12px auto;border:1px solid #ddd;border-radius:10px}
+#pasteZone{border:2px dashed #9db8d2;border-radius:10px;padding:16px;text-align:center;color:#44586e;background:#f7fafc;cursor:pointer}
+button{background:#2f6fb2;color:#fff;border:0;border-radius:8px;padding:10px 16px;font-size:15px;cursor:pointer;margin:4px 4px 4px 0}
 button.secondary{background:#555}
-.result{border:2px solid #d32f2f;border-radius:12px;padding:16px;background:#fff7f7}
+.result{border:2px solid #2f6fb2;border-radius:12px;padding:16px;background:#f2f7fc}
 .result h2{margin:0 0 6px}.warn{background:#fff8e1;border-color:#e6a700}
 .small{color:#555;font-size:13px} .tag{display:inline-block;background:#eee;border-radius:20px;padding:2px 10px;margin:2px;font-size:13px}
 table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1px solid #eee;padding:6px;text-align:left}
@@ -28,16 +32,19 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <body>
 <header>
 <h1>SPX Hub Thái Nguyên — Đẩy hàng theo tuyến</h1>
-<p>Hub: Tổ dân phố số 5, Phường Tích Lương, TP Thái Nguyên — 21.5439521, 105.8440779. Phụ trách: Tân Lập, Phú Xá, Tích Lương.</p>
+<p class="header-info">Hub: Tổ dân phố số 5, Phường Tích Lương, TP Thái Nguyên — 21.5439521, 105.8440779. Phụ trách: Tân Lập, Phú Xá, Tích Lương.</p>
 </header>
 <main>
 <div class="card">
 <h2>1. Đưa ảnh nhiệm vụ vào</h2>
-<p class="small">Tải ảnh lên, dán ảnh (Ctrl+V) vào trang, hoặc gõ trực tiếp địa chỉ ở ô dưới. Hệ thống đọc chữ tiếng Việt trong ảnh bằng OCR chạy trên máy của bạn.</p>
+<p class="small">Tải ảnh lên, dán ảnh (Ctrl+V), hoặc nhập trực tiếp địa chỉ ở ô dưới. Hệ thống đọc chữ tiếng Việt trong ảnh bằng OCR chạy trên thiết bị của bạn.</p>
 <input type="file" id="img" accept="image/*">
+<div id="pasteZone">Dán ảnh vào đây (Ctrl+V), kéo thả ảnh vào đây, hoặc bấm để chọn ảnh</div>
+<button class="secondary" id="pasteBtn">Dán ảnh từ bộ nhớ tạm</button>
+<p class="small">Hỗ trợ: tải ảnh lên, dán ảnh từ bộ nhớ tạm (Ctrl+V), kéo thả ảnh vào khung trên.</p>
 <div id="preview"></div>
 <p id="ocrStatus" class="small"></p>
-<label><input type="checkbox" id="hasReturn"> Ảnh có chữ “hoàn hàng” / “trả tiền” / “trả hàng” (tự nhận diện từ văn bản, huynh sửa tay nếu OCR đọc sai)</label>
+<label><input type="checkbox" id="hasReturn"> Ảnh có chữ “hoàn hàng” / “trả tiền” / “trả hàng” (tự nhận diện từ văn bản, có thể chỉnh tay nếu OCR đọc sai)</label>
 </div>
 
 <div class="card">
@@ -59,14 +66,13 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <div class="card">
 <h2>3. Bản đồ mốc chia tuyến</h2>
 <div id="map"></div>
-<p class="small">Mốc đã đối chiếu bản đồ thật: Hub (tọa độ huynh cung cấp), ĐH Kỹ thuật Công nghiệp tại 666 Đ. 3/2, GO! Tân Lập, đường Ga Lưu Xá, đường Việt Bắc đoạn Phú Xá, ngõ 272 đường 3/2 Tân Lập. Cây xăng Mạnh Hùng: theo mã huynh cung cấp JQR7+7C5, xã Vô Tranh — vị trí ghim chỉ là khu vực xã Vô Tranh, cần huynh xác nhận lại điểm chính xác trên Google Maps trước khi dùng làm mốc tọa độ.</p>
+<p class="small">Mốc đã đối chiếu bản đồ thật: Hub (tọa độ đã cung cấp), ĐH Kỹ thuật Công nghiệp tại 666 Đ. 3/2, GO! Tân Lập, đường Ga Lưu Xá, đường Việt Bắc đoạn Phú Xá, ngõ 272 đường 3/2 Tân Lập. Cây xăng Mạnh Hùng: theo mã JQR7+7C5, xã Vô Tranh — vị trí ghim chỉ là khu vực xã Vô Tranh, cần xác nhận lại điểm chính xác trên Google Maps trước khi dùng làm mốc tọa độ.</p>
 </div>
 
 <div class="card">
 <h2>4. Bảng tuyến đầy đủ</h2>
 <input id="q" placeholder="Tìm tên rider, tổ, đường, mốc..." style="padding:8px;width:100%;box-sizing:border-box;margin-bottom:8px">
 <table id="tbl"><thead><tr><th>Mã</th><th>Rider</th><th>Phường</th><th>Tuyến</th></tr></thead><tbody></tbody></table>
-<p class="small">TRẦN ĐĂNG YÊN [162125] đã nghỉ làm tại Hub nên không chia tuyến nữa và không xuất hiện trong kết quả gợi ý.</p>
 </div>
 
 <div class="card">
@@ -175,17 +181,17 @@ function render(){
   const hasReturnBox=$("hasReturn").checked;
   if(!raw){$("out").innerHTML="";return;}
   const res=findRider(raw);
-  // Nếu huynh tick tay thì tôn trọng ô tick hơn OCR
+  // Nếu trạng thái hoàn/trả được chọn tay thì tôn trọng lựa chọn tay hơn OCR
   const p=parse(raw);
   let note="";
-  if(hasReturnBox!==p.hasReturn) note="<p class='small'>Huynh đã tick tay trạng thái hoàn/trả khác với văn bản tự nhận diện — kết quả dưới đây vẫn theo địa chỉ; nếu địa chỉ không khớp, quy tắc dự phòng chỉ áp khi KHÔNG có hoàn/trả.</p>";
+  if(hasReturnBox!==p.hasReturn) note="<p class='small'>Trạng thái hoàn/trả đã được chọn thủ công, khác với văn bản tự nhận diện — kết quả dưới đây vẫn theo địa chỉ; nếu địa chỉ không khớp, quy tắc dự phòng chỉ áp khi KHÔNG có hoàn/trả.</p>";
   if(res.rider){
     $("out").innerHTML="<div class='result'><h2>Đẩy cho "+res.rider.name+" ["+res.rider.id+"]</h2><p>Độ tin cậy: "+res.conf+"% — "+res.reason+"</p><p class='small'>Tuyến: "+res.rider.route+" ("+res.rider.ward+")</p><button id='cp'>Copy câu trả lời</button>"+note+"</div>";
-    $("cp").onclick=()=>{const txt="Đẩy cho "+res.rider.name+" ["+res.rider.id+"] — "+res.reason; navigator.clipboard.writeText(txt).then(()=>alert("Đã copy."));};
+    $("cp").onclick=()=>{const txt="Đẩy cho "+res.rider.name+" ["+res.rider.id+"] — "+res.reason; navigator.clipboard.writeText(txt).then(()=>alert("Đã sao chép."));};
   } else if(res.ambiguous){
     $("out").innerHTML="<div class='result warn'><h2>Chưa chốt được 1 rider — 2 ứng viên</h2><p>"+res.reason+"</p><ul>"+res.ambiguous.map(r=>"<li>"+r.name+" ["+r.id+"] — "+r.route+"</li>").join("")+"</ul>"+note+"</div>";
   } else {
-    $("out").innerHTML="<div class='result warn'><h2>Chưa xác định được rider — cần huynh xác nhận</h2><p>"+res.reason+"</p><p class='small'>Đã đọc được: "+(p.to!==null?("Tổ "+p.to+"; "):"")+(p.ward?("Phường "+p.ward+"; "):"")+(p.house!==null?("Số nhà "+p.house+"; "):"")+(p.ngo!==null?("Ngõ "+p.ngo+"; "):"")+(p.hasReturn?"Có chữ hoàn/trả.":"Không có chữ hoàn/trả.")+"</p>"+note+"</div>";
+    $("out").innerHTML="<div class='result warn'><h2>Chưa xác định được rider — cần xác nhận thêm</h2><p>"+res.reason+"</p><p class='small'>Đã đọc được: "+(p.to!==null?("Tổ "+p.to+"; "):"")+(p.ward?("Phường "+p.ward+"; "):"")+(p.house!==null?("Số nhà "+p.house+"; "):"")+(p.ngo!==null?("Ngõ "+p.ngo+"; "):"")+(p.hasReturn?"Có chữ hoàn/trả.":"Không có chữ hoàn/trả.")+"</p>"+note+"</div>";
   }
 }
 $("find").onclick=render;
@@ -193,15 +199,32 @@ $("clear").onclick=()=>{$("addr").value="";$("out").innerHTML="";$("preview").in
 document.querySelectorAll(".test").forEach(el=>el.onclick=()=>{$("addr").value=el.dataset.t; $("hasReturn").checked=/hoan hang|tra tien|tra hang/i.test(el.dataset.t); render();});
 function runOCR(file){
   $("ocrStatus").textContent="Đang đọc ảnh...";
-  const img=document.createElement("img"); img.style.maxWidth="100%"; img.src=URL.createObjectURL(file);
+  const img=document.createElement("img"); img.src=URL.createObjectURL(file);
   $("preview").innerHTML=""; $("preview").appendChild(img);
-  if(typeof Tesseract==="undefined"){$("ocrStatus").textContent="Không tải được OCR (cần mạng). Huynh gõ địa chỉ vào ô để tra.";return;}
+  if(typeof Tesseract==="undefined"){$("ocrStatus").textContent="Không tải được OCR (cần mạng). Vui lòng nhập địa chỉ vào ô để tra cứu.";return;}
   Tesseract.recognize(file,"vie",{logger:m=>{if(m.status==="recognizing text") $("ocrStatus").textContent="Đang đọc ảnh: "+Math.round((m.progress||0)*100)+"%";}}).then(r=>{
     $("addr").value=r.data.text.trim(); $("hasReturn").checked=/hoàn hàng|trả tiền|trả hàng/i.test(r.data.text);
-    $("ocrStatus").textContent="Đã đọc xong. Huynh kiểm tra lại địa chỉ rồi bấm Tìm rider.";
+    $("ocrStatus").textContent="Đã đọc xong. Kiểm tra lại địa chỉ rồi bấm Tìm rider.";
     render();
-  }).catch(()=>{$("ocrStatus").textContent="OCR lỗi. Huynh gõ địa chỉ vào ô để tra.";});
+  }).catch(()=>{$("ocrStatus").textContent="Đọc ảnh không thành công. Vui lòng nhập địa chỉ vào ô để tra cứu.";});
 }
+async function pasteFromClipboard(){
+  try{
+    if(!navigator.clipboard||!navigator.clipboard.read) throw new Error("unsupported");
+    const items=await navigator.clipboard.read();
+    for(const item of items){
+      const type=item.types.find(t=>t.indexOf("image")===0);
+      if(type){const blob=await item.getType(type); runOCR(new File([blob],"pasted-image.png",{type})); return;}
+    }
+    $("ocrStatus").textContent="Bộ nhớ tạm không có ảnh. Hãy sao chép ảnh rồi nhấn Ctrl+V khi đang ở trang này.";
+  }catch(e){
+    $("ocrStatus").textContent="Không đọc được ảnh từ bộ nhớ tạm trên trình duyệt này. Hãy sao chép ảnh rồi nhấn Ctrl+V khi đang ở trang này.";
+  }
+}
+$("pasteBtn").onclick=pasteFromClipboard;
+$("pasteZone").onclick=()=>$("img").click();
+$("pasteZone").ondragover=e=>{e.preventDefault();};
+$("pasteZone").ondrop=e=>{e.preventDefault(); if(e.dataTransfer.files[0]) runOCR(e.dataTransfer.files[0]);};
 $("img").onchange=e=>{if(e.target.files[0]) runOCR(e.target.files[0]);};
 document.addEventListener("paste",e=>{const f=[...(e.clipboardData||{}).items||[]].find(i=>i.type.indexOf("image")===0); if(f) runOCR(f.getAsFile());});
 // Bảng tuyến

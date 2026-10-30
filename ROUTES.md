@@ -18,9 +18,9 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
 6. Tổ 17 → tính là Phú Xá.
 7. Tổ không có trong bảng (ví dụ Tổ 19) → hệ thống báo chưa xác định được,
    không tự đoán rider.
-8. TRẦN ĐĂNG YÊN [162125] đã nghỉ làm tại Hub nên không chia tuyến nữa.
+8. TRẦN ĐĂNG YÊN [162125]: không còn trong danh sách phân tuyến.
 
-## Bảng tuyến (từ file chia tuyến huynh gửi)
+## Bảng tuyến (từ file chia tuyến đã cung cấp)
 
 ### Tích Lương
 
@@ -55,3 +55,5 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
 
 Trang là web tĩnh, không cần build. Trên Vercel chọn Import repo này,
 framework để Other / Static, không cần lệnh build, file chạy là `index.html`.
+
+Ảnh có thể tải lên, dán từ bộ nhớ tạm (Ctrl+V), kéo thả vào khung dán ảnh, hoặc nhập địa chỉ trực tiếp.
