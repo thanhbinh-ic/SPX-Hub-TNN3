@@ -6,7 +6,7 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
 ## Luật ưu tiên
 
 1. Mốc địa danh trước, rồi tổ + phường, rồi số nhà + ngõ + đường.
-2. Trùm Quế (Tích Lương): CHỈ chuyển cho LÊ TUẤN ANH [139148] khi người chuyển là DƯƠNG VĂN SƠN. Chưa rõ người chuyển thì kết quả nêu cả 2 phương án: Sơn chuyển → LÊ TUẤN ANH; không phải Sơn chuyển → chia theo địa chỉ.
+2. Trùm Quế (Tích Lương): kết quả luôn nêu cả 2 phương án, không cần chọn người chuyển: Sơn chuyển → LÊ TUẤN ANH [139148]; không phải Sơn chuyển → chia theo địa chỉ.
 3. Mốc 666: ĐH Kỹ thuật Công nghiệp ở 666 Đ. 3/2, Tích Lương. Số nhà ≤ 666 tại Tổ 8 về
    LÊ THANH HÀ [16338]; số 666–1016 tại Tổ 2 về DƯƠNG TIỀN PHÚ [157243].
 4. Cây xăng Mạnh Hùng: mốc cuối tuyến LÊ THANH HÀ, mã JQR7+7C5, xã Vô Tranh.

@@ -53,7 +53,6 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <div class="card">
 <h2>2. Địa chỉ / văn bản đọc được</h2>
 <textarea id="addr" placeholder="Ví dụ: Cổng A1 Công nghiệp — hoặc: số nhà 01 ngách 4 ngõ 54 tổ dân phố 19, Phường Tích Lương, Thái Nguyên"></textarea>
-<label><input type="checkbox" id="sonTransfer"> Đơn này do DƯƠNG VĂN SƠN chuyển đẩy (chỉ áp dụng cho Trùm Quế)</label><br>
 <button id="find">Tìm rider</button>
 <button class="secondary" id="clear">Xóa</button>
 <p class="small">Thử nhanh:
@@ -88,7 +87,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <h2>5. Luật áp dụng — đọc kỹ trước khi gửi</h2>
 <ul>
 <li><b>Ưu tiên mốc địa danh</b> rồi mới tới tổ, số nhà, ngõ, đường.</li>
-<li><b>Trùm Quế (Tích Lương):</b> chỉ chuyển cho LÊ TUẤN ANH khi người chuyển là DƯƠNG VĂN SƠN. Chưa rõ người chuyển thì kết quả nêu cả 2 phương án: Sơn chuyển → LÊ TUẤN ANH; không phải Sơn chuyển → chia theo địa chỉ.</li>
+<li><b>Trùm Quế (Tích Lương):</b> kết quả luôn nêu cả 2 phương án: Sơn chuyển → LÊ TUẤN ANH; không phải Sơn chuyển → chia theo địa chỉ.</li>
 <li><b>Mốc 666:</b> ĐH Kỹ thuật Công nghiệp ở 666 Đ. 3/2. “Từ 666 trở ngược lên số nhỏ Tổ 8” nghĩa là số nhà ≤ 666 tại Tổ 8 về LÊ THANH HÀ; số 666–1016 tại Tổ 2 về DƯƠNG TIỀN PHÚ.</li>
 <li><b>Quy tắc dự phòng chỉ áp khi không khớp đoạn cụ thể nào VÀ ảnh KHÔNG có chữ “hoàn hàng”, “trả tiền” hay “trả hàng”:</b> Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH. Nếu ảnh có một trong ba chữ đó thì chia theo địa chỉ bình thường, không dùng dự phòng.</li>
 <li><b>Đọc hiểu địa chỉ, không áp công thức máy móc:</b> “8 Phú Xá” được hiểu là Tổ 8 khu Phú Xá; “Đường Phú Xá” được hiểu là khu vực Phú Xá, khác với phường hành chính ghi sau đó. Tổ được tra theo từng khu vực nhắc tới trước, rồi mới tới phường hành chính.</li>
@@ -145,8 +144,7 @@ function parse(raw){
   const cmt8=/cach mang thang 8|cmt8/.test(t);
   const tnxp=/thanh nien xung phong/.test(t);
   const le=/(mat le|\ble\b)/.test(t); const chan=/\bchan\b/.test(t);
-  const sonTransferMention=/duong van son/.test(t)&&/chuyen|day/.test(t);
-  return {t,hasReturn,areaList,admin,to,toImplicit,house,ngo,road32,vietbac,cmt8,tnxp,le,chan,sonTransferMention};
+  return {t,hasReturn,areaList,admin,to,toImplicit,house,ngo,road32,vietbac,cmt8,tnxp,le,chan};
 }
 function breakdown(p){
   const parts=[];
@@ -165,11 +163,8 @@ function breakdown(p){
 function hit(r,conf,reason){return {rider:r,conf,reason};}
 function findRider(raw,opts){
   opts=opts||{}; const p=parse(raw); const t=p.t;
-  const sonTransfer=!!opts.sonTransfer||p.sonTransferMention;
-  // Trùm Quế: CHỈ chuyển cho LÊ TUẤN ANH khi người chuyển là DƯƠNG VĂN SƠN.
-  // Chưa rõ người chuyển thì nêu cả 2 phương án, không tự chốt 1 phương án.
+  // Trùm Quế: luôn nêu cả 2 phương án, không cần nút chọn người chuyển.
   if(/trum que/.test(t)){
-    if(sonTransfer) return hit(RIDERS.TUAN_ANH,95,"Trùm Quế, đơn do DƯƠNG VĂN SƠN chuyển đẩy nên đẩy cho LÊ TUẤN ANH theo quy tắc Trùm Quế.");
     return {ambiguous:[
       {rider:RIDERS.TUAN_ANH,label:"Phương án 1 — Nếu đơn do DƯƠNG VĂN SƠN chuyển đẩy",reason:"Trùm Quế chuyển cho LÊ TUẤN ANH."},
       {rider:RIDERS.SON,label:"Phương án 2 — Nếu không phải Sơn chuyển, chia theo địa chỉ",reason:"Trùm Quế thuộc khu vực Tích Lương do DƯƠNG VĂN SƠN phụ trách (Tổ 4, Tổ 5). Cần xác nhận người chuyển để chốt."}
@@ -259,7 +254,7 @@ function render(){
   const raw=$("addr").value.trim();
   const hasReturnBox=$("hasReturn").checked;
   if(!raw){$("out").innerHTML="";return;}
-  const res=findRider(raw,{sonTransfer:$("sonTransfer").checked});
+  const res=findRider(raw);
   // Nếu trạng thái hoàn/trả được chọn tay thì tôn trọng lựa chọn tay hơn OCR
   const p=parse(raw);
   let note="";
