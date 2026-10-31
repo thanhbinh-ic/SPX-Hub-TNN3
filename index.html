@@ -77,7 +77,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <h2>3. Bản đồ mốc chia tuyến</h2>
 <div id="map"></div>
 <button class="secondary" id="reloadMap">Tải lại nền bản đồ</button>
-<p class="small">Mốc đã đối chiếu bản đồ thật: Hub (tọa độ đã cung cấp), ĐH Kỹ thuật Công nghiệp tại 666 Đ. 3/2, GO! Tân Lập, đường Ga Lưu Xá, đường Việt Bắc đoạn Phú Xá, ngõ 272 đường 3/2 Tân Lập. Cây xăng Mạnh Hùng: Xăng dầu Mạnh Hùng số 3, 426 Thống Nhất, Tích Lương — 21.5535057, 105.8337262 (đã xác nhận theo địa chỉ huynh cung cấp).</p>
+<p class="small">Mốc đã đối chiếu bản đồ thật: Hub (tọa độ đã cung cấp), ĐH Kỹ thuật Công nghiệp tại 666 Đ. 3/2, GO! Tân Lập, đường Ga Lưu Xá, đường Việt Bắc đoạn Phú Xá, ngõ 272 đường 3/2 Tân Lập. Cây xăng Mạnh Hùng: Xăng dầu Mạnh Hùng số 3, 426 Thống Nhất, Tích Lương — 21.5535057, 105.8337262.</p>
 </div>
 
 <div class="card">
@@ -312,21 +312,25 @@ Object.values(RIDERS).forEach(r=>{const tr=document.createElement("tr"); tr.inne
 $("q").oninput=e=>{const q=norm(e.target.value); [...tb.rows].forEach(row=>{row.style.display=norm(row.innerText).includes(q)?"":"none";});};
 // Bản đồ
 const map=L.map("map").setView([21.5439521,105.8440779],13);
-// Nền chính OpenStreetMap; nếu máy tính chặn/không tải được tile OSM (trường hợp
-// ghim hiện mà nền xám/đen, trong khi điện thoại vẫn hiện) thì tự chuyển sang nền
-// CARTO trên CDN khác để bản đồ vẫn hiện, không cần tải lại trang.
-const osmLayer=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"});
-const cartoLayer=L.tileLayer("https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:20,attribution:"© OpenStreetMap © CARTO"});
-let mapFallback=false;
-osmLayer.on("tileerror",()=>{ if(!mapFallback){ mapFallback=true; map.removeLayer(osmLayer); cartoLayer.addTo(map); }});
-osmLayer.addTo(map);
+// Các lớp nền đều KHÔNG cần API key. CARTO đã bị loại: nền CARTO
+// hiện đòi API key (ảnh chụp màn hình hiện chữ "API KEY REQUIRED" trên nền).
+// Nếu lớp nền hiện tại lỗi tile thì tự chuyển sang lớp tiếp theo trong danh sách.
+const mapLayers=[
+ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}),
+ L.tileLayer("https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap, Tiles style by Humanitarian OpenStreetMap Team"}),
+ L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Tiles © Esri"})
+];
+let mapLayerIdx=0, mapSwitching=false;
+function mapUseLayer(i){ map.eachLayer(l=>{ if(l instanceof L.TileLayer) map.removeLayer(l); }); mapLayers[i].addTo(map); }
+mapLayers.forEach((ly,i)=>{ ly.on("tileerror",()=>{ if(mapSwitching||i!==mapLayerIdx) return; if(mapLayerIdx<mapLayers.length-1){ mapSwitching=true; mapLayerIdx++; mapUseLayer(mapLayerIdx); setTimeout(()=>{ mapSwitching=false; },2000); } }); });
+mapUseLayer(0);
 // Ép Leaflet tính lại kích thước sau khi trang dựng xong và khi đổi cửa sổ:
 // bản đồ hay bị lệch/mất nền khi khởi tạo lúc khung chưa có kích thước cuối.
 function fixMapSize(){ map.invalidateSize(); }
 if(document.readyState==="complete"){ fixMapSize(); } else { window.addEventListener("load",fixMapSize); }
 setTimeout(fixMapSize,300);
 window.addEventListener("resize",fixMapSize);
-$("reloadMap").onclick=()=>{ fixMapSize(); osmLayer.redraw(); if(mapFallback) cartoLayer.redraw(); };
+$("reloadMap").onclick=()=>{ fixMapSize(); mapLayers[mapLayerIdx].redraw(); };
 const pins=[
  [21.5439521,105.8440779,"Hub SPX — Tổ 5, Tích Lương"],
  [21.55057,105.84165,"ĐH Kỹ thuật Công nghiệp — 666 Đ. 3/2"],
