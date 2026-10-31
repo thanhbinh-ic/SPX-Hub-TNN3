@@ -66,6 +66,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <span class="tag test" data-t="Số Nhà 188, Đường Phú Xá, Phường Tích Lương, Tỉnh Thái Nguyên">Số 188 Đường Phú Xá</span>
 <span class="tag test" data-t="số nhà 01 ngách 4 ngõ 54 tổ dân phố 19, Phú Xá, Phường Tích Lương">Tổ 19 Ngõ 54</span>
 <span class="tag test" data-t="Trùm Quế Thái Nguyên (Tích Lương)">Trùm Quế</span>
+<span class="tag test" data-t="Trùn Quế Thái Nguyên, Sn 1, Ngõ 88 Tích Lương, Tổ 4, Phường Tích Lương">Trùn Quế</span>
 </p>
 </div>
 
@@ -88,6 +89,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <ul>
 <li><b>Ưu tiên mốc địa danh</b> rồi mới tới tổ, số nhà, ngõ, đường.</li>
 <li><b>Trùm Quế (Tích Lương):</b> kết quả luôn nêu cả 2 phương án: Sơn chuyển → LÊ TUẤN ANH; không phải Sơn chuyển → chia theo địa chỉ.</li>
+<li><b>Tên viết sai chính tả:</b> “Trùn Quế” vẫn được hiểu là Trùm Quế và áp cùng quy tắc 2 phương án.</li>
 <li><b>Mốc 666:</b> ĐH Kỹ thuật Công nghiệp ở 666 Đ. 3/2. “Từ 666 trở ngược lên số nhỏ Tổ 8” nghĩa là số nhà ≤ 666 tại Tổ 8 về LÊ THANH HÀ; số 666–1016 tại Tổ 2 về DƯƠNG TIỀN PHÚ.</li>
 <li><b>Quy tắc dự phòng chỉ áp khi không khớp đoạn cụ thể nào VÀ ảnh KHÔNG có chữ “hoàn hàng”, “trả tiền” hay “trả hàng”:</b> Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH. Nếu ảnh có một trong ba chữ đó thì chia theo địa chỉ bình thường, không dùng dự phòng.</li>
 <li><b>Đọc hiểu địa chỉ, không áp công thức máy móc:</b> “8 Phú Xá” được hiểu là Tổ 8 khu Phú Xá; “Đường Phú Xá” được hiểu là khu vực Phú Xá, khác với phường hành chính ghi sau đó. Tổ được tra theo từng khu vực nhắc tới trước, rồi mới tới phường hành chính.</li>
@@ -137,7 +139,7 @@ function parse(raw){
     const im=t.match(/(^|[\s,])(\d{1,2})\s+(phu xa|tich luong|tan lap)\b/);
     if(im){to=parseInt(im[2]); toImplicit=true;}
   }
-  const hM=t.match(/so nha\s*(\d+)|nha\s*(\d+)/); const house=hM?parseInt(hM[1]||hM[2]):null;
+  const hM=t.match(/(?:so nha|sn)\s*(\d+)|nha\s*(\d+)/); const house=hM?parseInt(hM[1]||hM[2]):null;
   const nM=t.match(/ngo\s*(\d+)/); const ngo=nM?parseInt(nM[1]):null;
   const road32=/3\/2/.test(t);
   const vietbac=/viet bac/.test(t);
@@ -164,11 +166,12 @@ function hit(r,conf,reason){return {rider:r,conf,reason};}
 function findRider(raw,opts){
   opts=opts||{}; const p=parse(raw); const t=p.t;
   // Trùm Quế: luôn nêu cả 2 phương án, không cần nút chọn người chuyển.
-  if(/trum que/.test(t)){
+  // "Trùn Quế" là cách viết sai chính tả của "Trùm Quế" (m -> n) vẫn áp cùng quy tắc.
+  if(/(trum|trun) que/.test(t)){
     return {ambiguous:[
       {rider:RIDERS.TUAN_ANH,label:"Phương án 1 — Nếu đơn do DƯƠNG VĂN SƠN chuyển đẩy",reason:"Trùm Quế chuyển cho LÊ TUẤN ANH."},
       {rider:RIDERS.SON,label:"Phương án 2 — Nếu không phải Sơn chuyển, chia theo địa chỉ",reason:"Trùm Quế thuộc khu vực Tích Lương do DƯƠNG VĂN SƠN phụ trách (Tổ 4, Tổ 5). Cần xác nhận người chuyển để chốt."}
-    ],conf:0,reason:"Trùm Quế chỉ chuyển cho LÊ TUẤN ANH khi người chuyển là DƯƠNG VĂN SƠN; chưa rõ người chuyển nên nêu cả 2 phương án."};
+    ],conf:0,reason:(/trun que/.test(t)?"Địa chỉ ghi sai chính tả thành 'Trùn Quế', vẫn hiểu là Trùm Quế. ":"")+"Trùm Quế chỉ chuyển cho LÊ TUẤN ANH khi người chuyển là DƯƠNG VĂN SƠN; chưa rõ người chuyển nên nêu cả 2 phương án."};
   }
   if(/cong a1|a1 cong nghiep/.test(t)) return hit(RIDERS.TUAN,98,"Cổng A1 Công nghiệp thuộc tuyến cổng A1 đến Tổ 6 của BÙI VĂN TUẤN.");
   if(/cong chinh/.test(t)&&/cong nghiep/.test(t)) return hit(RIDERS.HA,95,"Cổng chính ĐH Công nghiệp thuộc tuyến của LÊ THANH HÀ.");
