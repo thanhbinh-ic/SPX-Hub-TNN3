@@ -28,7 +28,8 @@ button.secondary{background:#555}
 .result h2{margin:0 0 6px}.warn{background:#fff8e1;border-color:#e6a700}
 .small{color:#555;font-size:13px} .tag{display:inline-block;background:#eee;border-radius:20px;padding:2px 10px;margin:2px;font-size:13px}
 table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1px solid #eee;padding:6px;text-align:left}
-#map{height:340px;border-radius:12px}
+#map{height:340px;border-radius:12px;background:#ddd}
+.leaflet-container{background:#ddd}
 .test{cursor:pointer}
 </style>
 </head>
@@ -75,7 +76,8 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <div class="card">
 <h2>3. Bản đồ mốc chia tuyến</h2>
 <div id="map"></div>
-<p class="small">Mốc đã đối chiếu bản đồ thật: Hub (tọa độ đã cung cấp), ĐH Kỹ thuật Công nghiệp tại 666 Đ. 3/2, GO! Tân Lập, đường Ga Lưu Xá, đường Việt Bắc đoạn Phú Xá, ngõ 272 đường 3/2 Tân Lập. Cây xăng Mạnh Hùng: theo mã JQR7+7C5, xã Vô Tranh — vị trí ghim chỉ là khu vực xã Vô Tranh, cần xác nhận lại điểm chính xác trên Google Maps trước khi dùng làm mốc tọa độ.</p>
+<button class="secondary" id="reloadMap">Tải lại nền bản đồ</button>
+<p class="small">Mốc đã đối chiếu bản đồ thật: Hub (tọa độ đã cung cấp), ĐH Kỹ thuật Công nghiệp tại 666 Đ. 3/2, GO! Tân Lập, đường Ga Lưu Xá, đường Việt Bắc đoạn Phú Xá, ngõ 272 đường 3/2 Tân Lập. Cây xăng Mạnh Hùng: Xăng dầu Mạnh Hùng số 3, 426 Thống Nhất, Tích Lương — 21.5535057, 105.8337262 (đã xác nhận theo địa chỉ huynh cung cấp).</p>
 </div>
 
 <div class="card">
@@ -310,7 +312,21 @@ Object.values(RIDERS).forEach(r=>{const tr=document.createElement("tr"); tr.inne
 $("q").oninput=e=>{const q=norm(e.target.value); [...tb.rows].forEach(row=>{row.style.display=norm(row.innerText).includes(q)?"":"none";});};
 // Bản đồ
 const map=L.map("map").setView([21.5439521,105.8440779],13);
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(map);
+// Nền chính OpenStreetMap; nếu máy tính chặn/không tải được tile OSM (trường hợp
+// ghim hiện mà nền xám/đen, trong khi điện thoại vẫn hiện) thì tự chuyển sang nền
+// CARTO trên CDN khác để bản đồ vẫn hiện, không cần tải lại trang.
+const osmLayer=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"});
+const cartoLayer=L.tileLayer("https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:20,attribution:"© OpenStreetMap © CARTO"});
+let mapFallback=false;
+osmLayer.on("tileerror",()=>{ if(!mapFallback){ mapFallback=true; map.removeLayer(osmLayer); cartoLayer.addTo(map); }});
+osmLayer.addTo(map);
+// Ép Leaflet tính lại kích thước sau khi trang dựng xong và khi đổi cửa sổ:
+// bản đồ hay bị lệch/mất nền khi khởi tạo lúc khung chưa có kích thước cuối.
+function fixMapSize(){ map.invalidateSize(); }
+if(document.readyState==="complete"){ fixMapSize(); } else { window.addEventListener("load",fixMapSize); }
+setTimeout(fixMapSize,300);
+window.addEventListener("resize",fixMapSize);
+$("reloadMap").onclick=()=>{ fixMapSize(); osmLayer.redraw(); if(mapFallback) cartoLayer.redraw(); };
 const pins=[
  [21.5439521,105.8440779,"Hub SPX — Tổ 5, Tích Lương"],
  [21.55057,105.84165,"ĐH Kỹ thuật Công nghiệp — 666 Đ. 3/2"],
@@ -318,7 +334,7 @@ const pins=[
  [21.55775,105.84426,"Đường Ga Lưu Xá — Phú Xá"],
  [21.56385,105.84236,"Đường Việt Bắc — Phú Xá"],
  [21.55622,105.8296,"Ngõ 272, Đ. 3/2 — Tân Lập"],
- [21.68162,105.75179,"Khu vực xã Vô Tranh (mã JQR7+7C5) — cây xăng Mạnh Hùng, cần xác nhận điểm chính xác"]
+ [21.5535057,105.8337262,"Xăng dầu Mạnh Hùng số 3 — 426 Thống Nhất, Tích Lương (đã xác nhận)"]
 ];
 pins.forEach(p=>L.marker(p).addTo(map).bindPopup(p[2]));
 </script>

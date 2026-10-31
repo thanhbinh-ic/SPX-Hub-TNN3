@@ -10,8 +10,7 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
    Tên viết sai chính tả "Trùn Quế" vẫn được hiểu là Trùm Quế và áp cùng quy tắc 2 phương án. "Sn" trong địa chỉ được hiểu là viết tắt của "Số nhà".
 3. Mốc 666: ĐH Kỹ thuật Công nghiệp ở 666 Đ. 3/2, Tích Lương. Số nhà ≤ 666 tại Tổ 8 về
    LÊ THANH HÀ [16338]; số 666–1016 tại Tổ 2 về DƯƠNG TIỀN PHÚ [157243].
-4. Cây xăng Mạnh Hùng: mốc cuối tuyến LÊ THANH HÀ, mã JQR7+7C5, xã Vô Tranh.
-   Vị trí ghim trên bản đồ chỉ là khu vực xã Vô Tranh, cần xác nhận điểm chính xác
+4. Cây xăng Mạnh Hùng: mốc cuối tuyến LÊ THANH HÀ. Đã xác nhận 31/10/2026: Xăng dầu Mạnh Hùng số 3, 426 Thống Nhất, Tích Lương, Thái Nguyên — 21.5535057, 105.8337262 (thay ghim tạm khu vực xã Vô Tranh trước đây).
    trên Google Maps trước khi dùng làm mốc tọa độ.
 5. Quy tắc dự phòng CHỈ áp khi không khớp đoạn cụ thể nào VÀ ảnh nhiệm vụ KHÔNG có chữ "hoàn hàng", "trả tiền"
    hay "trả hàng": Phú Xá → ĐẶNG TIẾN TRUNG [79629]; Tân Lập / Tích Lương →
