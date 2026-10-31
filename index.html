@@ -76,7 +76,6 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <div class="card">
 <h2>3. Bản đồ mốc chia tuyến</h2>
 <div id="map"></div>
-<button class="secondary" id="reloadMap">Tải lại nền bản đồ</button>
 <p class="small">Mốc đã đối chiếu bản đồ thật: Hub (tọa độ đã cung cấp), ĐH Kỹ thuật Công nghiệp tại 666 Đ. 3/2, GO! Tân Lập, đường Ga Lưu Xá, đường Việt Bắc đoạn Phú Xá, ngõ 272 đường 3/2 Tân Lập. Cây xăng Mạnh Hùng: Xăng dầu Mạnh Hùng số 3, 426 Thống Nhất, Tích Lương — 21.5535057, 105.8337262.</p>
 </div>
 
@@ -330,7 +329,7 @@ function fixMapSize(){ map.invalidateSize(); }
 if(document.readyState==="complete"){ fixMapSize(); } else { window.addEventListener("load",fixMapSize); }
 setTimeout(fixMapSize,300);
 window.addEventListener("resize",fixMapSize);
-$("reloadMap").onclick=()=>{ fixMapSize(); mapLayers[mapLayerIdx].redraw(); };
+
 const pins=[
  [21.5439521,105.8440779,"Hub SPX — Tổ 5, Tích Lương"],
  [21.55057,105.84165,"ĐH Kỹ thuật Công nghiệp — 666 Đ. 3/2"],
