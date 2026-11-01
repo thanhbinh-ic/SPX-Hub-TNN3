@@ -74,3 +74,9 @@ Trang là web tĩnh, không cần build. Trên Vercel chọn Import repo này,
 framework để Other / Static, không cần lệnh build, file chạy là `index.html`.
 
 Ảnh có thể tải lên, dán từ bộ nhớ tạm (Ctrl+V), kéo thả vào khung dán ảnh, hoặc nhập địa chỉ trực tiếp.
+
+## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
+- Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
+- Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
+- Trường hợp 2 phương án (Trùm Quế): phương án nào nghỉ thì bị loại, chỉ còn 1 phương án thì chốt phương án đó; cả 2 cùng nghỉ thì chuyển sang người cover theo phường. Lý do kết quả luôn ghi rõ ai nghỉ và chuyển sang ai.
+- Đánh dấu nghỉ được lưu trên trình duyệt đang dùng (localStorage), tải lại trang vẫn giữ; sang ngày mới thì bấm "Bỏ đánh dấu nghỉ" hoặc bỏ tích tay. Không tích ai thì mọi luật cũ giữ nguyên.

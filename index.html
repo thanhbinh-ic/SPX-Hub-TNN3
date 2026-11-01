@@ -29,6 +29,7 @@ button.secondary{background:#555}
 .small{color:#555;font-size:13px} .tag{display:inline-block;background:#eee;border-radius:20px;padding:2px 10px;margin:2px;font-size:13px}
 table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1px solid #eee;padding:6px;text-align:left}
 #map{height:340px;border-radius:12px;background:#ddd}
+#tbl tr.off-row{opacity:.55}
 .leaflet-container{background:#ddd}
 .test{cursor:pointer}
 </style>
@@ -82,7 +83,9 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <div class="card">
 <h2>4. Bảng tuyến đầy đủ</h2>
 <input id="q" placeholder="Tìm tên rider, tổ, đường, mốc..." style="padding:8px;width:100%;box-sizing:border-box;margin-bottom:8px">
-<table id="tbl"><thead><tr><th>Mã</th><th>Rider</th><th>Phường</th><th>Tuyến</th></tr></thead><tbody></tbody></table>
+<table id="tbl"><thead><tr><th>Mã</th><th>Rider</th><th>Phường</th><th>Tuyến</th><th>Nghỉ</th></tr></thead><tbody></tbody></table>
+<p class="small" id="offStatus"></p>
+<button class="secondary" id="clearOff">Bỏ đánh dấu nghỉ</button>
 </div>
 
 <div class="card">
@@ -97,6 +100,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <li><b>Bổ sung file list mới:</b> HÀ NGỌC MAI thêm Tổ 19, Ngõ 54, đường CMT8 phường Tích Lương; NGUYỄN XUÂN THẮNG thêm ngõ 130 đường Thanh niên xung phong.</li>
 <li><b>Tổ 17 → tính là Phú Xá.</b> Tổ nào không có trong bảng (ví dụ Tổ 19) thì hệ thống báo “chưa xác định được”, không tự đoán rider.</li>
 <li><b>“Người gửi trả phí” không tính</b> là “trả hàng” hay “trả tiền” trong quy tắc dự phòng.</li>
+<li><b>Đánh dấu nghỉ:</b> tích cột “Nghỉ” trong Bảng tuyến cho rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó mà tự chuyển sang rider gần nhất cùng phường, nếu không còn ai thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH). Đánh dấu được lưu trên trình duyệt đang dùng, sang ngày mới thì bỏ tích.</li>
 </ul>
 </div>
 </main>
@@ -252,13 +256,77 @@ function findRider(raw,opts){
 }
 
 
+// Rider nghi: danh sach duoc tich o cot "Nghi" trong Bang tuyen, luu tren trinh duyet.
+// Khi chu tuyen nghi, don chuyen sang rider gan nhat (cung phuong, theo thu tu liet ke);
+// neu khong con ai thi chuyen sang nguoi cover du phong theo phuong.
+const COVER_BY_ID={
+ "53634":[RIDERS.SON,RIDERS.HA,RIDERS.TUAN_ANH],
+ "38286":[RIDERS.TUAN,RIDERS.HA,RIDERS.TUAN_ANH],
+ "16338":[RIDERS.SON,RIDERS.TUAN,RIDERS.PHU,RIDERS.TUAN_ANH],
+ "157243":[RIDERS.HA,RIDERS.DAM,RIDERS.TUAN_ANH],
+ "100332":[RIDERS.PHU,RIDERS.HA,RIDERS.TUAN_ANH],
+ "36689":[RIDERS.NHUNG,RIDERS.THU,RIDERS.TRUNG],
+ "55666":[RIDERS.CHUNG,RIDERS.HIEN_HUU,RIDERS.TRUNG],
+ "58352":[RIDERS.THU,RIDERS.HIEN_HUU,RIDERS.TRUNG],
+ "79629":[RIDERS.MAI,RIDERS.NHUNG,RIDERS.THU],
+ "164091":[RIDERS.TRUNG,RIDERS.NHUNG,RIDERS.HIEN_HUU],
+ "123498":[RIDERS.HIEN_HUU,RIDERS.TRUNG,RIDERS.MAI],
+ "161388":[RIDERS.KIEN,RIDERS.HIEN_PHAM,RIDERS.TUAN_ANH],
+ "79621":[RIDERS.HOANG_ANH,RIDERS.TUAN_ANH,RIDERS.DUC],
+ "69333":[RIDERS.THANG,RIDERS.HIEN_PHAM,RIDERS.TUAN_ANH],
+ "44207":[RIDERS.DUC,RIDERS.HIEN_PHAM,RIDERS.TUAN_ANH],
+ "52224":[RIDERS.HOANG_ANH,RIDERS.DUC,RIDERS.TUAN_ANH],
+ "139148":[RIDERS.KIEN,RIDERS.SON,RIDERS.HA,RIDERS.TUAN]
+};
+function wardCoverChain(ward){
+  if(ward==="phu xa") return [RIDERS.TRUNG,RIDERS.MAI,RIDERS.NHUNG,RIDERS.HIEN_HUU,RIDERS.THU];
+  if(ward==="tan lap") return [RIDERS.TUAN_ANH,RIDERS.KIEN,RIDERS.HOANG_ANH,RIDERS.DUC];
+  return [RIDERS.TUAN_ANH,RIDERS.SON,RIDERS.HA,RIDERS.TUAN];
+}
+let offIds=new Set();
+try{ if(typeof localStorage!=="undefined"){ const saved=JSON.parse(localStorage.getItem("spx-off-riders")||"[]"); if(Array.isArray(saved)) offIds=new Set(saved); } }catch(e){}
+function saveOff(){ try{ if(typeof localStorage!=="undefined") localStorage.setItem("spx-off-riders",JSON.stringify([...offIds])); }catch(e){} }
+function isOff(r){ return !!r&&offIds.has(r.id); }
+function coverFor(rider,ward){
+  ward=norm(ward||"");
+  const list=(rider.id==="139148"||rider.id==="79629")?wardCoverChain(ward):(COVER_BY_ID[rider.id]||[]);
+  for(const c of list) if(c!==rider&&!isOff(c)) return c;
+  for(const c of wardCoverChain(ward)) if(c!==rider&&!isOff(c)) return c;
+  for(const c of Object.values(RIDERS)) if(c.ward===rider.ward&&c!==rider&&!isOff(c)) return c;
+  return null;
+}
+function findRiderAvailable(raw){
+  const res=findRider(raw);
+  if(res.ambiguous){
+    const avail=res.ambiguous.filter(e=>!isOff(e.rider||e));
+    if(avail.length===1){
+      const r=avail[0].rider||avail[0];
+      const offOne=res.ambiguous.find(e=>isOff(e.rider||e));
+      const offName=offOne?((offOne.rider||offOne).name):"";
+      return {rider:r,conf:90,reason:((avail[0].reason||"")+" (Phuong an "+offName+" dang nghi nen chi con phuong an nay.)").trim(),redirectedFrom:offOne?(offOne.rider||offOne):null};
+    }
+    if(avail.length===0){
+      const pp=parse(raw); const ward=pp.admin||pp.areaList[0]||"tich luong";
+      for(const c of wardCoverChain(ward)) if(!isOff(c)) return {rider:c,conf:70,reason:"Ca 2 phuong an deu dang nghi nen chuyen sang nguoi cover theo phuong.",redirectedFrom:null};
+      return {rider:null,conf:0,reason:"Ca 2 phuong an deu dang nghi va khong con nguoi cover.",parsed:pp};
+    }
+    return Object.assign({},res,{ambiguous:avail});
+  }
+  if(res.rider&&isOff(res.rider)){
+    const c=coverFor(res.rider,res.rider.ward);
+    if(c) return {rider:c,conf:Math.min(res.conf,90),reason:res.reason+" Chu tuyen "+res.rider.name+" dang nghi nen chuyen sang nguoi cover "+c.name+".",redirectedFrom:res.rider};
+    return {rider:null,conf:0,reason:"Chu tuyen "+res.rider.name+" dang nghi va khong con nguoi cover trong phuong.",parsed:parse(raw)};
+  }
+  return res;
+}
+
 //__RULES_END__
 const $=id=>document.getElementById(id);
 function render(){
   const raw=$("addr").value.trim();
   const hasReturnBox=$("hasReturn").checked;
   if(!raw){$("out").innerHTML="";return;}
-  const res=findRider(raw);
+  const res=findRiderAvailable(raw);
   // Nếu trạng thái hoàn/trả được chọn tay thì tôn trọng lựa chọn tay hơn OCR
   const p=parse(raw);
   let note="";
@@ -307,7 +375,15 @@ $("img").onchange=e=>{if(e.target.files[0]) runOCR(e.target.files[0]);};
 document.addEventListener("paste",e=>{const f=[...(e.clipboardData||{}).items||[]].find(i=>i.type.indexOf("image")===0); if(f) runOCR(f.getAsFile());});
 // Bảng tuyến
 const tb=$("tbl").querySelector("tbody");
-Object.values(RIDERS).forEach(r=>{const tr=document.createElement("tr"); tr.innerHTML="<td>"+r.id+"</td><td>"+r.name+"</td><td>"+r.ward+"</td><td>"+r.route+"</td>"; tb.appendChild(tr);});
+Object.values(RIDERS).forEach(r=>{const tr=document.createElement("tr"); tr.innerHTML="<td>"+r.id+"</td><td>"+r.name+"</td><td>"+r.ward+"</td><td>"+r.route+"</td><td><input type=\"checkbox\" class=\"offbox\" data-id=\""+r.id+"\"></td>"; tb.appendChild(tr);});
+function refreshOffUI(){
+  document.querySelectorAll(".offbox").forEach(cb=>{ cb.checked=offIds.has(cb.dataset.id); cb.closest("tr").classList.toggle("off-row",cb.checked); });
+  const names=[...offIds].map(id=>{ const r=Object.values(RIDERS).find(x=>x.id===id); return r?r.name+" ["+id+"]":id; });
+  $("offStatus").textContent=names.length?("Đang nghỉ: "+names.join(", ")+" — hệ thống sẽ không đẩy đơn cho các rider này."):("Chưa đánh dấu ai nghỉ.");
+}
+document.querySelectorAll(".offbox").forEach(cb=>cb.onchange=()=>{ if(cb.checked) offIds.add(cb.dataset.id); else offIds.delete(cb.dataset.id); saveOff(); refreshOffUI(); if($("addr").value.trim()) render(); });
+$("clearOff").onclick=()=>{ offIds.clear(); saveOff(); refreshOffUI(); if($("addr").value.trim()) render(); };
+refreshOffUI();
 $("q").oninput=e=>{const q=norm(e.target.value); [...tb.rows].forEach(row=>{row.style.display=norm(row.innerText).includes(q)?"":"none";});};
 // Bản đồ
 const map=L.map("map").setView([21.5439521,105.8440779],13);
