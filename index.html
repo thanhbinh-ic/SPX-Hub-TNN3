@@ -63,7 +63,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <option value="NS">NS</option>
 </select>
 </label>
-<p class="small">Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH). Hàng Seller thì rider tự đẩy nhau theo tuyến/shop, không dùng cover dự phòng.</p>
+<p class="small">Chỉ hàng Buyer mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH). Hàng Seller, NS thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng. Để "Chưa chọn" thì giữ luật cũ (vẫn dùng cover).</p>
 <button id="find">Tìm rider</button>
 <button class="secondary" id="clear">Xóa</button>
 <p class="small">Thử nhanh:
@@ -81,6 +81,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <span class="tag test" data-t="Thuỳ Trang, SN 8. ngách 71, ngõ 80, tổ 16">Thuỳ Trang</span>
 <span class="tag test" data-t="Ngô Trang, NT Ba Hạnh- kiot số 2- chợ Tê Ba Nhất">Ngô Trang</span>
 <span class="tag test" data-t="kimquytn, Số Nhà 188, Đường Phú Xá, Phường Tích Lương, Tỉnh Thái Nguyên">kimquytn 188</span>
+<span class="tag test" data-t="HULY KISD, tổ 8 quyết thắng thái nguyên, Phường Quyết Thắng">HULY KISD Quyết Thắng</span>
 </p>
 </div>
 
@@ -110,9 +111,10 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <li><b>Quy tắc dự phòng chỉ áp khi không khớp đoạn cụ thể nào VÀ ảnh KHÔNG có chữ “hoàn hàng”, “trả tiền” hay “trả hàng”:</b> Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH. Nếu ảnh có một trong ba chữ đó thì chia theo địa chỉ bình thường, không dùng dự phòng.</li>
 <li><b>Đọc hiểu địa chỉ, không áp công thức máy móc:</b> “8 Phú Xá” được hiểu là Tổ 8 khu Phú Xá; “Đường Phú Xá” được hiểu là khu vực Phú Xá, khác với phường hành chính ghi sau đó. Tổ được tra theo từng khu vực nhắc tới trước, rồi mới tới phường hành chính.</li>
 <li><b>Bổ sung file list mới:</b> HÀ NGỌC MAI thêm Tổ 19, Ngõ 54, đường CMT8 phường Tích Lương; NGUYỄN XUÂN THẮNG thêm ngõ 130 đường Thanh niên xung phong.</li>
-<li><b>PUP Type (loại hàng):</b> chọn Seller, Buyer hoặc NS ở mục 2. Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH); hàng Seller thì rider tự đẩy nhau theo tuyến/shop, không dùng cover dự phòng và không dùng cover khi chủ tuyến nghỉ nếu người cover là Trung hoặc Tuấn Anh.</li>
-<li><b>Đẩy rider theo tên shop và địa chỉ (ưu tiên cao nhất, trước cả mốc và tổ):</b> kimquytn 188 Đường Phú Xá → ĐẶNG TIẾN TRUNG; Trang Thu (Sn 1147 nhà thuốc Ba Hạnh 2) → NGUYỄN THỊ THU; Đại Dương (Ngõ 172 Đường Tích Lương, Tổ 1) → BÙI VĂN TUẤN; Thuỳ Trang (SN 8, ngách 71, ngõ 80, tổ 16) → LƯỜNG THỊ ĐẦM; Ngô Trang (NT Ba Hạnh, kiot số 2, chợ Tê Ba Nhất) → DƯƠNG TIỀN PHÚ; Voi lu (Tổ 2 Phú Xá) → ĐỖ THỊ NHUNG; Vân Anh (43 Thống Nhất) và Kim Thành (65 Thống Nhất, Tổ 1a) → NGUYỄN HOÀNG ANH; HK3D Studio (Ngõ 105 Đường Ga Lưu Xá) → ĐỖ THỊ NHUNG, Nhung nghỉ thì chuyển cho NGUYỄN THỊ THU; Phạm Xuân An (Số 122, Tổ 3, Phường Tích Lương) → DƯƠNG VĂN SƠN. Luật shop cần cả tên shop và địa chỉ trong văn bản (OCR thường đọc đủ cả hai).</li>
-<li><b>Bổ sung tuyến từ file Map.txt:</b> DƯƠNG VĂN SƠN thêm Tổ 3; LƯỜNG THỊ ĐẦM thêm Tổ 16; NGUYỄN HOÀNG ANH thêm Thống Nhất, Tổ 1 (Tích Lương) — nên Tổ 1 Tích Lương nay về Hoàng Anh, không còn gán nhầm sang Tổ 1 Tân Lập của PHẠM TRUNG KIÊN. Địa chỉ 188 Đường Phú Xá của shop kimquytn về ĐẶNG TIẾN TRUNG theo luật shop, không áp khoảng 58–210 chẵn của NGUYỄN HỮU HIỆN.</li>
+<li><b>PUP Type (loại hàng):</b> chọn Seller, Buyer hoặc NS ở mục 2. Chỉ hàng Buyer mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH); hàng Seller, NS thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng và không dùng cover khi chủ tuyến nghỉ nếu người cover là Trung hoặc Tuấn Anh. Để "Chưa chọn" thì giữ luật cũ (vẫn dùng cover).</li>
+<li><b>Đẩy rider theo địa chỉ chỉ định (ưu tiên cao nhất, trước cả mốc và tổ):</b> chỉ cần địa chỉ trùng với địa chỉ trong danh sách dưới đây là áp luật, không cần tên shop: 188 Đường Phú Xá → ĐẶNG TIẾN TRUNG; Sn 1147 nhà thuốc Ba Hạnh 2 → NGUYỄN THỊ THU; Ngõ 172 Đường Tích Lương → BÙI VĂN TUẤN; ngõ 80 tổ 16 → LƯỜNG THỊ ĐẦM; chợ Tê Ba Nhất (NT Ba Hạnh, kiot số 2) → DƯƠNG TIỀN PHÚ; Tổ 2 Phú Xá (trừ đoạn ngõ 167 / nhà 57B lẻ của NGUYỄN HỮU HIỆN) → ĐỖ THỊ NHUNG; 43 Thống Nhất và 65 Thống Nhất → NGUYỄN HOÀNG ANH; Ngõ 105 Đường Ga Lưu Xá → ĐỖ THỊ NHUNG, Nhung nghỉ thì chuyển cho NGUYỄN THỊ THU; Số 122 Tổ 3 → DƯƠNG VĂN SƠN. "Ba Hạnh" xuất hiện ở cả Trang Thu (1147) và Ngô Trang (chợ Tê Ba Nhất) nên phân biệt bằng số nhà/chợ, không dùng tên shop.</li>
+<li><b>Hàng lạc tuyến (ngoài 3 phường của HUB):</b> địa chỉ thuộc phường hành chính ngoài Tân Lập, Phú Xá, Tích Lương thì không đẩy cho rider HUB này. Phường Quyết Thắng → đẩy cho LÊ THANH TUẤN (HUB Thái Nguyên 7). Phường/xã khác ngoài 3 phường mà chưa có HUB nhận ghi trong bảng thì hệ thống báo lạc tuyến, cần bổ sung HUB nhận.</li>
+<li><b>Bổ sung tuyến từ file Map.txt:</b> DƯƠNG VĂN SƠN thêm Tổ 3; LƯỜNG THỊ ĐẦM thêm Tổ 16; NGUYỄN HOÀNG ANH thêm Thống Nhất, Tổ 1 (Tích Lương) — nên Tổ 1 Tích Lương nay về Hoàng Anh, không còn gán nhầm sang Tổ 1 Tân Lập của PHẠM TRUNG KIÊN. Địa chỉ 188 Đường Phú Xá về ĐẶNG TIẾN TRUNG theo luật địa chỉ chỉ định, không áp khoảng 58–210 chẵn của NGUYỄN HỮU HIỆN, kể cả khi không có tên shop kimquytn.</li>
 <li><b>Tổ nào không có trong bảng</b> thì hệ thống báo “chưa xác định được”, không tự đoán rider.</li>
 <li><b>“Người gửi trả phí” không tính</b> là “trả hàng” hay “trả tiền” trong quy tắc dự phòng.</li>
 <li><b>Đánh dấu nghỉ:</b> tích cột “Nghỉ” trong Bảng tuyến cho rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó mà tự chuyển sang rider gần nhất cùng phường, nếu không còn ai thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH). Đánh dấu được lưu trên trình duyệt đang dùng, sang ngày mới thì bỏ tích.</li>
@@ -151,6 +153,14 @@ function parse(raw){
   const areaList=[]; areas.forEach(x=>{if(areaList.indexOf(x.name)<0) areaList.push(x.name);});
   let admin=null; const pm=t.match(/phuong\s+(tich luong|phu xa|tan lap)/g);
   if(pm){admin=norm(pm[pm.length-1].replace("phuong","")).trim();}
+  // Phuong/xa hanh chinh nam ngoai 3 phuong cua HUB (de nhan hang lac tuyen).
+  // Chi xet "phuong X" hoac "xa X" (xa khong phai phan cua "Phu Xa").
+  let adminOther=null;
+  const om=t.match(/(?:phuong|(?<!phu\s)xa)\s+([a-z\s]+?)(?:,|$)/g);
+  if(om){
+    const lm=om[om.length-1].match(/(?:phuong|(?<!phu\s)xa)\s+([a-z\s]+?)(?:,|$)/);
+    if(lm){ const w=lm[1].trim(); if(w&&["tich luong","phu xa","tan lap"].indexOf(w)<0) adminOther=w; }
+  }
   const toM=t.match(/to\s*(?:dan pho\s*)?(\d+)/);
   let to=toM?parseInt(toM[1]):null; let toImplicit=false;
   if(to===null){
@@ -166,7 +176,7 @@ function parse(raw){
   const cmt8=/cach mang thang 8|cmt8/.test(t);
   const tnxp=/thanh nien xung phong/.test(t);
   const le=/(mat le|\ble\b)/.test(t); const chan=/\bchan\b/.test(t);
-  return {t,hasReturn,areaList,admin,to,toImplicit,house,ngo,road32,vietbac,cmt8,tnxp,le,chan};
+  return {t,hasReturn,areaList,admin,adminOther,to,toImplicit,house,ngo,road32,vietbac,cmt8,tnxp,le,chan};
 }
 function breakdown(p){
   const parts=[];
@@ -183,20 +193,25 @@ function breakdown(p){
   return parts.join("; ");
 }
 function hit(r,conf,reason){return {rider:r,conf,reason};}
-// Shop chi dinh theo file Map.txt (03/11/2026): can ca ten shop VA dia chi trong van ban,
-// uu tien cao nhat, truoc ca moc dia danh va to. Shop co cover rieng (HK3D) thi khi chu
-// tuyen nghi se theo cover do thay vi chuoi cover chung.
+// Dia chi chi dinh theo file Map.txt / Map-2.txt: chi can dia chi trung voi dia chi
+// trong danh sach la ap luat, KHONG can ten shop (don khong phai cua shop do nhung
+// trung dia chi thi cung ap dung). Uu tien cao nhat, truoc ca moc dia danh va to.
+// Shop co cover rieng (HK3D) thi khi chu tuyen nghi se theo cover do thay vi chuoi
+// cover chung. "Ba Hanh" xuat hien o ca Trang Thu (1147) va Ngo Trang (cho Te Ba Nhat)
+// nen phan biet bang so nha/cho, khong dung ten shop.
 function shopMatch(t,p){
-  if(/kimquytn/.test(t)&&p.house===188&&p.areaList.indexOf("phu xa")>=0) return hit(RIDERS.TRUNG,96,"Shop kimquytn tại Số Nhà 188, Đường Phú Xá được chỉ định cho ĐẶNG TIẾN TRUNG.");
-  if(/trang thu/.test(t)&&/ba hanh/.test(t)) return hit(RIDERS.THU,96,"Shop Trang Thu tại Sn 1147 nhà thuốc Ba Hạnh 2 được chỉ định cho NGUYỄN THỊ THU.");
-  if(/dai duong/.test(t)&&p.ngo===172) return hit(RIDERS.TUAN,96,"Shop Đại Dương tại Ngõ 172 Đường Tích Lương, Tổ 1 được chỉ định cho BÙI VĂN TUẤN.");
-  if(/thuy trang/.test(t)&&p.ngo===80&&p.to===16) return hit(RIDERS.DAM,96,"Shop Thuỳ Trang tại SN 8, ngách 71, ngõ 80, tổ 16 được chỉ định cho LƯỜNG THỊ ĐẦM.");
-  if(/ngo trang/.test(t)&&/ba hanh/.test(t)) return hit(RIDERS.PHU,96,"Shop Ngô Trang tại NT Ba Hạnh, kiot số 2, chợ Tê Ba Nhất được chỉ định cho DƯƠNG TIỀN PHÚ.");
-  if(/voi lu/.test(t)&&p.to===2&&p.areaList.indexOf("phu xa")>=0) return hit(RIDERS.NHUNG,96,"Shop Voi lu tại Tổ 2 Phú Xá được chỉ định cho ĐỖ THỊ NHUNG.");
-  if(/van anh/.test(t)&&/thong nhat/.test(t)) return hit(RIDERS.HOANG_ANH,96,"Shop Vân Anh tại 43 Thống Nhất được chỉ định cho NGUYỄN HOÀNG ANH.");
-  if(/kim thanh/.test(t)&&/thong nhat/.test(t)) return hit(RIDERS.HOANG_ANH,96,"Shop Kim Thành tại Số Nhà 65, Đường Thống Nhất, Tổ 1a được chỉ định cho NGUYỄN HOÀNG ANH.");
-  if(/hk3d/.test(t)&&p.ngo===105){ const r=hit(RIDERS.NHUNG,96,"Shop HK3D Studio tại Số Nhà 02, Ngõ 105 Đường Ga Lưu Xá được chỉ định cho ĐỖ THỊ NHUNG."); r.coverOverride=RIDERS.THU; return r; }
-  if(/pham xuan an/.test(t)&&p.to===3) return hit(RIDERS.SON,96,"Shop Phạm Xuân An tại Số Nhà 122, Tổ 3, Phường Tích Lương được chỉ định cho DƯƠNG VĂN SƠN.");
+  if(p.house===188&&p.areaList.indexOf("phu xa")>=0) return hit(RIDERS.TRUNG,96,"Địa chỉ 188 Đường Phú Xá được chỉ định cho ĐẶNG TIẾN TRUNG.");
+  if(p.house===1147&&/ba hanh/.test(t)) return hit(RIDERS.THU,96,"Địa chỉ Sn 1147 nhà thuốc Ba Hạnh 2 được chỉ định cho NGUYỄN THỊ THU.");
+  if(p.ngo===172&&p.areaList.indexOf("tich luong")>=0) return hit(RIDERS.TUAN,96,"Địa chỉ Ngõ 172 Đường Tích Lương được chỉ định cho BÙI VĂN TUẤN.");
+  if(p.ngo===80&&p.to===16) return hit(RIDERS.DAM,96,"Địa chỉ ngõ 80, tổ 16 được chỉ định cho LƯỜNG THỊ ĐẦM.");
+  if(/te ba nhat/.test(t)) return hit(RIDERS.PHU,96,"Địa chỉ chợ Tê Ba Nhất (NT Ba Hạnh, kiot số 2) được chỉ định cho DƯƠNG TIỀN PHÚ.");
+  // To 2 Phu Xa ve NHUNG, tru doan cu the cua HIEN (ngo 167 / nha 57B le) de khong
+  // pha doan Viet Bac cua Hien.
+  if(p.to===2&&p.areaList.indexOf("phu xa")>=0&&p.ngo!==167&&!(p.house===57&&p.le)) return hit(RIDERS.NHUNG,96,"Địa chỉ Tổ 2 Phú Xá được chỉ định cho ĐỖ THỊ NHUNG.");
+  if(/thong nhat/.test(t)&&(p.house===43||/(^|[\s,])43[\s,]+(duong\s+)?thong nhat/.test(t))) return hit(RIDERS.HOANG_ANH,96,"Địa chỉ 43 Thống Nhất được chỉ định cho NGUYỄN HOÀNG ANH.");
+  if(/thong nhat/.test(t)&&(p.house===65||/(^|[\s,])65[\s,]+(duong\s+)?thong nhat/.test(t))) return hit(RIDERS.HOANG_ANH,96,"Địa chỉ 65 Thống Nhất được chỉ định cho NGUYỄN HOÀNG ANH.");
+  if(p.ngo===105&&/ga luu xa/.test(t)){ const r=hit(RIDERS.NHUNG,96,"Địa chỉ Ngõ 105 Đường Ga Lưu Xá được chỉ định cho ĐỖ THỊ NHUNG."); r.coverOverride=RIDERS.THU; return r; }
+  if(p.house===122&&p.to===3) return hit(RIDERS.SON,96,"Địa chỉ Số 122, Tổ 3 được chỉ định cho DƯƠNG VĂN SƠN.");
   return null;
 }
 function findRider(raw,opts){
@@ -228,7 +243,11 @@ function findRider(raw,opts){
   // Tổ: tra theo từng khu vực được nhắc tới, rồi mới tới phường hành chính.
   // Ví dụ "8 Phú Xá, Phường Tích Lương" -> Tổ 8 khu Phú Xá -> HÀ NGỌC MAI,
   // chứ không phải Tổ 8 phường Tích Lương.
-  if(p.to!==null){
+  // Ngoai le: neu phuong hanh chinh nam ngoai 3 phuong cua HUB (hang lac tuyen)
+  // thi bo qua ca khoi to, vi so to trung nhau giua cac phuong (vd To 5 cua
+  // Phuong Hoang Van Thu khong phai To 5 Tich Luong cua SON) — de roi xuong
+  // luat lac tuyen o duoi thay vi gan nham cho rider HUB nay.
+  if(p.to!==null && !p.adminOther){
     const maps={"tich luong":{1:RIDERS.HOANG_ANH,3:RIDERS.SON,6:RIDERS.TUAN,4:RIDERS.SON,5:RIDERS.SON,9:RIDERS.PHU,10:RIDERS.PHU,11:RIDERS.DAM,12:RIDERS.DAM,13:RIDERS.DAM,14:RIDERS.DAM,15:RIDERS.DAM,16:RIDERS.DAM},
       "phu xa":{4:RIDERS.THU,7:RIDERS.TRUNG,8:RIDERS.MAI,10:RIDERS.MAI,11:RIDERS.MAI,19:RIDERS.MAI},
       "tan lap":{1:RIDERS.KIEN,2:RIDERS.KIEN}};
@@ -267,11 +286,19 @@ function findRider(raw,opts){
       return {ambiguous:[RIDERS.DUC,RIDERS.THANG],conf:0,reason:"Chỉ có ngõ 272 Tân Lập, chưa rõ về hướng số to (NGUYỄN MẠNH ĐỨC) hay số nhỏ (NGUYỄN XUÂN THẮNG)."};
     }
   }
+  // Hang lac tuyen: phuong/xa hanh chinh nam ngoai 3 phuong cua HUB thi chuyen
+  // HUB khac, khong day cho rider HUB nay. Phuong Quyet Thang -> LE THANH TUAN
+  // (HUB Thai Nguyen 7); phuong/xa khac chua co HUB nhan ghi trong bang.
+  if(p.adminOther){
+    if(p.adminOther==="quyet thang") return {offRoute:true,target:"LÊ THANH TUẤN (HUB Thái Nguyên 7)",conf:0,reason:"Địa chỉ thuộc Phường Quyết Thắng — ngoài 3 phường của HUB nên là hàng lạc tuyến, đẩy cho LÊ THANH TUẤN (HUB Thái Nguyên 7), không đẩy cho rider của HUB này."};
+    const disp=p.adminOther.split(" ").map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(" ");
+    return {offRoute:true,target:null,conf:0,reason:"Địa chỉ thuộc Phường/Xã "+disp+" — ngoài 3 phường Tân Lập, Phú Xá, Tích Lương của HUB nên là hàng lạc tuyến, chưa có HUB nhận ghi trong bảng."};
+  }
   // Dự phòng theo khu vực: chỉ khi không khớp đoạn cụ thể VÀ không có chữ hoàn/trả
-  // VÀ không phải hàng Seller (chỉ hàng Buyer, NS mới đẩy được cho cover dự phòng).
+  // VÀ là hàng Buyer (hàng Seller, NS thì rider tự đẩy nhau, không dùng cover).
   // Tổ 17 tính là Phú Xá. Nếu khu vực và phường hành chính cho 2 đáp án dự phòng
   // khác nhau thì nêu cả 2, không tự chọn 1.
-  if(!p.hasReturn && pup!=="Seller"){
+  if(!p.hasReturn && pup!=="Seller" && pup!=="NS"){
     if(p.to===17) return hit(RIDERS.TRUNG,75,"Tổ 17 tính là Phú Xá, và không có chữ hoàn hàng/trả tiền/trả hàng nên áp quy tắc dự phòng: Phú Xá → ĐẶNG TIẾN TRUNG.");
     const fb=[];
     if(p.areaList.indexOf("phu xa")>=0||p.admin==="phu xa") fb.push(RIDERS.TRUNG);
@@ -287,7 +314,7 @@ function findRider(raw,opts){
   reasons.push("Đã hiểu địa chỉ là: "+breakdown(p)+".");
   if(p.to!==null) reasons.push("Tổ "+p.to+" không khớp đoạn cụ thể nào trong bảng tuyến ở các khu vực đã nhắc tới.");
   if(p.hasReturn) reasons.push("Có chữ hoàn hàng/trả tiền/trả hàng nên KHÔNG áp quy tắc dự phòng theo khu vực.");
-  if(pup==="Seller") reasons.push("Hàng Seller KHÔNG áp quy tắc dự phòng cho cover (chỉ hàng Buyer, NS mới đẩy được cho cover ĐẶNG TIẾN TRUNG / LÊ TUẤN ANH) — cần khớp tuyến cụ thể hoặc shop chỉ định, rider tự đẩy nhau.");
+  if(pup==="Seller"||pup==="NS") reasons.push("Hàng "+pup+" KHÔNG áp quy tắc dự phòng cho cover (chỉ hàng Buyer mới đẩy được cho cover ĐẶNG TIẾN TRUNG / LÊ TUẤN ANH) — cần khớp tuyến cụ thể hoặc địa chỉ chỉ định, rider tự đẩy nhau.");
   return {rider:null,conf:0,reason:reasons.join(" "),parsed:p};
 }
 
@@ -325,8 +352,8 @@ function saveOff(){ try{ if(typeof localStorage!=="undefined") localStorage.setI
 function isOff(r){ return !!r&&offIds.has(r.id); }
 function coverFor(rider,ward,pup){
   ward=norm(ward||"");
-  // Hang Seller khong day cho cover TRUNG / TUAN_ANH (chi Buyer, NS moi duoc).
-  const coverOk=c=>!(pup==="Seller"&&(c.id==="79629"||c.id==="139148"));
+  // Hang Seller, NS khong day cho cover TRUNG / TUAN_ANH (chi Buyer moi duoc).
+  const coverOk=c=>!((pup==="Seller"||pup==="NS")&&(c.id==="79629"||c.id==="139148"));
   const list=(rider.id==="139148"||rider.id==="79629")?wardCoverChain(ward):(COVER_BY_ID[rider.id]||[]);
   for(const c of list) if(c!==rider&&!isOff(c)&&coverOk(c)) return c;
   for(const c of wardCoverChain(ward)) if(c!==rider&&!isOff(c)&&coverOk(c)) return c;
@@ -345,7 +372,7 @@ function findRiderAvailable(raw,pupType){
     }
     if(avail.length===0){
       const pp=parse(raw); const ward=pp.admin||pp.areaList[0]||"tich luong";
-      for(const c of wardCoverChain(ward)) if(!isOff(c)&&!(pupType==="Seller"&&(c.id==="79629"||c.id==="139148"))) return {rider:c,conf:70,reason:"Ca 2 phuong an deu dang nghi nen chuyen sang nguoi cover theo phuong.",redirectedFrom:null};
+      for(const c of wardCoverChain(ward)) if(!isOff(c)&&!((pupType==="Seller"||pupType==="NS")&&(c.id==="79629"||c.id==="139148"))) return {rider:c,conf:70,reason:"Ca 2 phuong an deu dang nghi nen chuyen sang nguoi cover theo phuong.",redirectedFrom:null};
       return {rider:null,conf:0,reason:"Ca 2 phuong an deu dang nghi va khong con nguoi cover.",parsed:pp};
     }
     return Object.assign({},res,{ambiguous:avail});
@@ -373,6 +400,8 @@ function render(){
   if(res.rider){
     $("out").innerHTML="<div class='result'><h2>Đẩy cho "+res.rider.name+" ["+res.rider.id+"]</h2><p>Độ tin cậy: "+res.conf+"% — "+res.reason+"</p><p class='small'>Tuyến: "+res.rider.route+" ("+res.rider.ward+")</p><button id='cp'>Copy câu trả lời</button>"+note+"</div>";
     $("cp").onclick=()=>{const txt="Đẩy cho "+res.rider.name+" ["+res.rider.id+"] — "+res.reason; navigator.clipboard.writeText(txt).then(()=>alert("Đã sao chép."));};
+  } else if(res.offRoute){
+    $("out").innerHTML="<div class='result warn'><h2>"+(res.target?("Hàng lạc tuyến — đẩy cho "+res.target):"Hàng lạc tuyến — chưa có HUB nhận trong bảng")+"</h2><p>"+res.reason+"</p>"+note+"</div>";
   } else if(res.ambiguous){
     $("out").innerHTML="<div class='result warn'><h2>Chưa chốt được 1 rider — xem cả 2 phương án</h2><p>"+res.reason+"</p><ul>"+res.ambiguous.map(e=>{const r=e.rider||e; const lab=e.label?("<b>"+e.label+": </b>"):""; const rsn=e.reason?(" — "+e.reason):(" — "+r.route); return "<li>"+lab+r.name+" ["+r.id+"]"+rsn+"</li>";}).join("")+"</ul>"+note+"</div>";
   } else {
