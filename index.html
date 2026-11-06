@@ -22,8 +22,12 @@ textarea{min-height:190px;padding:10px;font-size:15px}
 #pasteZone{border:2px dashed #9db8d2;border-radius:10px;padding:20px;text-align:center;color:#44586e;background:#f7fafc;cursor:pointer;margin:14px 0}
 #out{margin-bottom:28px}
 input[type=file]{margin-bottom:12px}
-button{background:#2f6fb2;color:#fff;border:0;border-radius:8px;padding:10px 16px;font-size:15px;cursor:pointer;margin:10px 10px 10px 0}
-button.secondary{background:#555}
+button{background:#ee4d2d;color:#fff;border:0;border-radius:10px;padding:12px 28px;font-size:16px;font-weight:700;cursor:pointer;margin:10px 10px 10px 0;box-shadow:0 2px 8px rgba(238,77,45,.35);transition:background .15s,transform .05s}
+button:hover{background:#d73211}
+button:active{transform:translateY(1px)}
+button.secondary{background:#5a6b7c;padding:10px 16px;font-size:15px;font-weight:400;box-shadow:none}
+button.secondary:hover{background:#46586a}
+select#pupType{padding:9px 12px;font-size:15px;border:1px solid #c8d4e0;border-radius:8px;background:#fff;color:#222;cursor:pointer}
 .result{border:2px solid #2f6fb2;border-radius:12px;padding:16px;background:#f2f7fc}
 .result h2{margin:0 0 6px}.warn{background:#fff8e1;border-color:#e6a700}
 .small{color:#555;font-size:13px} .tag{display:inline-block;background:#eee;border-radius:20px;padding:2px 10px;margin:2px;font-size:13px}
@@ -63,7 +67,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <option value="NS">NS</option>
 </select>
 </label>
-<p class="small">Chỉ hàng Buyer mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH). Hàng Seller, NS thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng. Để "Chưa chọn" thì giữ luật cũ (vẫn dùng cover).</p>
+<p class="small">Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH). Hàng Seller thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng. Để "Chưa chọn" thì giữ luật cũ (vẫn dùng cover). Chọn loại hàng là kết quả đổi ngay, không cần bấm Tìm rider.</p>
 <button id="find">Tìm rider</button>
 <button class="secondary" id="clear">Xóa</button>
 <p class="small">Thử nhanh:
@@ -111,7 +115,8 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <li><b>Quy tắc dự phòng chỉ áp khi không khớp đoạn cụ thể nào VÀ ảnh KHÔNG có chữ “hoàn hàng”, “trả tiền” hay “trả hàng”:</b> Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH. Nếu ảnh có một trong ba chữ đó thì chia theo địa chỉ bình thường, không dùng dự phòng.</li>
 <li><b>Đọc hiểu địa chỉ, không áp công thức máy móc:</b> “8 Phú Xá” được hiểu là Tổ 8 khu Phú Xá; “Đường Phú Xá” được hiểu là khu vực Phú Xá, khác với phường hành chính ghi sau đó. Tổ được tra theo từng khu vực nhắc tới trước, rồi mới tới phường hành chính.</li>
 <li><b>Bổ sung file list mới:</b> HÀ NGỌC MAI thêm Tổ 19, Ngõ 54, đường CMT8 phường Tích Lương; NGUYỄN XUÂN THẮNG thêm ngõ 130 đường Thanh niên xung phong.</li>
-<li><b>PUP Type (loại hàng):</b> chọn Seller, Buyer hoặc NS ở mục 2. Chỉ hàng Buyer mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH); hàng Seller, NS thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng và không dùng cover khi chủ tuyến nghỉ nếu người cover là Trung hoặc Tuấn Anh. Để "Chưa chọn" thì giữ luật cũ (vẫn dùng cover).</li>
+<li><b>PUP Type (loại hàng):</b> chọn Seller, Buyer hoặc NS ở mục 2. Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH); hàng Seller thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng và không dùng cover khi chủ tuyến nghỉ nếu người cover là Trung hoặc Tuấn Anh. Để "Chưa chọn" thì giữ luật cũ (vẫn dùng cover).</li>
+<li><b>Ô tick hoàn/trả và ô chọn PUP Type đổi kết quả ngay khi thay đổi, không cần bấm Tìm rider:</b> ô tick hoàn/trả do OCR tự nhận diện nhưng chỉnh tay luôn thắng giá trị tự nhận diện — bỏ tick là kết quả tính lại như không có hoàn/trả.</li>
 <li><b>Đẩy rider theo địa chỉ chỉ định (ưu tiên cao nhất, trước cả mốc và tổ):</b> chỉ cần địa chỉ trùng với địa chỉ trong danh sách dưới đây là áp luật, không cần tên shop: 188 Đường Phú Xá → ĐẶNG TIẾN TRUNG; Sn 1147 nhà thuốc Ba Hạnh 2 → NGUYỄN THỊ THU; Ngõ 172 Đường Tích Lương → BÙI VĂN TUẤN; ngõ 80 tổ 16 → LƯỜNG THỊ ĐẦM; chợ Tê Ba Nhất (NT Ba Hạnh, kiot số 2) → DƯƠNG TIỀN PHÚ; Tổ 2 Phú Xá (trừ đoạn ngõ 167 / nhà 57B lẻ của NGUYỄN HỮU HIỆN) → ĐỖ THỊ NHUNG; 43 Thống Nhất và 65 Thống Nhất → NGUYỄN HOÀNG ANH; Ngõ 105 Đường Ga Lưu Xá → ĐỖ THỊ NHUNG, Nhung nghỉ thì chuyển cho NGUYỄN THỊ THU; Số 122 Tổ 3 → DƯƠNG VĂN SƠN. "Ba Hạnh" xuất hiện ở cả Trang Thu (1147) và Ngô Trang (chợ Tê Ba Nhất) nên phân biệt bằng số nhà/chợ, không dùng tên shop.</li>
 <li><b>Hàng lạc tuyến (ngoài 3 phường của HUB):</b> địa chỉ thuộc phường hành chính ngoài Tân Lập, Phú Xá, Tích Lương thì không đẩy cho rider HUB này. Phường Quyết Thắng → đẩy cho LÊ THANH TUẤN (HUB Thái Nguyên 7). Phường/xã khác ngoài 3 phường mà chưa có HUB nhận ghi trong bảng thì hệ thống báo lạc tuyến, cần bổ sung HUB nhận.</li>
 <li><b>Bổ sung tuyến từ file Map.txt:</b> DƯƠNG VĂN SƠN thêm Tổ 3; LƯỜNG THỊ ĐẦM thêm Tổ 16; NGUYỄN HOÀNG ANH thêm Thống Nhất, Tổ 1 (Tích Lương) — nên Tổ 1 Tích Lương nay về Hoàng Anh, không còn gán nhầm sang Tổ 1 Tân Lập của PHẠM TRUNG KIÊN. Địa chỉ 188 Đường Phú Xá về ĐẶNG TIẾN TRUNG theo luật địa chỉ chỉ định, không áp khoảng 58–210 chẵn của NGUYỄN HỮU HIỆN, kể cả khi không có tên shop kimquytn.</li>
@@ -217,6 +222,9 @@ function shopMatch(t,p){
 function findRider(raw,opts){
   opts=opts||{}; const p=parse(raw); const t=p.t;
   const pup=opts.pupType||"";
+  // O tick hoan/tra o muc 1 (do OCR tu nhan dien, co the chinh tay) luon thang
+  // gia tri tu nhan dien trong van ban: tat tick thi coi nhu khong co hoan/tra.
+  if(opts.hasReturn!==undefined&&opts.hasReturn!==null) p.hasReturn=!!opts.hasReturn;
   const shop=shopMatch(t,p);
   if(shop) return shop;
   // Trùm Quế: luôn nêu cả 2 phương án, không cần nút chọn người chuyển.
@@ -295,10 +303,11 @@ function findRider(raw,opts){
     return {offRoute:true,target:null,conf:0,reason:"Địa chỉ thuộc Phường/Xã "+disp+" — ngoài 3 phường Tân Lập, Phú Xá, Tích Lương của HUB nên là hàng lạc tuyến, chưa có HUB nhận ghi trong bảng."};
   }
   // Dự phòng theo khu vực: chỉ khi không khớp đoạn cụ thể VÀ không có chữ hoàn/trả
-  // VÀ là hàng Buyer (hàng Seller, NS thì rider tự đẩy nhau, không dùng cover).
+  // VÀ không phải hàng Seller (hàng Buyer, NS mới đẩy được cho cover;
+  // hàng Seller thì rider tự đẩy nhau, không dùng cover).
   // Tổ 17 tính là Phú Xá. Nếu khu vực và phường hành chính cho 2 đáp án dự phòng
   // khác nhau thì nêu cả 2, không tự chọn 1.
-  if(!p.hasReturn && pup!=="Seller" && pup!=="NS"){
+  if(!p.hasReturn && pup!=="Seller"){
     if(p.to===17) return hit(RIDERS.TRUNG,75,"Tổ 17 tính là Phú Xá, và không có chữ hoàn hàng/trả tiền/trả hàng nên áp quy tắc dự phòng: Phú Xá → ĐẶNG TIẾN TRUNG.");
     const fb=[];
     if(p.areaList.indexOf("phu xa")>=0||p.admin==="phu xa") fb.push(RIDERS.TRUNG);
@@ -314,7 +323,7 @@ function findRider(raw,opts){
   reasons.push("Đã hiểu địa chỉ là: "+breakdown(p)+".");
   if(p.to!==null) reasons.push("Tổ "+p.to+" không khớp đoạn cụ thể nào trong bảng tuyến ở các khu vực đã nhắc tới.");
   if(p.hasReturn) reasons.push("Có chữ hoàn hàng/trả tiền/trả hàng nên KHÔNG áp quy tắc dự phòng theo khu vực.");
-  if(pup==="Seller"||pup==="NS") reasons.push("Hàng "+pup+" KHÔNG áp quy tắc dự phòng cho cover (chỉ hàng Buyer mới đẩy được cho cover ĐẶNG TIẾN TRUNG / LÊ TUẤN ANH) — cần khớp tuyến cụ thể hoặc địa chỉ chỉ định, rider tự đẩy nhau.");
+  if(pup==="Seller") reasons.push("Hàng Seller KHÔNG áp quy tắc dự phòng cho cover (chỉ hàng Buyer, NS mới đẩy được cho cover ĐẶNG TIẾN TRUNG / LÊ TUẤN ANH) — cần khớp tuyến cụ thể hoặc địa chỉ chỉ định, rider tự đẩy nhau.");
   return {rider:null,conf:0,reason:reasons.join(" "),parsed:p};
 }
 
@@ -352,16 +361,19 @@ function saveOff(){ try{ if(typeof localStorage!=="undefined") localStorage.setI
 function isOff(r){ return !!r&&offIds.has(r.id); }
 function coverFor(rider,ward,pup){
   ward=norm(ward||"");
-  // Hang Seller, NS khong day cho cover TRUNG / TUAN_ANH (chi Buyer moi duoc).
-  const coverOk=c=>!((pup==="Seller"||pup==="NS")&&(c.id==="79629"||c.id==="139148"));
+  // Hang Seller khong day cho cover TRUNG / TUAN_ANH (chi Buyer, NS moi duoc).
+  const coverOk=c=>!(pup==="Seller"&&(c.id==="79629"||c.id==="139148"));
   const list=(rider.id==="139148"||rider.id==="79629")?wardCoverChain(ward):(COVER_BY_ID[rider.id]||[]);
   for(const c of list) if(c!==rider&&!isOff(c)&&coverOk(c)) return c;
   for(const c of wardCoverChain(ward)) if(c!==rider&&!isOff(c)&&coverOk(c)) return c;
   for(const c of Object.values(RIDERS)) if(c.ward===rider.ward&&c!==rider&&!isOff(c)&&coverOk(c)) return c;
   return null;
 }
-function findRiderAvailable(raw,pupType){
-  const res=findRider(raw,{pupType:pupType||""});
+function findRiderAvailable(raw,opts){
+  if(typeof opts==="string") opts={pupType:opts};
+  opts=opts||{};
+  const pupType=opts.pupType||"";
+  const res=findRider(raw,opts);
   if(res.ambiguous){
     const avail=res.ambiguous.filter(e=>!isOff(e.rider||e));
     if(avail.length===1){
@@ -372,7 +384,7 @@ function findRiderAvailable(raw,pupType){
     }
     if(avail.length===0){
       const pp=parse(raw); const ward=pp.admin||pp.areaList[0]||"tich luong";
-      for(const c of wardCoverChain(ward)) if(!isOff(c)&&!((pupType==="Seller"||pupType==="NS")&&(c.id==="79629"||c.id==="139148"))) return {rider:c,conf:70,reason:"Ca 2 phuong an deu dang nghi nen chuyen sang nguoi cover theo phuong.",redirectedFrom:null};
+      for(const c of wardCoverChain(ward)) if(!isOff(c)&&!(pupType==="Seller"&&(c.id==="79629"||c.id==="139148"))) return {rider:c,conf:70,reason:"Ca 2 phuong an deu dang nghi nen chuyen sang nguoi cover theo phuong.",redirectedFrom:null};
       return {rider:null,conf:0,reason:"Ca 2 phuong an deu dang nghi va khong con nguoi cover.",parsed:pp};
     }
     return Object.assign({},res,{ambiguous:avail});
@@ -392,11 +404,11 @@ function render(){
   const raw=$("addr").value.trim();
   const hasReturnBox=$("hasReturn").checked;
   if(!raw){$("out").innerHTML="";return;}
-  const res=findRiderAvailable(raw,$("pupType").value);
+  const res=findRiderAvailable(raw,{pupType:$("pupType").value,hasReturn:$("hasReturn").checked});
   // Nếu trạng thái hoàn/trả được chọn tay thì tôn trọng lựa chọn tay hơn OCR
   const p=parse(raw);
   let note="";
-  if(hasReturnBox!==p.hasReturn) note="<p class='small'>Trạng thái hoàn/trả đã được chọn thủ công, khác với văn bản tự nhận diện — kết quả dưới đây vẫn theo địa chỉ; nếu địa chỉ không khớp, quy tắc dự phòng chỉ áp khi KHÔNG có hoàn/trả.</p>";
+  if(hasReturnBox!==p.hasReturn) note="<p class='small'>Trạng thái hoàn/trả đã được chọn thủ công, khác với văn bản tự nhận diện — kết quả dưới đây tính theo lựa chọn thủ công này.</p>";
   if(res.rider){
     $("out").innerHTML="<div class='result'><h2>Đẩy cho "+res.rider.name+" ["+res.rider.id+"]</h2><p>Độ tin cậy: "+res.conf+"% — "+res.reason+"</p><p class='small'>Tuyến: "+res.rider.route+" ("+res.rider.ward+")</p><button id='cp'>Copy câu trả lời</button>"+note+"</div>";
     $("cp").onclick=()=>{const txt="Đẩy cho "+res.rider.name+" ["+res.rider.id+"] — "+res.reason; navigator.clipboard.writeText(txt).then(()=>alert("Đã sao chép."));};
@@ -409,6 +421,8 @@ function render(){
   }
 }
 $("find").onclick=render;
+$("pupType").onchange=render;
+$("hasReturn").onchange=render;
 $("clear").onclick=()=>{$("addr").value="";$("out").innerHTML="";$("preview").innerHTML="";};
 document.querySelectorAll(".test").forEach(el=>el.onclick=()=>{$("addr").value=el.dataset.t; $("hasReturn").checked=/hoan hang|tra tien|tra hang/i.test(el.dataset.t); render();});
 function runOCR(file){

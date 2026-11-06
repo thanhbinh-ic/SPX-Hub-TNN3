@@ -15,9 +15,9 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
 4. Cây xăng Mạnh Hùng: mốc cuối tuyến LÊ THANH HÀ. Đã xác nhận 31/10/2026: Xăng dầu Mạnh Hùng số 3, 426 Thống Nhất, Tích Lương, Thái Nguyên — 21.5535057, 105.8337262 (thay ghim tạm khu vực xã Vô Tranh trước đây).
    trên Google Maps trước khi dùng làm mốc tọa độ.
 5. Quy tắc dự phòng CHỈ áp khi không khớp đoạn cụ thể nào VÀ ảnh nhiệm vụ KHÔNG có chữ "hoàn hàng", "trả tiền"
-   hay "trả hàng" VÀ là hàng Buyer: Phú Xá → ĐẶNG TIẾN TRUNG [79629]; Tân Lập / Tích Lương →
-   LÊ TUẤN ANH [139148]. Hàng Seller, NS thì rider tự đẩy nhau, không dùng cover dự phòng.
-   "Người gửi trả phí" không tính là một trong ba chữ này.
+   hay "trả hàng" VÀ không phải hàng Seller: Phú Xá → ĐẶNG TIẾN TRUNG [79629]; Tân Lập / Tích Lương →
+   LÊ TUẤN ANH [139148]. Hàng Buyer, NS mới đẩy được cho cover; hàng Seller thì rider tự đẩy nhau,
+   không dùng cover dự phòng. "Người gửi trả phí" không tính là một trong ba chữ này.
 6. Tổ 17 → tính là Phú Xá.
 7. Tổ 19 nay thuộc HÀ NGỌC MAI [164091] (file list mới). Tổ thật sự không có trong bảng thì hệ thống báo chưa xác định được, không tự đoán rider.
 8. TRẦN ĐĂNG YÊN [162125]: không còn trong danh sách phân tuyến.
@@ -79,13 +79,20 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 
 Ảnh có thể tải lên, dán từ bộ nhớ tạm (Ctrl+V), kéo thả vào khung dán ảnh, hoặc nhập địa chỉ trực tiếp.
 
-## PUP Type và luật địa chỉ chỉ định (thêm 03/11/2026, sửa 05/11/2026, chỉ bản web)
+## PUP Type và luật địa chỉ chỉ định (thêm 03/11/2026, sửa 05/11/2026 và 06/11/2026, chỉ bản web)
 - Mục 2 có trường chọn PUP Type: Seller, Buyer, NS (mặc định "Chưa chọn" giữ luật cũ,
   vẫn dùng cover).
-  Chỉ hàng Buyer mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH);
-  hàng Seller, NS thì rider tự đẩy nhau theo tuyến/địa chỉ — không dùng cover dự phòng,
+  Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH);
+  hàng Seller thì rider tự đẩy nhau theo tuyến/địa chỉ — không dùng cover dự phòng,
   và khi chủ tuyến nghỉ cũng không chuyển cho Trung hoặc Tuấn Anh nếu người cover
-  là một trong hai người đó.
+  là một trong hai người đó. (Ngày 05/11/2026 từng đổi thành chỉ Buyer được cover,
+  ngày 06/11/2026 đổi lại như cũ theo kết quả tra cứu: Buyer và NS đều là hàng
+  khách gửi.)
+- Ô tick "Ảnh có chữ hoàn hàng / trả tiền / trả hàng" và ô chọn PUP Type đổi kết
+  quả ngay khi thay đổi, không cần bấm Tìm rider. Ô tick do OCR tự nhận diện
+  nhưng chỉnh tay luôn thắng giá trị tự nhận diện: bỏ tick là kết quả tính lại
+  như không có hoàn/trả. (Trước 06/11/2026 ô tick chỉ đổi dòng ghi chú chứ
+  không đổi kết quả, vì giá trị tick không được đưa vào luật.)
 - Luật địa chỉ chỉ định (từ 05/11/2026): chỉ cần địa chỉ trùng với địa chỉ trong
   danh sách là áp luật, KHÔNG cần tên shop. Đơn không phải của shop đó nhưng trùng
   địa chỉ thì cùng áp dụng:
