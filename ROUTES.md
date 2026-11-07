@@ -140,3 +140,21 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
 - Trường hợp 2 phương án (Trùm Quế): phương án nào nghỉ thì bị loại, chỉ còn 1 phương án thì chốt phương án đó; cả 2 cùng nghỉ thì chuyển sang người cover theo phường. Lý do kết quả luôn ghi rõ ai nghỉ và chuyển sang ai.
 - Đánh dấu nghỉ được lưu trên trình duyệt đang dùng (localStorage), tải lại trang vẫn giữ; sang ngày mới thì bấm "Bỏ đánh dấu nghỉ" hoặc bỏ tích tay. Không tích ai thì mọi luật cũ giữ nguyên.
+
+## OCR và khả năng chịu lỗi (thêm 07/11/2026, chỉ bản web)
+- Trước khi OCR, ảnh được tiền xử lý ngay trên trình duyệt: phóng to tối đa 2 lần,
+  xám hoá, nhị phân hoá Otsu (chữ đen trên nền trắng) rồi mới đưa cho Tesseract.js
+  (tiếng Việt, PSM 6 — khối văn bản đồng nhất). Nếu kết quả đọc từ ảnh đã xử lý
+  gần như trống thì hệ thống tự đọc lại ảnh gốc.
+- Parser lọc ký tự rác do OCR chèn vào (®, +, | ...) trước khi nhận diện luật,
+  nên "Phường + Quyết Thắng" vẫn nhận ra Phường Quyết Thắng. Ngoài ra tên
+  "Quyết Thắng" được nhận cả khi đứng trần trong văn bản (không cần chữ
+  "Phường" đi trước), vì đây là phường ngoài duy nhất đã có HUB nhận ghi
+  trong bảng.
+- Parser cũng nhận số nhà viết tắt dạng "Số 666" (trước đây chỉ nhận "Số nhà",
+  "SN", "nhà") — vụ 07/11/2026: "Số 666, đường 3/2, Tổ 8" trước đây rơi
+  xuống dự phòng Tuấn Anh, nay về đúng LÊ THANH HÀ theo mốc 666.
+- Vụ 07/11/2026: ảnh HULY KISD OCR ra "tổ 8 quyết thắng thái nguyên,
+  Phường + / Quyết Thắng" nhưng bản cũ báo chưa xác định được, vì dấu "+"
+  làm vỡ mẫu "Phường Quyết Thắng". Sau bản sửa, văn bản OCR đó cho ra hàng
+  lạc tuyến → LÊ THANH TUẤN (HUB Thái Nguyên 7).

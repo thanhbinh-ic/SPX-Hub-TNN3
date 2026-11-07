@@ -149,7 +149,9 @@ const RIDERS = {
 };
 function norm(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/\s+/g," ").trim();}
 function parse(raw){
-  const t=norm(raw);
+  // OCR hay chen ky tu rac (® + | ...) giua cac tu, dac biet giua "Phuong" va ten
+  // phuong -> loc sach chi giu chu, so, khoang trang, dau phay va "/" (duong 3/2).
+  let t=norm(raw).replace(/[^a-z0-9\s,\/]/g," ").replace(/\s+/g," ").trim();
   const hasReturn=/hoan hang|tra tien|tra hang/.test(t);
   // Khu vực được nhắc tới (tên cũ / tên đường / tên khu), theo thứ tự xuất hiện,
   // khác với phường hành chính (sau chữ "phường").
@@ -166,6 +168,11 @@ function parse(raw){
     const lm=om[om.length-1].match(/(?:phuong|(?<!phu\s)xa)\s+([a-z\s]+?)(?:,|$)/);
     if(lm){ const w=lm[1].trim(); if(w&&["tich luong","phu xa","tan lap"].indexOf(w)<0) adminOther=w; }
   }
+  // Phong khi OCR lam mat hoac doc sai chu "Phuong": ten phuong ngoai duy nhat co
+  // HUB nhan ghi trong bang la Quyet Thang -> nhan ca khi no dung tran trong van ban,
+  // mien la van ban khong ghi phuong trong 3 phuong cua HUB (de khong nham voi
+  // ten duong/nguoi trung ten neu co).
+  if(!adminOther && !admin && /quyet thang/.test(t)) adminOther="quyet thang";
   const toM=t.match(/to\s*(?:dan pho\s*)?(\d+)/);
   let to=toM?parseInt(toM[1]):null; let toImplicit=false;
   if(to===null){
@@ -174,7 +181,7 @@ function parse(raw){
     const im=t.match(/(^|[\s,])(\d{1,2})\s+(phu xa|tich luong|tan lap)\b/);
     if(im){to=parseInt(im[2]); toImplicit=true;}
   }
-  const hM=t.match(/(?:so nha|sn)\s*(\d+)|nha\s*(\d+)/); const house=hM?parseInt(hM[1]||hM[2]):null;
+  const hM=t.match(/(?:so nha|sn|so)\s*(\d+)|nha\s*(\d+)/); const house=hM?parseInt(hM[1]||hM[2]):null;
   const nM=t.match(/ngo\s*(\d+)/); const ngo=nM?parseInt(nM[1]):null;
   const road32=/3\/2/.test(t);
   const vietbac=/viet bac/.test(t);
@@ -425,16 +432,60 @@ $("pupType").onchange=render;
 $("hasReturn").onchange=render;
 $("clear").onclick=()=>{$("addr").value="";$("out").innerHTML="";$("preview").innerHTML="";};
 document.querySelectorAll(".test").forEach(el=>el.onclick=()=>{$("addr").value=el.dataset.t; $("hasReturn").checked=/hoan hang|tra tien|tra hang/i.test(el.dataset.t); render();});
-function runOCR(file){
+// Tien xu ly anh truoc OCR: phong to, xam hoa, nhi phan hoa Otsu (chu den tren
+// nen trang) -> Tesseract doc chinh xac hon, nhat la chu xam nho tren anh chup
+// man hinh dien thoai.
+async function preprocessImage(file){
+  const img=await new Promise((res,rej)=>{const i=new Image(); i.onload=()=>res(i); i.onerror=rej; i.src=URL.createObjectURL(file);});
+  const maxDim=2600;
+  const scale=Math.min(2,maxDim/Math.max(img.naturalWidth,img.naturalHeight));
+  const c=document.createElement("canvas");
+  c.width=Math.max(1,Math.round(img.naturalWidth*scale));
+  c.height=Math.max(1,Math.round(img.naturalHeight*scale));
+  const x=c.getContext("2d");
+  x.drawImage(img,0,0,c.width,c.height);
+  const d=x.getImageData(0,0,c.width,c.height);
+  const px=d.data,n=px.length/4;
+  const gray=new Uint8Array(n);
+  for(let i=0,j=0;i<px.length;i+=4,j++) gray[j]=Math.round(0.299*px[i]+0.587*px[i+1]+0.114*px[i+2]);
+  const hist=new Array(256).fill(0);
+  for(let i=0;i<n;i++) hist[gray[i]]++;
+  let sum=0; for(let i=0;i<256;i++) sum+=i*hist[i];
+  let sumB=0,wB=0,max=0,thr=127;
+  for(let i=0;i<256;i++){ wB+=hist[i]; if(!wB) continue; const wF=n-wB; if(!wF) break; sumB+=i*hist[i]; const mB=sumB/wB,mF=(sum-sumB)/wF,b=wB*wF*(mB-mF)*(mB-mF); if(b>max){max=b;thr=i;} }
+  for(let i=0,j=0;i<px.length;i+=4,j++){ const v=gray[j]<=thr?0:255; px[i]=px[i+1]=px[i+2]=v; px[i+3]=255; }
+  x.putImageData(d,0,0);
+  return c;
+}
+function applyOCRText(text){
+  $("addr").value=text.trim();
+  $("hasReturn").checked=/hoàn hàng|trả tiền|trả hàng/i.test(text);
+  $("ocrStatus").textContent="Đã đọc xong. Kiểm tra lại địa chỉ rồi bấm Tìm rider.";
+  render();
+}
+async function runOCR(file){
   $("ocrStatus").textContent="Đang đọc ảnh...";
   const img=document.createElement("img"); img.src=URL.createObjectURL(file);
   $("preview").innerHTML=""; $("preview").appendChild(img);
   if(typeof Tesseract==="undefined"){$("ocrStatus").textContent="Không tải được OCR (cần mạng). Vui lòng nhập địa chỉ vào ô để tra cứu.";return;}
-  Tesseract.recognize(file,"vie",{logger:m=>{if(m.status==="recognizing text") $("ocrStatus").textContent="Đang đọc ảnh: "+Math.round((m.progress||0)*100)+"%";}}).then(r=>{
-    $("addr").value=r.data.text.trim(); $("hasReturn").checked=/hoàn hàng|trả tiền|trả hàng/i.test(r.data.text);
-    $("ocrStatus").textContent="Đã đọc xong. Kiểm tra lại địa chỉ rồi bấm Tìm rider.";
-    render();
-  }).catch(()=>{$("ocrStatus").textContent="Đọc ảnh không thành công. Vui lòng nhập địa chỉ vào ô để tra cứu.";});
+  const logger=m=>{if(m.status==="recognizing text") $("ocrStatus").textContent="Đang đọc ảnh: "+Math.round((m.progress||0)*100)+"%";};
+  try{
+    const canvas=await preprocessImage(file);
+    const worker=await Tesseract.createWorker("vie",Tesseract.OEM.DEFAULT,{logger});
+    await worker.setParameters({tessedit_pageseg_mode:Tesseract.PSM.SINGLE_BLOCK});
+    const r1=await worker.recognize(canvas);
+    let text=r1.data.text||"";
+    // Phong khi tien xu ly lam hong anh (chu qua nhat): doc lai anh goc.
+    const alnum=s=>(s||"").replace(/[^a-zA-Z0-9À-ỹ]/g,"").length;
+    if(alnum(text)<5){
+      const r2=await worker.recognize(file);
+      if(alnum(r2.data.text)>alnum(text)) text=r2.data.text;
+    }
+    await worker.terminate();
+    applyOCRText(text);
+  }catch(e){
+    $("ocrStatus").textContent="Đọc ảnh không thành công. Vui lòng nhập địa chỉ vào ô để tra cứu.";
+  }
 }
 async function pasteFromClipboard(){
   try{
