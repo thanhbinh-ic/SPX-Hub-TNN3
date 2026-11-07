@@ -109,9 +109,8 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
     mọi đơn Tổ 2 Phú Xá ngoài đoạn của Hiện đều về Nhung, không còn rơi xuống
     dự phòng Phú Xá (Trung) nữa.
   - 43 Thống Nhất và 65 Thống Nhất → NGUYỄN HOÀNG ANH [161388].
-  - Ngõ 105 Đường Ga Lưu Xá → ĐỖ THỊ NHUNG [123498];
-    Nhung nghỉ thì chuyển cho NGUYỄN THỊ THU [55666] theo chỉ định
-    (thay vì chuỗi cover chung Nhung → Hiện).
+  - Ngõ 105 Đường Ga Lưu Xá → ĐẶNG TIẾN TRUNG [79629] (đổi từ 07/11/2026
+    theo Map-4.txt; trước đó về NHUNG, Nhung nghỉ thì chuyển THU).
   - Số Nhà 122, Tổ 3 → DƯƠNG VĂN SƠN [38286].
 - Bổ sung tuyến từ file Map.txt: DƯƠNG VĂN SƠN thêm Tổ 3; LƯỜNG THỊ ĐẦM thêm Tổ 16;
   NGUYỄN HOÀNG ANH thêm Thống Nhất, Tổ 1 (Tích Lương). Nhờ đó Tổ 1 Tích Lương
@@ -170,11 +169,21 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
     theo luật Voi lu.
   - đào thị huyền trang (sn 153, tổ 12) → LƯỜNG THỊ ĐẦM [100332]: không cần
     luật mới, Tổ 12 chỉ có trong tuyến của Đầm nên hệ thống đã gán đúng.
+    (Map-4.txt thêm: Đầm nghỉ thì chuyển TRUNG theo chỉ định — xem mục Map-4.)
 - Dạng viết "Tổ <khu vực> <số>" (Tổ Phú Xá 9, Tổ Phú Xá 2, Tổ Tân Lập 8,
   Tổ Dân Phố Phú Xá 1) vẫn chưa được parser tách thành số tổ — các ca
   Map-3 xử lý bằng tên shop/ngõ thay thế. Câu hỏi Tổ 9 khu Phú Xá có thuộc
   về HÀ NGỌC MAI không (hỏi từ 05/11/2026) vẫn chưa có trả lời; nếu huynh
   chốt thì parser sẽ tách dạng này và ghi Tổ 9 Phú Xá vào bảng.
+
+## Cập nhật Map-4.txt (07/11/2026, chỉ bản web)
+- HK3D Studio, Ngõ 105 Đường Ga Lưu Xá → ĐẶNG TIẾN TRUNG [79629].
+  Đổi luật so với Map-3.txt (trước đó về NHUNG, Nhung nghỉ thì chuyển THU);
+  nếu Trung nghỉ thì chuyển theo chuỗi cover chung của Trung (Mai rồi Nhung).
+- đào thị huyền trang (sn 153, tổ 12) → LƯỜNG THỊ ĐẦM [100332]; Đầm nghỉ
+  thì chuyển cho ĐẶNG TIẾN TRUNG [79629] theo chỉ định (thay vì chuỗi cover
+  chung Đầm → Phú). Tổ 12 nói chung (không có sn 153) vẫn theo chuỗi chung.
+- Tiến: KTX Nhà K, Trường Đại học Kỹ thuật Công nghiệp → BÙI VĂN TUẤN [53634].
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.

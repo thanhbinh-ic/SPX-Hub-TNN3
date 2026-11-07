@@ -91,6 +91,8 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <span class="tag test" data-t="Tiếng Trung Tuấn Kiệt cơ sở 5, Số 981, Đường 3/2, Tổ 5">Tuấn Kiệt 981</span>
 <span class="tag test" data-t="Ngách 26, Ngõ 226, Đường 3 Tháng 2, Tổ Dân Phố Tân Lập 8, Phường Tích Lương">Ngõ 226 Tân Lập</span>
 <span class="tag test" data-t="Số 101, Đường 3/2">Số 101 đường 3/2</span>
+<span class="tag test" data-t="Trường Đại Học Kỹ Thuật Công Nghiệp Thái Nguyên Ktx Nhà K">KTX Nhà K</span>
+<span class="tag test" data-t="đào thị huyền trang: sn 153, tổ 12">sn 153 tổ 12</span>
 </p>
 </div>
 
@@ -228,6 +230,8 @@ function shopMatch(t,p,areasEff){
   if(p.house===557&&p.to===12&&/duong 3/.test(t)&&!p.road32) return hit(RIDERS.HIEN_PHAM,96,"Địa chỉ Số Nhà 557, Đường 3, Tổ 12 được chỉ định cho PHẠM THỊ HIÊN.");
   if(/ecokill|mat ong a su/.test(t)) return hit(RIDERS.TUAN_ANH,96,"Địa chỉ EcoKill (ngõ vào mật ong A Sự, Phường Tích Lương) được chỉ định cho LÊ TUẤN ANH.");
   if(/dien may xanh/.test(t)&&p.areaList.indexOf("phu xa")>=0) return hit(RIDERS.HIEN_HUU,96,"Địa chỉ Điện Máy Xanh, Phú Xá, Tổ 26 được chỉ định cho NGUYỄN HỮU HIỆN.");
+  if(/dao thi huyen trang/.test(t)||(p.house===153&&p.to===12)){ const r=hit(RIDERS.DAM,96,"Địa chỉ sn 153, tổ 12 được chỉ định cho LƯỜNG THỊ ĐẦM."); r.coverOverride=RIDERS.TRUNG; return r; }
+  if(/ktx/.test(t)&&/nha k/.test(t)) return hit(RIDERS.TUAN,96,"Địa chỉ KTX Nhà K, Trường Đại học Kỹ thuật Công nghiệp được chỉ định cho BÙI VĂN TUẤN.");
   if(p.house===188&&A.indexOf("phu xa")>=0) return hit(RIDERS.TRUNG,96,"Địa chỉ 188 Đường Phú Xá được chỉ định cho ĐẶNG TIẾN TRUNG.");
   if(p.house===1147&&/ba hanh/.test(t)) return hit(RIDERS.THU,96,"Địa chỉ Sn 1147 nhà thuốc Ba Hạnh 2 được chỉ định cho NGUYỄN THỊ THU.");
   if(p.ngo===172&&A.indexOf("tich luong")>=0) return hit(RIDERS.TUAN,96,"Địa chỉ Ngõ 172 Đường Tích Lương được chỉ định cho BÙI VĂN TUẤN.");
@@ -238,7 +242,7 @@ function shopMatch(t,p,areasEff){
   if(p.to===2&&A.indexOf("phu xa")>=0&&p.ngo!==167&&!(p.house===57&&p.le)) return hit(RIDERS.NHUNG,96,"Địa chỉ Tổ 2 Phú Xá được chỉ định cho ĐỖ THỊ NHUNG.");
   if(/thong nhat/.test(t)&&(p.house===43||/(^|[\s,])43[\s,]+(duong\s+)?thong nhat/.test(t))) return hit(RIDERS.HOANG_ANH,96,"Địa chỉ 43 Thống Nhất được chỉ định cho NGUYỄN HOÀNG ANH.");
   if(/thong nhat/.test(t)&&(p.house===65||/(^|[\s,])65[\s,]+(duong\s+)?thong nhat/.test(t))) return hit(RIDERS.HOANG_ANH,96,"Địa chỉ 65 Thống Nhất được chỉ định cho NGUYỄN HOÀNG ANH.");
-  if(p.ngo===105&&/ga luu xa/.test(t)){ const r=hit(RIDERS.NHUNG,96,"Địa chỉ Ngõ 105 Đường Ga Lưu Xá được chỉ định cho ĐỖ THỊ NHUNG."); r.coverOverride=RIDERS.THU; return r; }
+  if(p.ngo===105&&/ga luu xa/.test(t)) return hit(RIDERS.TRUNG,96,"Địa chỉ Ngõ 105 Đường Ga Lưu Xá được chỉ định cho ĐẶNG TIẾN TRUNG.");
   if(p.house===122&&p.to===3) return hit(RIDERS.SON,96,"Địa chỉ Số 122, Tổ 3 được chỉ định cho DƯƠNG VĂN SƠN.");
   return null;
 }
