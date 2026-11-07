@@ -127,6 +127,11 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   file Map-2.txt: HULY KISD, tổ 8 quyết thắng, Phường Quyết Thắng → Lê Thanh Tuấn.
   Chú ý: Lê Thanh Tuấn (HUB khác) khác với LÊ THANH HÀ và LÊ TUẤN ANH của HUB này,
   và không có trong bảng tuyến hay chuỗi cover của HUB này.
+- Trần Lương Computer Shop, 335 phố Hương (Phường Tích Lương) → đẩy cho
+  NGUYỄN TRUNG ĐỨC (15-TNN Thái Nguyên 8 Hub) — đổi luật từ 07/11/2026 theo
+  file Map-3.txt; trước đó địa chỉ này về LÊ TUẤN ANH theo dự phòng Tích Lương.
+  Luật lạc tuyến này chạy trước luật dự phòng, áp cho mọi loại hàng và cả khi
+  có chữ hoàn/trả.
 - Phường/xã khác ngoài 3 phường mà chưa có HUB nhận ghi trong bảng thì hệ thống
   báo lạc tuyến, cần huynh bổ sung HUB nhận.
 - Nguyên tắc phân biệt: đoạn cụ thể (mốc, địa chỉ chỉ định, ngõ/đường trong bảng)
@@ -134,6 +139,42 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   phường (Tổ 5 Phường Hoàng Văn Thụ không phải Tổ 5 Tích Lương của Sơn) nên
   địa chỉ có phường hành chính ngoài 3 phường sẽ bỏ qua khối tra tổ và rơi
   xuống luật lạc tuyến.
+
+## Cập nhật Map-3.txt (07/11/2026, chỉ bản web)
+- Số nhà lẻ/chẵn đường 3/2: khi địa chỉ trên đường 3/2 không ghi rõ khu vực
+  hay phường thì số nhà lẻ tính là phía Phú Xá, số nhà chẵn tính là phía
+  Tích Lương, rồi áp các luật tuyến/dự phòng theo phía đó (ví dụ số nhà
+  1023A → Phú Xá; Số 666 đường 3/2 Tổ 8 → LÊ THANH HÀ theo mốc 666;
+  số 800 đường 3/2 Tổ 2 → DƯƠNG TIỀN PHÚ theo khoảng 666–1016).
+  Chỉ áp cho đường 3/2, không áp cho đường khác (ví dụ 43 Thống Nhất lẻ
+  nhưng vẫn là Tích Lương) vì các luật địa chỉ chỉ định chạy trước.
+  Ngõ 67/210/711 chỉ có trong tuyến của ĐẶNG TIẾN TRUNG nên nhận cả khi
+  địa chỉ không ghi rõ khu vực, để không bị luật lẻ/chẵn đẩy nhầm.
+- Luật địa chỉ chỉ định mới (ưu tiên cao nhất, như các luật cũ):
+  - Điện Máy Xanh, Phú Xá, Tổ 26 → NGUYỄN HỮU HIỆN [36689]; Tổ 26 Phú Xá
+    cũng ghi vào bảng tuyến cho Hiện.
+  - Tiếng Trung Tuấn Kiệt cơ sở 5, Số 981, Đường 3/2, Tổ 5 → ĐẶNG TIẾN TRUNG
+    [79629] (địa chỉ này mà áp luật chung đường 3/2 thì về Thu vì 981 lẻ
+    ≤ 1149, nên luật chỉ định thắng luật chung).
+  - Ngõ 226, Đường 3/2, Tổ Tân Lập 8 → NGUYỄN MẠNH ĐỨC [69333].
+  - Nguyễn Linh, Tổ Dân Phố Phú Xá 1 → ĐẶNG TIẾN TRUNG [79629]. Luật này
+    nhận theo tên vì riêng địa chỉ "Tổ 1 Phú Xá" trùng với tuyến mặt lẻ
+    Tổ 1 Phú Xá của NGUYỄN ĐỨC CHUNG (chỉ khi có chữ "lẻ").
+  - Ngõ 77 Đường Thống Nhất → NGUYỄN MẠNH ĐỨC [69333] (Trần Quang Yên,
+    Yến Hùng, Hi An cùng địa chỉ này).
+  - Số Nhà 557, Đường 3, Tổ 12 → PHẠM THỊ HIÊN [52224] (thắng luật
+    Tổ 12 Tích Lương của ĐẦM).
+  - EcoKill (ngõ vào mật ong A Sự, Phường Tích Lương) → LÊ TUẤN ANH [139148].
+  - Shop Bình Minh 68, Tổ Phú Xá 2 → ĐẶNG TIẾN TRUNG [79629]. Riêng shop
+    này nhận theo tên, vì địa chỉ Tổ 2 Phú Xá nói chung vẫn về ĐỖ THỊ NHUNG
+    theo luật Voi lu.
+  - đào thị huyền trang (sn 153, tổ 12) → LƯỜNG THỊ ĐẦM [100332]: không cần
+    luật mới, Tổ 12 chỉ có trong tuyến của Đầm nên hệ thống đã gán đúng.
+- Dạng viết "Tổ <khu vực> <số>" (Tổ Phú Xá 9, Tổ Phú Xá 2, Tổ Tân Lập 8,
+  Tổ Dân Phố Phú Xá 1) vẫn chưa được parser tách thành số tổ — các ca
+  Map-3 xử lý bằng tên shop/ngõ thay thế. Câu hỏi Tổ 9 khu Phú Xá có thuộc
+  về HÀ NGỌC MAI không (hỏi từ 05/11/2026) vẫn chưa có trả lời; nếu huynh
+  chốt thì parser sẽ tách dạng này và ghi Tổ 9 Phú Xá vào bảng.
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
