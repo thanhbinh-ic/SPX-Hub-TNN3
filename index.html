@@ -67,7 +67,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <option value="NS">NS</option>
 </select>
 </label>
-<p class="small">Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH). Hàng Seller thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng. Để "Chưa chọn" thì giữ luật cũ (vẫn dùng cover). Chọn loại hàng là kết quả đổi ngay, không cần bấm Tìm rider.</p>
+<p class="small">Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH). Hàng Seller thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng. Để "Chưa chọn" thì vẫn dùng cover (đã chốt 08/11/2026: không chặn cover). Chọn loại hàng là kết quả đổi ngay, không cần bấm Tìm rider.</p>
 <button id="find">Tìm rider</button>
 <button class="secondary" id="clear">Xóa</button>
 <p class="small">Thử nhanh:
@@ -80,7 +80,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <span class="tag test" data-t="8 Phú Xá, Phường Tích Lương, Tỉnh Thái Nguyên">8 Phú Xá</span>
 <span class="tag test" data-t="Số Nhà 188, Đường Phú Xá, Phường Tích Lương, Tỉnh Thái Nguyên">Số 188 Đường Phú Xá</span>
 <span class="tag test" data-t="số nhà 01 ngách 4 ngõ 54 tổ dân phố 19, Phú Xá, Phường Tích Lương">Tổ 19 Ngõ 54</span>
-<span class="tag test" data-t="Trùm Quế Thái Nguyên (Tích Lương)">Trùm Quế</span>
+<span class="tag test" data-t="Trùn Quế Thái Nguyên, Sn 1, Ngõ 88 Tích Lương, Tổ 4, Phường Tích Lương">Trùn Quế</span>
 <span class="tag test" data-t="Trùn Quế Thái Nguyên, Sn 1, Ngõ 88 Tích Lương, Tổ 4, Phường Tích Lương">Trùn Quế</span>
 <span class="tag test" data-t="Thuỳ Trang, SN 8. ngách 71, ngõ 80, tổ 16">Thuỳ Trang</span>
 <span class="tag test" data-t="Ngô Trang, NT Ba Hạnh- kiot số 2- chợ Tê Ba Nhất">Ngô Trang</span>
@@ -94,6 +94,8 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <span class="tag test" data-t="Trường Đại Học Kỹ Thuật Công Nghiệp Thái Nguyên Ktx Nhà K">KTX Nhà K</span>
 <span class="tag test" data-t="đào thị huyền trang: sn 153, tổ 12">sn 153 tổ 12</span>
 <span class="tag test" data-t="Số Nhà 116, Đường Thanh Niên Xung Phong, Tổ 13, Phường Tích Lương, Tỉnh Thái Nguyên">116 đường TNXP</span>
+<span class="tag test" data-t="Tổ Phú Xá 9, Phường Tích Lương">Tổ Phú Xá 9</span>
+<span class="tag test" data-t="HƯƠNG PHÁP CLOTHING, Đường Ga Lưu Xá, Ngõ 8, Phường Phú Xá, Phường Tích Lương">HƯƠNG PHÁP Ngõ 8</span>
 </p>
 </div>
 
@@ -118,14 +120,14 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <ul>
 <li><b>Ưu tiên mốc địa danh</b> rồi mới tới tổ, số nhà, ngõ, đường.</li>
 <li><b>Trùm Quế (Tích Lương):</b> kết quả luôn nêu cả 2 phương án: Sơn chuyển → LÊ TUẤN ANH; không phải Sơn chuyển → chia theo địa chỉ.</li>
-<li><b>Tên viết sai chính tả:</b> “Trùn Quế” vẫn được hiểu là Trùm Quế và áp cùng quy tắc 2 phương án.</li>
+<li><b>Tên shop chuẩn là “Trùn Quế Thái Nguyên” (Sn 1, Ngõ 88 Tích Lương, Tổ 4):</b> “Trùm Quế” là cách viết đúng chính tả, hệ thống nhận cả hai và áp cùng quy tắc 2 phương án. “Tràm Quế” không đồng bộ.</li>
 <li><b>Mốc 666:</b> ĐH Kỹ thuật Công nghiệp ở 666 Đ. 3/2. “Từ 666 trở ngược lên số nhỏ Tổ 8” nghĩa là số nhà ≤ 666 tại Tổ 8 về LÊ THANH HÀ; số 666–1016 tại Tổ 2 về DƯƠNG TIỀN PHÚ.</li>
 <li><b>Quy tắc dự phòng chỉ áp khi không khớp đoạn cụ thể nào VÀ ảnh KHÔNG có chữ “hoàn hàng”, “trả tiền” hay “trả hàng”:</b> Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH. Nếu ảnh có một trong ba chữ đó thì chia theo địa chỉ bình thường, không dùng dự phòng.</li>
 <li><b>Đọc hiểu địa chỉ, không áp công thức máy móc:</b> “8 Phú Xá” được hiểu là Tổ 8 khu Phú Xá; “Đường Phú Xá” được hiểu là khu vực Phú Xá, khác với phường hành chính ghi sau đó. Tổ được tra theo từng khu vực nhắc tới trước, rồi mới tới phường hành chính.</li>
-<li><b>Bổ sung file list mới:</b> HÀ NGỌC MAI thêm Tổ 19, Ngõ 54, đường CMT8 phường Tích Lương; NGUYỄN XUÂN THẮNG thêm đường Thanh niên xung phong (cả tuyến, không chỉ ngõ 130 — từ Map-5.txt).</li>
-<li><b>PUP Type (loại hàng):</b> chọn Seller, Buyer hoặc NS ở mục 2. Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH); hàng Seller thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng và không dùng cover khi chủ tuyến nghỉ nếu người cover là Trung hoặc Tuấn Anh. Để "Chưa chọn" thì giữ luật cũ (vẫn dùng cover).</li>
+<li><b>Bổ sung file list mới:</b> HÀ NGỌC MAI thêm Tổ 9 (Phú Xá, chốt 08/11/2026), Tổ 19, Ngõ 54, đường CMT8 phường Tích Lương; NGUYỄN XUÂN THẮNG thêm đường Thanh niên xung phong (cả tuyến, không chỉ ngõ 130 — từ Map-5.txt).</li>
+<li><b>PUP Type (loại hàng):</b> chọn Seller, Buyer hoặc NS ở mục 2. Hàng Buyer, NS mới đẩy được cho cover dự phòng (ĐẶNG TIẾN TRUNG, LÊ TUẤN ANH); hàng Seller thì rider tự đẩy nhau theo tuyến/địa chỉ, không dùng cover dự phòng và không dùng cover khi chủ tuyến nghỉ nếu người cover là Trung hoặc Tuấn Anh. Để "Chưa chọn" thì vẫn dùng cover (đã chốt 08/11/2026: không chặn cover).</li>
 <li><b>Ô tick hoàn/trả và ô chọn PUP Type đổi kết quả ngay khi thay đổi, không cần bấm Tìm rider:</b> ô tick hoàn/trả do OCR tự nhận diện nhưng chỉnh tay luôn thắng giá trị tự nhận diện — bỏ tick là kết quả tính lại như không có hoàn/trả.</li>
-<li><b>Đẩy rider theo địa chỉ chỉ định (ưu tiên cao nhất, trước cả mốc và tổ):</b> chỉ cần địa chỉ trùng với địa chỉ trong danh sách dưới đây là áp luật, không cần tên shop: 188 Đường Phú Xá → ĐẶNG TIẾN TRUNG; Sn 1147 nhà thuốc Ba Hạnh 2 → NGUYỄN THỊ THU; Ngõ 172 Đường Tích Lương → BÙI VĂN TUẤN; ngõ 80 tổ 16 → LƯỜNG THỊ ĐẦM; chợ Tê Ba Nhất (NT Ba Hạnh, kiot số 2) → DƯƠNG TIỀN PHÚ; Tổ 2 Phú Xá (trừ đoạn ngõ 167 / nhà 57B lẻ của NGUYỄN HỮU HIỆN) → ĐỖ THỊ NHUNG; 43 Thống Nhất và 65 Thống Nhất → NGUYỄN HOÀNG ANH; Ngõ 105 Đường Ga Lưu Xá → ĐẶNG TIẾN TRUNG; Số 122 Tổ 3 → DƯƠNG VĂN SƠN. "Ba Hạnh" xuất hiện ở cả Trang Thu (1147) và Ngô Trang (chợ Tê Ba Nhất) nên phân biệt bằng số nhà/chợ, không dùng tên shop.</li>
+<li><b>Đẩy rider theo địa chỉ chỉ định (ưu tiên cao nhất, trước cả mốc và tổ):</b> chỉ cần địa chỉ trùng với địa chỉ trong danh sách dưới đây là áp luật, không cần tên shop: 188 Đường Phú Xá → ĐẶNG TIẾN TRUNG; Sn 1147 nhà thuốc Ba Hạnh 2 → NGUYỄN THỊ THU; Ngõ 172 Đường Tích Lương → BÙI VĂN TUẤN; ngõ 80 tổ 16 → LƯỜNG THỊ ĐẦM; chợ Tê Ba Nhất (NT Ba Hạnh, kiot số 2) → DƯƠNG TIỀN PHÚ; Tổ 2 Phú Xá (trừ đoạn ngõ 167 / nhà 57B lẻ của NGUYỄN HỮU HIỆN) → ĐỖ THỊ NHUNG; 43 Thống Nhất và 65 Thống Nhất → NGUYỄN HOÀNG ANH; Ngõ 105 Đường Ga Lưu Xá → ĐẶNG TIẾN TRUNG; Ngõ 8 Đường Ga Lưu Xá (HƯƠNG PHÁP CLOTHING) → ĐẶNG TIẾN TRUNG; Số 122 Tổ 3 → DƯƠNG VĂN SƠN. "Ba Hạnh" xuất hiện ở cả Trang Thu (1147) và Ngô Trang (chợ Tê Ba Nhất) nên phân biệt bằng số nhà/chợ, không dùng tên shop.</li>
 <li><b>Hàng lạc tuyến (ngoài 3 phường của HUB):</b> địa chỉ thuộc phường hành chính ngoài Tân Lập, Phú Xá, Tích Lương thì không đẩy cho rider HUB này. Phường Quyết Thắng → đẩy cho LÊ THANH TUẤN [161239] (15-TNN Thái Nguyên 7 Hub). Phường/xã khác ngoài 3 phường mà chưa có HUB nhận ghi trong bảng thì hệ thống báo lạc tuyến, cần bổ sung HUB nhận.</li>
 <li><b>Bổ sung tuyến từ file Map.txt:</b> DƯƠNG VĂN SƠN thêm Tổ 3; LƯỜNG THỊ ĐẦM thêm Tổ 16; NGUYỄN HOÀNG ANH thêm Thống Nhất, Tổ 1 (Tích Lương) — nên Tổ 1 Tích Lương nay về Hoàng Anh, không còn gán nhầm sang Tổ 1 Tân Lập của PHẠM TRUNG KIÊN. Địa chỉ 188 Đường Phú Xá về ĐẶNG TIẾN TRUNG theo luật địa chỉ chỉ định, không áp khoảng 58–210 chẵn của NGUYỄN HỮU HIỆN, kể cả khi không có tên shop kimquytn.</li>
 <li><b>Tổ nào không có trong bảng</b> thì hệ thống báo “chưa xác định được”, không tự đoán rider.</li>
@@ -146,7 +148,7 @@ const RIDERS = {
   THU:{id:"55666",name:"NGUYỄN THỊ THU",ward:"Phú Xá",route:"Tổ 4, mặt lẻ đường 3/2 đến 1149 (số nhà lẻ đường 3/2 đến 1149)"},
   CHUNG:{id:"58352",name:"NGUYỄN ĐỨC CHUNG",ward:"Phú Xá",route:"Mặt lẻ Tổ 1 Phú Xá, Tổ 1 Cách mạng Tháng 8"},
   TRUNG:{id:"79629",name:"ĐẶNG TIẾN TRUNG",ward:"Phú Xá",route:"1151 đến 1477, ngõ 67, ngõ 210; Tổ 7, ngõ 711"},
-  MAI:{id:"164091",name:"HÀ NGỌC MAI",ward:"Phú Xá",route:"Tổ 8, Tổ 10, Tổ 11, Tổ 19, Ngõ 54, Đường CMT8 phường Tích Lương"},
+  MAI:{id:"164091",name:"HÀ NGỌC MAI",ward:"Phú Xá",route:"Tổ 8, Tổ 9 (Phú Xá), Tổ 10, Tổ 11, Tổ 19, Ngõ 54, Đường CMT8 phường Tích Lương"},
   NHUNG:{id:"123498",name:"ĐỖ THỊ NHUNG",ward:"Phú Xá",route:"Cổng GOLICC đến hết đường ga; đường Việt Bắc đến đèn xanh đèn đỏ; Ga Lưu Xá"},
   HOANG_ANH:{id:"161388",name:"NGUYỄN HOÀNG ANH",ward:"Tân Lập",route:"502 đến Ốc Hương, lẻ đường 3/2; các số nhà 8xx; Thống Nhất, Tổ 1 (Tích Lương)"},
   KIEN:{id:"79621",name:"PHẠM TRUNG KIÊN",ward:"Tân Lập",route:"Tổ 1, Tổ 2, GO, đường Việt Bắc"},
@@ -188,6 +190,13 @@ function parse(raw){
     // "188, Đường Phú Xá" không khớp dạng này vì số nhà đứng trước chữ "đường".
     const im=t.match(/(^|[\s,])(\d{1,2})\s+(phu xa|tich luong|tan lap)\b/);
     if(im){to=parseInt(im[2]); toImplicit=true;}
+    // Dạng "Tổ <khu vực> <số>": "Tổ Phú Xá 9" = Tổ 9 khu Phú Xá,
+    // "Tổ Dân Phố Phú Xá 1" = Tổ 1 khu Phú Xá (chốt 08/11/2026: Tổ 9 Phú Xá
+    // thuộc HÀ NGỌC MAI). Tên khu vực đã có trong areaList nên khối tổ tra đúng.
+    if(to===null){
+      const tm=t.match(/to\s*(?:dan pho\s*)?(phu xa|tich luong|tan lap)\s*(\d+)/);
+      if(tm){to=parseInt(tm[2]);}
+    }
   }
   const hM=t.match(/(?:so nha|sn|so)\s*(\d+)|nha\s*(\d+)/); const house=hM?parseInt(hM[1]||hM[2]):null;
   const nM=t.match(/ngo\s*(\d+)/); const ngo=nM?parseInt(nM[1]):null;
@@ -244,6 +253,8 @@ function shopMatch(t,p,areasEff){
   if(/thong nhat/.test(t)&&(p.house===43||/(^|[\s,])43[\s,]+(duong\s+)?thong nhat/.test(t))) return hit(RIDERS.HOANG_ANH,96,"Địa chỉ 43 Thống Nhất được chỉ định cho NGUYỄN HOÀNG ANH.");
   if(/thong nhat/.test(t)&&(p.house===65||/(^|[\s,])65[\s,]+(duong\s+)?thong nhat/.test(t))) return hit(RIDERS.HOANG_ANH,96,"Địa chỉ 65 Thống Nhất được chỉ định cho NGUYỄN HOÀNG ANH.");
   if(p.ngo===105&&/ga luu xa/.test(t)) return hit(RIDERS.TRUNG,96,"Địa chỉ Ngõ 105 Đường Ga Lưu Xá được chỉ định cho ĐẶNG TIẾN TRUNG.");
+  // Map-6.txt (08/11/2026): HƯƠNG PHÁP CLOTHING, Ngõ 8 Đường Ga Lưu Xá.
+  if(p.ngo===8&&/ga luu xa/.test(t)) return hit(RIDERS.TRUNG,96,"Địa chỉ Ngõ 8, Đường Ga Lưu Xá (HƯƠNG PHÁP CLOTHING) được chỉ định cho ĐẶNG TIẾN TRUNG.");
   if(p.house===122&&p.to===3) return hit(RIDERS.SON,96,"Địa chỉ Số 122, Tổ 3 được chỉ định cho DƯƠNG VĂN SƠN.");
   return null;
 }
@@ -263,12 +274,13 @@ function findRider(raw,opts){
   const shop=shopMatch(t,p,areasEff);
   if(shop) return shop;
   // Trùm Quế: luôn nêu cả 2 phương án, không cần nút chọn người chuyển.
-  // "Trùn Quế" là cách viết sai chính tả của "Trùm Quế" (m -> n) vẫn áp cùng quy tắc.
+  // Tên shop chuẩn là "Trùn Quế Thái Nguyên" (Sn 1, Ngõ 88 Tích Lương, Tổ 4);
+  // "Trùm Quế" là cách viết đúng chính tả, nhận cả hai. "Tràm Quế" không đồng bộ.
   if(/(trum|trun) que/.test(t)){
     return {ambiguous:[
       {rider:RIDERS.TUAN_ANH,label:"Phương án 1 — Nếu đơn do DƯƠNG VĂN SƠN chuyển đẩy",reason:"Trùm Quế chuyển cho LÊ TUẤN ANH."},
       {rider:RIDERS.SON,label:"Phương án 2 — Nếu không phải Sơn chuyển, chia theo địa chỉ",reason:"Trùm Quế thuộc khu vực Tích Lương do DƯƠNG VĂN SƠN phụ trách (Tổ 4, Tổ 5). Cần xác nhận người chuyển để chốt."}
-    ],conf:0,reason:(/trun que/.test(t)?"Địa chỉ ghi sai chính tả thành 'Trùn Quế', vẫn hiểu là Trùm Quế. ":"")+"Trùm Quế chỉ chuyển cho LÊ TUẤN ANH khi người chuyển là DƯƠNG VĂN SƠN; chưa rõ người chuyển nên nêu cả 2 phương án."};
+    ],conf:0,reason:(/trun que/.test(t)?"Tên shop chuẩn là 'Trùn Quế Thái Nguyên'. ":"")+"Trùm Quế chỉ chuyển cho LÊ TUẤN ANH khi người chuyển là DƯƠNG VĂN SƠN; chưa rõ người chuyển nên nêu cả 2 phương án."};
   }
   if(/cong a1|a1 cong nghiep/.test(t)) return hit(RIDERS.TUAN,98,"Cổng A1 Công nghiệp thuộc tuyến cổng A1 đến Tổ 6 của BÙI VĂN TUẤN.");
   if(/cong chinh/.test(t)&&/cong nghiep/.test(t)) return hit(RIDERS.HA,95,"Cổng chính ĐH Công nghiệp thuộc tuyến của LÊ THANH HÀ.");
@@ -294,11 +306,17 @@ function findRider(raw,opts){
   // luat lac tuyen o duoi thay vi gan nham cho rider HUB nay.
   if(p.to!==null && !p.adminOther){
     const maps={"tich luong":{1:RIDERS.HOANG_ANH,3:RIDERS.SON,6:RIDERS.TUAN,4:RIDERS.SON,5:RIDERS.SON,9:RIDERS.PHU,10:RIDERS.PHU,11:RIDERS.DAM,12:RIDERS.DAM,13:RIDERS.DAM,14:RIDERS.DAM,15:RIDERS.DAM,16:RIDERS.DAM},
-      "phu xa":{4:RIDERS.THU,7:RIDERS.TRUNG,8:RIDERS.MAI,10:RIDERS.MAI,11:RIDERS.MAI,19:RIDERS.MAI,26:RIDERS.HIEN_HUU},
+      "phu xa":{4:RIDERS.THU,7:RIDERS.TRUNG,8:RIDERS.MAI,9:RIDERS.MAI,10:RIDERS.MAI,11:RIDERS.MAI,19:RIDERS.MAI,26:RIDERS.HIEN_HUU},
       "tan lap":{1:RIDERS.KIEN,2:RIDERS.KIEN}};
     const candidates=areasEff.slice(); if(p.admin&&candidates.indexOf(p.admin)<0) candidates.push(p.admin);
-    for(const a of candidates){
-      if(maps[a]&&maps[a][p.to]) return hit(maps[a][p.to],90,"Tổ "+p.to+" thuộc khu vực "+a+" theo bảng tuyến.");
+    // Chi tra to trong khu vuc nhac toi truoc tien: to cung so o khu vuc khac
+    // la to khac (vd To 1 khu Phu Xa khong phai To 1 Tich Luong cua HOANG ANH,
+    // To 1 Phu Xa mat le thuoc CHUNG theo luat rieng o duoi). Neu khu vuc dau
+    // tien khong co muc cho to nay thi roi xuong luat rieng (mat le, moc 666)
+    // / to chi co 1 rider / du phong, khong tu doi sang khu vuc sau.
+    if(candidates.length>0){
+      const a0=candidates[0];
+      if(maps[a0]&&maps[a0][p.to]) return hit(maps[a0][p.to],90,"Tổ "+p.to+" thuộc khu vực "+a0+" theo bảng tuyến.");
     }
     // Tổ chỉ xuất hiện trong đúng 1 bảng tuyến (ví dụ Tổ 19 chỉ có ở HÀ NGỌC MAI)
     // thì gán cho rider đó ngay cả khi địa chỉ chỉ ghi phường hành chính.

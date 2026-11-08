@@ -9,7 +9,10 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
    rồi tổ + phường, rồi số nhà + ngõ + đường. Chỉ cần địa chỉ trùng là áp
    luật, không cần tên shop.
 2. Trùm Quế (Tích Lương): kết quả luôn nêu cả 2 phương án, không cần chọn người chuyển: Sơn chuyển → LÊ TUẤN ANH [139148]; không phải Sơn chuyển → chia theo địa chỉ.
-   Tên viết sai chính tả "Trùn Quế" vẫn được hiểu là Trùm Quế và áp cùng quy tắc 2 phương án. "Sn" trong địa chỉ được hiểu là viết tắt của "Số nhà".
+   Tên shop chuẩn là "Trùn Quế Thái Nguyên" (Sn 1, Ngõ 88 Tích Lương, Tổ 4);
+   "Trùm Quế" là cách viết đúng chính tả, hệ thống nhận cả hai và áp cùng quy
+   tắc 2 phương án. "Tràm Quế" không đồng bộ. "Sn" trong địa chỉ được hiểu là
+   viết tắt của "Số nhà".
 3. Mốc 666: ĐH Kỹ thuật Công nghiệp ở 666 Đ. 3/2, Tích Lương. Số nhà ≤ 666 tại Tổ 8 về
    LÊ THANH HÀ [16338]; số 666–1016 tại Tổ 2 về DƯƠNG TIỀN PHÚ [157243].
 4. Cây xăng Mạnh Hùng: mốc cuối tuyến LÊ THANH HÀ. Đã xác nhận 31/10/2026: Xăng dầu Mạnh Hùng số 3, 426 Thống Nhất, Tích Lương, Thái Nguyên — 21.5535057, 105.8337262 (thay ghim tạm khu vực xã Vô Tranh trước đây).
@@ -40,7 +43,7 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
 - [55666] NGUYỄN THỊ THU: Tổ 4, mặt lẻ đường 3/2 đến 1149 (số nhà lẻ đường 3/2 đến 1149)
 - [58352] NGUYỄN ĐỨC CHUNG: mặt lẻ Tổ 1 Phú Xá, Tổ 1 Cách mạng Tháng 8
 - [79629] ĐẶNG TIẾN TRUNG: 1151 đến 1477, ngõ 67, ngõ 210; Tổ 7, ngõ 711
-- [164091] HÀ NGỌC MAI: Tổ 8, Tổ 10, Tổ 11, Tổ 19, Ngõ 54, Đường CMT8 phường Tích Lương
+- [164091] HÀ NGỌC MAI: Tổ 8, Tổ 9 (Phú Xá), Tổ 10, Tổ 11, Tổ 19, Ngõ 54, Đường CMT8 phường Tích Lương
 - [123498] ĐỖ THỊ NHUNG: cổng GOLICC đến hết đường ga; đường Việt Bắc đến
   đèn xanh đèn đỏ; Ga Lưu Xá (Tích Lương cũ)
 
@@ -172,10 +175,11 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
     luật mới, Tổ 12 chỉ có trong tuyến của Đầm nên hệ thống đã gán đúng.
     (Map-4.txt thêm: Đầm nghỉ thì chuyển TRUNG theo chỉ định — xem mục Map-4.)
 - Dạng viết "Tổ <khu vực> <số>" (Tổ Phú Xá 9, Tổ Phú Xá 2, Tổ Tân Lập 8,
-  Tổ Dân Phố Phú Xá 1) vẫn chưa được parser tách thành số tổ — các ca
-  Map-3 xử lý bằng tên shop/ngõ thay thế. Câu hỏi Tổ 9 khu Phú Xá có thuộc
-  về HÀ NGỌC MAI không (hỏi từ 05/11/2026) vẫn chưa có trả lời; nếu huynh
-  chốt thì parser sẽ tách dạng này và ghi Tổ 9 Phú Xá vào bảng.
+  Tổ Dân Phố Phú Xá 1) nay parser đã tách được thành số tổ (chốt 08/11/2026).
+  Tổ 9 khu Phú Xá thuộc HÀ NGỌC MAI [164091] — đã chốt, không còn là câu hỏi.
+  Tổ 9 phường Tích Lương vẫn về DƯƠNG TIỀN PHÚ [157243] theo bảng tuyến;
+  chỉ ghi "Tổ 9" trần, không khu vực/phường, thì nay không tự gán (trước đây
+  gán nhầm cho PHÚ theo luật tổ chỉ có 1 rider) vì Tổ 9 có ở cả 2 phường.
 
 ## Cập nhật Map-4.txt (07/11/2026, chỉ bản web)
 - HK3D Studio, Ngõ 105 Đường Ga Lưu Xá → ĐẶNG TIẾN TRUNG [79629].
@@ -200,6 +204,36 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   Tổ 12 nói chung vẫn về ĐẦM theo bảng tuyến.
 - HULY KISD (Phường Quyết Thắng) ghi rõ người nhận: LÊ THANH TUẤN [161239]
   (15-TNN Thái Nguyên 7 Hub).
+
+## Cập nhật Map-6.txt (08/11/2026, chỉ bản web)
+- Tổ 9 khu Phú Xá → HÀ NGỌC MAI [164091] (chốt 08/11/2026, hỏi từ 05/11).
+  Parser nay tách được dạng "Tổ <khu vực> <số>" (Tổ Phú Xá 9, Tổ Tân Lập 8,
+  Tổ Dân Phố Phú Xá 1) thành số tổ; khu vực nhắc tới trong dạng này được
+  tính như khu vực thường (tra tổ theo khu vực nhắc trước). Các ca cũ vẫn
+  đúng: Bình Minh 68 (Tổ Phú Xá 2) về TRUNG theo tên shop; ngõ 226
+  (Tổ Tân Lập 8) về ĐỨC theo ngõ; Nguyễn Linh (Tổ Dân Phố Phú Xá 1) về TRUNG
+  theo tên. Sửa kèm lỗi tra tổ: trước đây khối tra tổ thử lần lượt mọi khu
+  vực nhắc tới, nên "Tổ 1 khu Phú Xá" (không ghi lẻ) bị gán nhầm cho HOÀNG
+  ANH theo Tổ 1 Tích Lương, và "Tổ 1 Phú Xá, mặt lẻ" cũng bị chặn trước luật
+  của CHUNG; nay chỉ tra tổ trong khu vực nhắc tới đầu tiên, không khớp thì
+  rơi xuống luật riêng / tổ chỉ có 1 rider / dự phòng. Kiểm thử: Tổ 1 Phú Xá
+  mặt lẻ nay về CHUNG; Tổ 1 Phú Xá không ghi lẻ nêu cả 2 phương án dự phòng
+  (TRUNG / TUẤN ANH) thay vì gán nhầm.
+- HƯƠNG PHÁP CLOTHING — Ngõ 8, Đường Ga Lưu Xá → ĐẶNG TIẾN TRUNG [79629].
+  Nhận diện bằng ngõ 8 + đường Ga Lưu Xá, không cần tên shop; địa chỉ này
+  ghi cả "Phường Phú Xá, Phường Tích Lương" nhưng luật chỉ định thắng mốc
+  chung (đường Ga Lưu Xá nói chung vẫn về NHUNG).
+- Tổ 16 của Thuỳ Trang tính là Tích Lương (chốt 08/11/2026, trước đó chỉ là
+  giả định). ĐẦM giữ Tổ 16 theo bảng tuyến.
+- Ô PUP Type "Chưa chọn" không chặn cover (chốt 08/11/2026): vẫn dùng cover
+  như luật cũ.
+- Tên shop chuẩn là "Trùn Quế Thái Nguyên" (Sn 1, Ngõ 88 Tích Lương, Tổ 4);
+  "Trùm Quế" là cách viết đúng chính tả, hệ thống nhận cả hai. "Tràm Quế"
+  không đồng bộ lên bản web.
+- Bản Map-6 soạn lại theo format mới (§1 thứ tự áp dụng luật, §2 bảng tuyến
+  gộp đủ tổ bổ sung, §5 luật chỉ định đánh số, §9 việc chờ quyết) đã áp dụng
+  nội dung lên web; file bản soạn lại lưu tại
+  ~/workspace/your_files/Map-6-soan-lai.txt.
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
