@@ -122,7 +122,8 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Địa chỉ thuộc phường/xã hành chính ngoài 3 phường Tân Lập, Phú Xá, Tích Lương
   thì không đẩy cho rider HUB này, kể cả hàng Buyer (luật lạc tuyến chạy trước
   luật dự phòng).
-- Phường Quyết Thắng → đẩy cho LÊ THANH TUẤN (HUB Thái Nguyên 7). Ví dụ trong
+- Phường Quyết Thắng → đẩy cho LÊ THANH TUẤN [161239] (15-TNN Thái Nguyên 7
+  Hub) — ghi rõ mã rider và mã hub từ Map-5.txt. Ví dụ trong
   file Map-2.txt: HULY KISD, tổ 8 quyết thắng, Phường Quyết Thắng → Lê Thanh Tuấn.
   Chú ý: Lê Thanh Tuấn (HUB khác) khác với LÊ THANH HÀ và LÊ TUẤN ANH của HUB này,
   và không có trong bảng tuyến hay chuỗi cover của HUB này.
@@ -183,7 +184,22 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - đào thị huyền trang (sn 153, tổ 12) → LƯỜNG THỊ ĐẦM [100332]; Đầm nghỉ
   thì chuyển cho ĐẶNG TIẾN TRUNG [79629] theo chỉ định (thay vì chuỗi cover
   chung Đầm → Phú). Tổ 12 nói chung (không có sn 153) vẫn theo chuỗi chung.
+  *Đã đổi ở Map-5.txt 08/11/2026: nay về thẳng TRUNG, xem mục Map-5.*
 - Tiến: KTX Nhà K, Trường Đại học Kỹ thuật Công nghiệp → BÙI VĂN TUẤN [53634].
+
+## Cập nhật Map-5.txt (08/11/2026, chỉ bản web)
+- Đường Thanh niên xung phong cả tuyến → NGUYỄN XUÂN THẮNG [44207]: file
+  Map-5.txt đổi dòng tuyến của Thắng từ "ngõ 130 đường thanh niên xung phong"
+  thành "ngõ 130, đường thanh niên xung phong", tức đường này là tuyến riêng
+  của Thắng chứ không chỉ ngõ 130. Vụ đơn Phạm Thị Ninh (Số Nhà 116, Đường
+  Thanh Niên Xung Phong, Tổ 13, Phường Tích Lương, nhãn Trả hàng) trước đây
+  về ĐẦM theo Tổ 13, nay về THẮNG theo đường — luật đường thắng luật tổ,
+  kể cả khi có chữ trả hàng.
+- đào thị huyền trang (sn 153, tổ 12) → ĐẶNG TIẾN TRUNG [79629] thẳng.
+  Đổi luật so với Map-4.txt (trước đó về ĐẦM, Đầm nghỉ thì chuyển TRUNG);
+  Tổ 12 nói chung vẫn về ĐẦM theo bảng tuyến.
+- HULY KISD (Phường Quyết Thắng) ghi rõ người nhận: LÊ THANH TUẤN [161239]
+  (15-TNN Thái Nguyên 7 Hub).
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
