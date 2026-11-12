@@ -235,6 +235,27 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   nội dung lên web; file bản soạn lại lưu tại
   ~/workspace/your_files/Map-6-soan-lai.txt.
 
+## Cập nhật Map-7.txt (12/11/2026, chỉ bản web)
+- laixefc — Số nhà 86, tổ 13, Phường Tích Lương → DƯƠNG VĂN SƠN [38286].
+  Nhận diện bằng tên shop hoặc địa chỉ (số 86 + tổ 13); riêng địa chỉ này,
+  còn Tổ 13 nói chung vẫn về LƯỜNG THỊ ĐẦM [100332].
+- Hoàng quỳnh — Đường Phú Xá, tổ 6, Phường Tích Lương → NGUYỄN HỮU HIỆN
+  [36689]. Nhận diện bằng tên shop hoặc địa chỉ (Đường Phú Xá + tổ 6);
+  riêng địa chỉ này — trước đây "Tổ 6 khu Phú Xá" rơi vào luật tổ chỉ có
+  1 rider nên gán nhầm cho BÙI VĂN TUẤN [53634] theo Tổ 6 Tích Lương.
+  Chỉ ghi "Tổ 6, Phường Tích Lương" (không nhắc Phú Xá) vẫn về TUẤN.
+- lvy Apr Clothing — Số 123, Đường Ga Lưu Xá, Phường Tích Lương →
+  NGUYỄN THỊ THU [55666]. Nhận diện bằng tên shop hoặc địa chỉ (số 123 +
+  đường Ga — kể cả khi văn bản viết "Đường Ga, Lưu Xá" có dấu phẩy);
+  riêng địa chỉ này, còn Đường Ga Lưu Xá nói chung vẫn về ĐỖ THỊ NHUNG.
+- File Map-7.txt đổi dòng Trùm Quế thành "Trùn Quế Thái Nguyên" cho khớp tên
+  shop chuẩn đã chốt 08/11/2026; bản web đã nhận cả hai cách viết từ trước
+  nên không cần sửa code. Dòng tuyến của MAI trong file Map-7 vẫn chưa ghi
+  Tổ 9 (Phú Xá) — luật Tổ 9 Phú Xá → MAI đã chốt 08/11/2026 và vẫn chạy
+  trên web, file gốc chỉ chưa cập nhật dòng đó.
+- Bản Map-7 soạn lại theo format mới lưu tại
+  ~/workspace/your_files/Map-7-soan-lai.txt.
+
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
