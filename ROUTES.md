@@ -14,7 +14,7 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
    tắc 2 phương án. "Tràm Quế" không đồng bộ. "Sn" trong địa chỉ được hiểu là
    viết tắt của "Số nhà".
 3. Mốc 666: ĐH Kỹ thuật Công nghiệp ở 666 Đ. 3/2, Tích Lương. Số nhà ≤ 666 tại Tổ 8 về
-   LÊ THANH HÀ [16338]; số 666–1016 tại Tổ 2 về DƯƠNG TIỀN PHÚ [157243].
+   LÊ THANH HÀ [16338]; số 666–1016 tại Tổ 2 về DƯƠNG TIẾN PHÚ [157243].
 4. Cây xăng Mạnh Hùng: mốc cuối tuyến LÊ THANH HÀ. Đã xác nhận 31/10/2026: Xăng dầu Mạnh Hùng số 3, 426 Thống Nhất, Tích Lương, Thái Nguyên — 21.5535057, 105.8337262 (thay ghim tạm khu vực xã Vô Tranh trước đây).
    trên Google Maps trước khi dùng làm mốc tọa độ.
 5. Quy tắc dự phòng CHỈ áp khi không khớp đoạn cụ thể nào VÀ ảnh nhiệm vụ KHÔNG có chữ "hoàn hàng", "trả tiền"
@@ -33,7 +33,7 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
 - [16338] LÊ THANH HÀ: cổng chính ĐH Công nghiệp đến cây xăng Mạnh Hùng;
   từ 666 trở ngược về số nhỏ, Tổ 8
 - [100332] LƯỜNG THỊ ĐẦM: Tổ 11, 12, 13, 14, 15, 16
-- [157243] DƯƠNG TIỀN PHÚ: Tổ 9, Tổ 10; từ 666 đến 1016, Tổ 2
+- [157243] DƯƠNG TIẾN PHÚ: Tổ 9, Tổ 10; từ 666 đến 1016, Tổ 2
 - [38286] DƯƠNG VĂN SƠN: Tổ 3, Tổ 4, Tổ 5
 
 ### Phú Xá
@@ -54,7 +54,7 @@ Phụ trách: Tân Lập, Phú Xá, Tích Lương.
 - [79621] PHẠM TRUNG KIÊN: Tổ 1, Tổ 2, GO, đường Việt Bắc
 - [69333] NGUYỄN MẠNH ĐỨC: chẵn Tân Lập, từ ngõ 272 đến số to trung cấp nghề
 - [44207] NGUYỄN XUÂN THẮNG: từ 272 đến số nhỏ, trường nội trú, ngõ 130 đường Thanh niên xung phong
-- [52224] PHẠM THỊ HIÊN: từ 505 đến số nhỏ
+- [52224] PHẠM THỊ HIÊN: từ 505 đến 301, đường 3/2
 - [139148] LÊ TUẤN ANH: lấy hàng seller, NS tại Tân Lập
 
 ## Đọc hiểu địa chỉ (không áp công thức máy móc)
@@ -104,7 +104,7 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   - Sn 1147 nhà thuốc Ba Hạnh 2 → NGUYỄN THỊ THU [55666].
   - Ngõ 172 Đường Tích Lương → BÙI VĂN TUẤN [53634].
   - Ngõ 80, tổ 16 → LƯỜNG THỊ ĐẦM [100332].
-  - Chợ Tê Ba Nhất (NT Ba Hạnh, kiot số 2) → DƯƠNG TIỀN PHÚ [157243].
+  - Chợ Tê Ba Nhất (NT Ba Hạnh, kiot số 2) → DƯƠNG TIẾN PHÚ [157243].
     Chú ý: "Ba Hạnh" xuất hiện ở cả Trang Thu (1147) và Ngô Trang (chợ Tê Ba Nhất)
     nên phân biệt bằng số nhà/chợ, không dùng tên shop.
   - Tổ 2 Phú Xá → ĐỖ THỊ NHUNG [123498], trừ đoạn cụ thể của NGUYỄN HỮU HIỆN
@@ -148,7 +148,7 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   hay phường thì số nhà lẻ tính là phía Phú Xá, số nhà chẵn tính là phía
   Tích Lương, rồi áp các luật tuyến/dự phòng theo phía đó (ví dụ số nhà
   1023A → Phú Xá; Số 666 đường 3/2 Tổ 8 → LÊ THANH HÀ theo mốc 666;
-  số 800 đường 3/2 Tổ 2 → DƯƠNG TIỀN PHÚ theo khoảng 666–1016).
+  số 800 đường 3/2 Tổ 2 → DƯƠNG TIẾN PHÚ theo khoảng 666–1016).
   Chỉ áp cho đường 3/2, không áp cho đường khác (ví dụ 43 Thống Nhất lẻ
   nhưng vẫn là Tích Lương) vì các luật địa chỉ chỉ định chạy trước.
   Ngõ 67/210/711 chỉ có trong tuyến của ĐẶNG TIẾN TRUNG nên nhận cả khi
@@ -177,7 +177,7 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Dạng viết "Tổ <khu vực> <số>" (Tổ Phú Xá 9, Tổ Phú Xá 2, Tổ Tân Lập 8,
   Tổ Dân Phố Phú Xá 1) nay parser đã tách được thành số tổ (chốt 08/11/2026).
   Tổ 9 khu Phú Xá thuộc HÀ NGỌC MAI [164091] — đã chốt, không còn là câu hỏi.
-  Tổ 9 phường Tích Lương vẫn về DƯƠNG TIỀN PHÚ [157243] theo bảng tuyến;
+  Tổ 9 phường Tích Lương vẫn về DƯƠNG TIẾN PHÚ [157243] theo bảng tuyến;
   chỉ ghi "Tổ 9" trần, không khu vực/phường, thì nay không tự gán (trước đây
   gán nhầm cho PHÚ theo luật tổ chỉ có 1 rider) vì Tổ 9 có ở cả 2 phường.
 
@@ -255,6 +255,21 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   trên web, file gốc chỉ chưa cập nhật dòng đó.
 - Bản Map-7 soạn lại theo format mới lưu tại
   ~/workspace/your_files/Map-7-soan-lai.txt.
+
+## Cập nhật Map-8.txt (12/11/2026, chỉ bản web)
+- PHẠM THỊ HIÊN [52224]: đoạn 301–505 đường 3/2 ("từ số 505 đến số nhỏ
+  301"). Luật mới trong khối đường 3/2, đặt trước luật lẻ của THU: số nhà
+  301–505 trên đường 3/2 về HIÊN, kể cả số lẻ (ví dụ Số 309, Đ.3Tháng2 →
+  HIÊN, không phải THU theo lẻ ≤ 1149). Ngoài đoạn 301–505, luật cũ giữ
+  nguyên (lẻ ≤ 1149 → THU, 1151–1477 → TRUNG, 8xx Tân Lập → HOÀNG ANH).
+- Parser nay nhận đường 3/2 viết đủ 3 dạng: "3/2", "3 Tháng 2", "3Tháng2"
+  (OCR hay đọc "Đ. 3/2" thành "Đ.3Tháng2"). Các luật đường 3/2 (khoảng số
+  nhà, lẻ/chẵn) nay áp cho cả 3 dạng.
+- Đổi tên rider [157243]: DƯƠNG TIỀN PHÚ → DƯƠNG TIẾN PHÚ (chỉ đổi tên
+  hiển thị; mã rider, tuyến, luật không đổi). Đã đổi trên web (bảng tuyến,
+  lý do kết quả, ROUTES.md), hồ sơ người liên quan và MEMORY.md.
+- Bản Map-8 soạn lại theo format mới lưu tại
+  ~/workspace/your_files/Map-8-soan-lai.txt.
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
