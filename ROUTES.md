@@ -271,6 +271,21 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Bản Map-8 soạn lại theo format mới lưu tại
   ~/workspace/your_files/Map-8-soan-lai.txt.
 
+## Cập nhật Map-9.txt (13/11/2026, chỉ bản web)
+- hoàng nga — 234 Ba Tháng Hai, Phường Tích Lương → NGUYỄN XUÂN THẮNG
+  [44207]. Nhận diện bằng tên shop hoặc địa chỉ (234 + Ba Tháng Hai, kể cả
+  dạng "Số 234, Đường Ba Tháng Hai"). "Ba Tháng Hai" là cách viết chữ của
+  đường 3/2 — parser nay nhận đủ 4 dạng "3/2", "3 Tháng 2", "3Thang2",
+  "Ba Tháng Hai" (ví dụ Số 309 Ba Tháng Hai vẫn về HIÊN theo đoạn 301–505).
+- Việt Anh — Số Nhà 22, 24, Ngõ 472 Tân Lập Cũ, 19/5, Phường Tích Lương →
+  NGUYỄN HOÀNG ANH [161388]. Nhận diện bằng tên shop hoặc ngõ 472.
+- Đỗ Thị Huệ — Số nhà 220b, tổ 5, phú xá, Phường Tích Lương → NGUYỄN ĐỨC
+  CHUNG [58352]. Nhận diện bằng tên shop hoặc địa chỉ (số 220 + tổ 5 +
+  phú xá); riêng địa chỉ này — Tổ 5 phú xá nói chung (không có số 220) vẫn
+  về SƠN theo luật tổ chỉ có 1 rider.
+- Bản Map-9 soạn lại theo format mới lưu tại
+  ~/workspace/your_files/Map-9-soan-lai.txt.
+
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
