@@ -286,6 +286,15 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Bản Map-9 soạn lại theo format mới lưu tại
   ~/workspace/your_files/Map-9-soan-lai.txt.
 
+## Cập nhật 14/11/2026 (đơn PUP202502110IOC8, chỉ bản web)
+- Số nhà 666 đường 3/2 không ghi tổ, phía Tích Lương → LÊ THANH HÀ
+  [16338]. Mốc 666 là Đại học Kỹ thuật Công nghiệp; số 666 chẵn nên tính
+  phía Tích Lương, ranh giới ≤ 666 về HÀ. Luật đặt đầu khối đường 3/2,
+  chỉ áp khi không có số tổ — có tổ thì khối tổ xử lý trước (Tổ 2 →
+  DƯƠNG TIẾN PHÚ, Tổ 8 → HÀ). "Đ:" trong "Số 666 Đ: 3/2" chỉ là "Đ."
+  (Đường) do OCR đọc dấu chấm thành hai chấm, parser đã nhận sẵn vì chỉ
+  cần chuỗi "3/2".
+
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.

@@ -92,6 +92,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <span class="tag test" data-t="Ngách 26, Ngõ 226, Đường 3 Tháng 2, Tổ Dân Phố Tân Lập 8, Phường Tích Lương">Ngõ 226 Tân Lập</span>
 <span class="tag test" data-t="Số 101, Đường 3/2">Số 101 đường 3/2</span>
 <span class="tag test" data-t="Số 309, Đ.3Tháng2">Số 309 Đ.3Tháng2</span>
+<span class="tag test" data-t="Số 666 Đ: 3/2">Số 666 Đ: 3/2</span>
 <span class="tag test" data-t="Trường Đại Học Kỹ Thuật Công Nghiệp Thái Nguyên Ktx Nhà K">KTX Nhà K</span>
 <span class="tag test" data-t="đào thị huyền trang: sn 153, tổ 12">sn 153 tổ 12</span>
 <span class="tag test" data-t="Số Nhà 116, Đường Thanh Niên Xung Phong, Tổ 13, Phường Tích Lương, Tỉnh Thái Nguyên">116 đường TNXP</span>
@@ -352,6 +353,11 @@ function findRider(raw,opts){
     if(p.to===2&&areasEff.indexOf("phu xa")>=0&&(p.ngo===167||(p.house===57&&p.le))) return hit(RIDERS.HIEN_HUU,90,"Tổ 2 Phú Xá, đoạn ngõ 167 / nhà 57B lẻ mặt đường Việt Bắc thuộc tuyến của NGUYỄN HỮU HIỆN.");
   }
   if(p.road32&&p.house!==null){
+    // Don PUP202502110IOC8 (14/11/2026): "So 666 D: 3/2" khong ghi to —
+    // moc 666 la DH KTCN, so 666 chan nen tinh phia Tich Luong -> HA
+    // (ranh gioi: <=666 ve HA). Chi ap khi khong co so to: co to thi khoi
+    // to da xu ly truoc (to 2 -> PHU, to 8 -> HA).
+    if(p.house===666&&p.to===null&&areasEff.indexOf("tich luong")>=0) return hit(RIDERS.HA,90,"Số nhà 666 đường 3/2, phía Tích Lương (số chẵn) về LÊ THANH HÀ — mốc 666 là Đại học Kỹ thuật Công nghiệp, từ 666 trở ngược lên số nhỏ.");
     // Map-8.txt (12/11/2026): doan 301-505 duong 3/2 thuoc PHAM THI HIEN
     // ("tu 505 den so nho 301"), thang luat le cua THU (vd so 309, D.3Thang2
     // -> HIEN, khong phai THU theo le <= 1149). Dat truoc luat THU.
