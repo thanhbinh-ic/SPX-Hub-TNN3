@@ -121,6 +121,13 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <table id="tbl"><thead><tr><th>Mã</th><th>Rider</th><th>Phường</th><th>Tuyến</th><th>Nghỉ</th></tr></thead><tbody></tbody></table>
 <p class="small" id="offStatus"></p>
 <button class="secondary" id="clearOff">Bỏ đánh dấu nghỉ</button>
+<hr>
+<h3>Lịch nghỉ theo ngày</h3>
+<p class="small">Chọn ngày rồi tích rider nghỉ vào ngày đó. Đến ngày đó, tải lại trang sẽ tự động tích nghỉ cho rider — không cần tích tay. Lịch được lưu trên trình duyệt đang dùng.</p>
+<label>Ngày: <input type="date" id="schedDate"></label>
+<div id="schedPick" style="margin:8px 0"></div>
+<p class="small"><b>Lịch đã đặt:</b></p>
+<div id="schedList" class="small"></div>
 </div>
 
 <div class="card">
@@ -140,7 +147,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} th,td{border-bottom:1p
 <li><b>Bổ sung tuyến từ file Map.txt:</b> DƯƠNG VĂN SƠN thêm Tổ 3; LƯỜNG THỊ ĐẦM thêm Tổ 16; NGUYỄN HOÀNG ANH thêm Thống Nhất, Tổ 1 (Tích Lương) — nên Tổ 1 Tích Lương nay về Hoàng Anh, không còn gán nhầm sang Tổ 1 Tân Lập của PHẠM TRUNG KIÊN. Địa chỉ 188 Đường Phú Xá về ĐẶNG TIẾN TRUNG theo luật địa chỉ chỉ định, không áp khoảng 58–210 chẵn của NGUYỄN HỮU HIỆN, kể cả khi không có tên shop kimquytn.</li>
 <li><b>Tổ nào không có trong bảng</b> thì hệ thống báo “chưa xác định được”, không tự đoán rider.</li>
 <li><b>“Người gửi trả phí” không tính</b> là “trả hàng” hay “trả tiền” trong quy tắc dự phòng.</li>
-<li><b>Đánh dấu nghỉ:</b> tích cột “Nghỉ” trong Bảng tuyến cho rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó mà tự chuyển sang rider gần nhất cùng phường, nếu không còn ai thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH). Đánh dấu được lưu trên trình duyệt đang dùng, sang ngày mới thì bỏ tích.</li>
+<li><b>Đánh dấu nghỉ:</b> tích cột “Nghỉ” trong Bảng tuyến cho rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó mà tự chuyển sang rider gần nhất cùng phường, nếu không còn ai thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH). Đánh dấu được lưu trên trình duyệt đang dùng, sang ngày mới thì bỏ tích. Muốn đặt nghỉ trước cho một ngày cụ thể (ví dụ 19/11 Nhung nghỉ) thì dùng mục “Lịch nghỉ theo ngày” trong Bảng tuyến: chọn ngày, tích rider — đến ngày đó tải lại trang sẽ tự động tích nghỉ, không cần tích tay; rider nghỉ theo lịch thì ô tích ở bảng bị khóa và có ghi “(theo lịch)”.</li>
 </ul>
 </div>
 </main>
@@ -446,7 +453,25 @@ function wardCoverChain(ward){
 let offIds=new Set();
 try{ if(typeof localStorage!=="undefined"){ const saved=JSON.parse(localStorage.getItem("spx-off-riders")||"[]"); if(Array.isArray(saved)) offIds=new Set(saved); } }catch(e){}
 function saveOff(){ try{ if(typeof localStorage!=="undefined") localStorage.setItem("spx-off-riders",JSON.stringify([...offIds])); }catch(e){} }
-function isOff(r){ return !!r&&offIds.has(r.id); }
+function isOff(r){ return !!r&&(offIds.has(r.id)||schedToday.has(r.id)); }
+// Lich nghi theo ngay (15/11/2026): lich luu trong localStorage dang
+// {"YYYY-MM-DD":["id rider", ...]}. Moi lan tai trang, lich cua NGAY HOM
+// NAY duoc nap vao schedToday va isOff() coi nhu nghi — khong can tich
+// tay. Lich cua ngay da qua tu dong bi loai khi doc.
+const SCHED_KEY="spx-off-schedule";
+function localDateStr(d){ const p=n=>String(n).padStart(2,"0"); return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate()); }
+function loadSched(){
+  let s={};
+  try{ if(typeof localStorage!=="undefined"){ const raw=JSON.parse(localStorage.getItem(SCHED_KEY)||"{}"); if(raw&&typeof raw==="object") s=raw; } }catch(e){ s={}; }
+  const today=localDateStr(new Date());
+  Object.keys(s).forEach(ds=>{ if(!/^\d{4}-\d{2}-\d{2}$/.test(ds)||ds<today||!Array.isArray(s[ds])) delete s[ds]; else s[ds]=[...new Set(s[ds].filter(x=>typeof x==="string"))]; });
+  return s;
+}
+function saveSched(s){ try{ if(typeof localStorage!=="undefined") localStorage.setItem(SCHED_KEY,JSON.stringify(s)); }catch(e){} }
+function schedIdsFor(s,ds){ return Array.isArray(s[ds])?s[ds]:[]; }
+let schedToday=new Set(schedIdsFor(loadSched(),localDateStr(new Date())));
+function applySchedToday(){ schedToday=new Set(schedIdsFor(loadSched(),localDateStr(new Date()))); }
+function isSchedOffToday(r){ return !!r&&schedToday.has(r.id); }
 function coverFor(rider,ward,pup){
   ward=norm(ward||"");
   // Hang Seller khong day cho cover TRUNG / TUAN_ANH (chi Buyer, NS moi duoc).
@@ -591,12 +616,52 @@ document.addEventListener("paste",e=>{const f=[...(e.clipboardData||{}).items||[
 const tb=$("tbl").querySelector("tbody");
 Object.values(RIDERS).forEach(r=>{const tr=document.createElement("tr"); tr.innerHTML="<td>"+r.id+"</td><td>"+r.name+"</td><td>"+r.ward+"</td><td>"+r.route+"</td><td><input type=\"checkbox\" class=\"offbox\" data-id=\""+r.id+"\"></td>"; tb.appendChild(tr);});
 function refreshOffUI(){
-  document.querySelectorAll(".offbox").forEach(cb=>{ cb.checked=offIds.has(cb.dataset.id); cb.closest("tr").classList.toggle("off-row",cb.checked); });
-  const names=[...offIds].map(id=>{ const r=Object.values(RIDERS).find(x=>x.id===id); return r?r.name+" ["+id+"]":id; });
+  document.querySelectorAll(".offbox").forEach(cb=>{ const off=isOff({id:cb.dataset.id}); const sched=isSchedOffToday({id:cb.dataset.id}); cb.checked=off; cb.disabled=sched; cb.title=sched?"Nghỉ theo lịch đã đặt cho hôm nay — sửa ở mục Lịch nghỉ theo ngày bên dưới.":""; cb.closest("tr").classList.toggle("off-row",off); });
+  const names=[...new Set([...offIds,...schedToday])].map(id=>{ const r=Object.values(RIDERS).find(x=>x.id===id); const n=r?r.name+" ["+id+"]":id; return schedToday.has(id)?n+" (theo lịch)":n; });
   $("offStatus").textContent=names.length?("Đang nghỉ: "+names.join(", ")+" — hệ thống sẽ không đẩy đơn cho các rider này."):("Chưa đánh dấu ai nghỉ.");
 }
 document.querySelectorAll(".offbox").forEach(cb=>cb.onchange=()=>{ if(cb.checked) offIds.add(cb.dataset.id); else offIds.delete(cb.dataset.id); saveOff(); refreshOffUI(); if($("addr").value.trim()) render(); });
 $("clearOff").onclick=()=>{ offIds.clear(); saveOff(); refreshOffUI(); if($("addr").value.trim()) render(); };
+// Lich nghi theo ngay: chon ngay -> tich rider nghi vao ngay do (luu ngay
+// khi tich/bo tich). Den ngay do, tai lai trang se tu dong tich nghi.
+function schedDateLabel(ds){ const p=ds.split("-"); return p[2]+"/"+p[1]+"/"+p[0]; }
+function renderSchedPick(){
+  const ds=$("schedDate").value||localDateStr(new Date());
+  const s=loadSched(); const ids=new Set(schedIdsFor(s,ds));
+  const box=$("schedPick"); box.innerHTML="";
+  Object.values(RIDERS).forEach(r=>{
+    const lab=document.createElement("label"); lab.style.cssText="display:inline-block;margin:2px 10px 2px 0;white-space:nowrap";
+    const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=ids.has(r.id);
+    cb.onchange=()=>{ const cur=loadSched(); const arr=new Set(schedIdsFor(cur,ds)); if(cb.checked) arr.add(r.id); else arr.delete(r.id); if(arr.size) cur[ds]=[...arr]; else delete cur[ds]; saveSched(cur); renderSchedList(); if(ds===localDateStr(new Date())){ applySchedToday(); refreshOffUI(); if($("addr").value.trim()) render(); } };
+    lab.appendChild(cb); lab.appendChild(document.createTextNode(" "+r.name+" ["+r.id+"]"));
+    box.appendChild(lab);
+  });
+}
+function renderSchedList(){
+  const s=loadSched(); const today=localDateStr(new Date());
+  const days=Object.keys(s).filter(ds=>ds>=today&&s[ds].length).sort();
+  const el=$("schedList");
+  if(!days.length){ el.textContent="Chưa đặt lịch nghỉ nào."; return; }
+  el.innerHTML="";
+  days.forEach(ds=>{
+    const line=document.createElement("div");
+    line.appendChild(document.createTextNode(schedDateLabel(ds)+": "));
+    s[ds].forEach((id,i)=>{
+      const r=Object.values(RIDERS).find(x=>x.id===id);
+      const nm=document.createElement("b"); nm.textContent=r?r.name+" ["+id+"]":id; line.appendChild(nm);
+      const del=document.createElement("button"); del.textContent="✕"; del.className="secondary"; del.style.cssText="padding:0 6px;margin-left:4px";
+      del.title="Xóa lịch nghỉ ngày "+schedDateLabel(ds)+" của "+(r?r.name:id);
+      del.onclick=()=>{ const cur=loadSched(); cur[ds]=schedIdsFor(cur,ds).filter(x=>x!==id); if(!cur[ds].length) delete cur[ds]; saveSched(cur); renderSchedPick(); renderSchedList(); if(ds===today){ applySchedToday(); refreshOffUI(); if($("addr").value.trim()) render(); } };
+      line.appendChild(del);
+      if(i<s[ds].length-1) line.appendChild(document.createTextNode(", "));
+    });
+    el.appendChild(line);
+  });
+}
+$("schedDate").value=localDateStr(new Date());
+$("schedDate").min=localDateStr(new Date());
+$("schedDate").onchange=renderSchedPick;
+renderSchedPick(); renderSchedList();
 refreshOffUI();
 $("q").oninput=e=>{const q=norm(e.target.value); [...tb.rows].forEach(row=>{row.style.display=norm(row.innerText).includes(q)?"":"none";});};
 // Bản đồ

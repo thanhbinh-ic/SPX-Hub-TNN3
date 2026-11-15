@@ -295,6 +295,20 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   (Đường) do OCR đọc dấu chấm thành hai chấm, parser đã nhận sẵn vì chỉ
   cần chuỗi "3/2".
 
+## Lịch nghỉ theo ngày (15/11/2026, chỉ bản web)
+- Mục mới trong Bảng tuyến: chọn ngày rồi tích rider nghỉ vào ngày đó.
+  Đến ngày đó, tải lại trang sẽ tự động tích nghỉ cho rider — không cần
+  tích tay. Lịch lưu trong localStorage của trình duyệt đang dùng, dạng
+  {"YYYY-MM-DD": ["mã rider", ...]}; ngày đã qua tự động bị loại khi đọc.
+- Rider nghỉ theo lịch thì ô tích ở bảng tuyến bị khóa (có ghi "(theo
+  lịch)" ở dòng trạng thái), muốn bỏ thì xóa ở danh sách "Lịch đã đặt"
+  (nút ✕ từng người). Nút "Bỏ đánh dấu nghỉ" chỉ bỏ các tích tay, không
+  động vào lịch. Chuỗi cover áp dụng như nghỉ tay bình thường (Nhung nghỉ
+  theo lịch thì Tổ 2 Phú Xá chuyển sang HIỆN).
+- Ví dụ: đặt Nhung nghỉ ngày 19/11/2026 — mở trang, chọn 19/11 ở mục
+  Lịch nghỉ theo ngày, tích ĐỖ THỊ NHUNG; đến 19/11 tải lại trang là
+  Nhung tự tích nghỉ.
+
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
