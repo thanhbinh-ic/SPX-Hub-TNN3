@@ -309,6 +309,34 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   Lịch nghỉ theo ngày, tích ĐỖ THỊ NHUNG; đến 19/11 tải lại trang là
   Nhung tự tích nghỉ.
 
+## Cập nhật Map-10.txt (15/11/2026, chỉ bản web)
+- 8 luật chỉ định mới, đều nhận theo tên hoặc địa chỉ:
+  - Phạm thuý nga (Sn 236 đường Phú Xá) → NGUYỄN ĐỨC CHUNG [58352]
+  - Phạm Thị Minh (Số 384, Đường 3/2 Tân Lập 11) → NGUYỄN MẠNH ĐỨC
+    [69333]; riêng địa chỉ này — đoạn 301–505 đường 3/2 nói chung vẫn về
+    HIÊN (Số 384 không ghi Tân Lập vẫn về HIÊN)
+  - Phương Xìn (Số nhà 441, phường Tân Lập) → PHẠM THỊ HIÊN [52224]
+  - Le Biên (Số Nhà 54, Phường Tích Lương) → ĐỖ THỊ NHUNG [123498]
+  - Mã Thị Thành (Nhà Số 2, Ngách 35, Tổ 9) → NGUYỄN MẠNH ĐỨC [69333]
+  - Quỳnh Trang Bayonline + Phạm Thị Phương Thảo (Sn 1029A đường 3/2) →
+    ĐẶNG TIẾN TRUNG [79629]; riêng địa chỉ này — số lẻ ≤ 1149 đường 3/2
+    nói chung vẫn về THU
+  - Đỉnh Yến (642 Đường 3/2, Tổ 8) → LÊ THANH HÀ [16338]; nhận cả dạng
+    không có tiền tố "Số" (nhận bằng chuỗi 642 + đường 3/2)
+  - Lê Thị Thu Hiền (Sn 882B, Tổ 9) → DƯƠNG TIẾN PHÚ [157243]
+- Bản Map-10 soạn lại theo format mới lưu tại
+  ~/workspace/your_files/Map-10-soan-lai.txt.
+
+## Cập nhật Map-11.txt (16/11/2026, chỉ bản web)
+- 1 luật chỉ định mới, nhận theo tên hoặc địa chỉ: Nguyễn Minh phong —
+  Phượng Coffee cổng chợ khu tây, Phường Tích Lương → ĐẶNG TIẾN TRUNG
+  [79629]. Không có số nhà thì địa chỉ này theo luật cũ sẽ về TUẤN ANH
+  qua dự phòng Tích Lương, nay chỉ định thẳng về TRUNG.
+- Lần đẩy này gộp cả Map-10 (8 luật, 15/11/2026) vì lần đẩy Map-10
+  trước đó chưa lên được do 2 thẻ phê duyệt hết hạn.
+- Bản Map-11 soạn lại theo format mới lưu tại
+  ~/workspace/your_files/Map-11-soan-lai.txt.
+
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
