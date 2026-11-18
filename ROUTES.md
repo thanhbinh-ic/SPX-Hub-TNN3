@@ -337,6 +337,25 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Bản Map-11 soạn lại theo format mới lưu tại
   ~/workspace/your_files/Map-11-soan-lai.txt.
 
+## Cập nhật Map-12.txt (18/11/2026, chỉ bản web)
+- 4 luật chỉ định mới, nhận theo tên hoặc địa chỉ:
+  - chè ngon thái nguyên.kim oanh (Số 6A, Ngõ 210, Tổ 6) → ĐẶNG TIẾN
+    TRUNG [79629]
+  - Đồng Bá Thơm (Đường Việt Bắc, Khu Dân Cư Số 1 Việt Bắc Mở Rộng) →
+    PHẠM TRUNG KIÊN [79621]
+  - Nguyen Thuỳ Dương (Sn 3A, Ngõ 226 Đường 3/2) → NGUYỄN XUÂN THẮNG
+    [44207] — riêng địa chỉ này, còn Ngõ 226 Tân Lập nói chung vẫn về
+    NGUYỄN MẠNH ĐỨC
+  - nguyễn thị bảo ngọc (Số nhà 555, tổ 12, phường Tân Lập) → PHẠM THỊ
+    HIÊN [52224] — riêng địa chỉ này, còn Tổ 12 nói chung vẫn về LƯỜNG
+    THỊ ĐẦM
+- Chưa áp dụng: Map-12 ghi ĐẦM thêm Tổ 4 trong khi SƠN vẫn giữ Tổ 4
+  (trùng nhau, lại đúng chỗ Trùn Quế ở Tổ 4 về SƠN) — chờ huynh chốt
+  Tổ 4 chuyển sang ĐẦM, cả hai cùng giữ, hay ghi nhầm thì mới sửa bảng
+  tuyến.
+- Bản Map-12 soạn lại theo format mới lưu tại
+  ~/workspace/your_files/Map-12-soan-lai.txt.
+
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
