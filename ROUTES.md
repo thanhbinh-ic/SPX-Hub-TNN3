@@ -349,10 +349,9 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   - nguyễn thị bảo ngọc (Số nhà 555, tổ 12, phường Tân Lập) → PHẠM THỊ
     HIÊN [52224] — riêng địa chỉ này, còn Tổ 12 nói chung vẫn về LƯỜNG
     THỊ ĐẦM
-- Chưa áp dụng: Map-12 ghi ĐẦM thêm Tổ 4 trong khi SƠN vẫn giữ Tổ 4
-  (trùng nhau, lại đúng chỗ Trùn Quế ở Tổ 4 về SƠN) — chờ huynh chốt
-  Tổ 4 chuyển sang ĐẦM, cả hai cùng giữ, hay ghi nhầm thì mới sửa bảng
-  tuyến.
+- Map-12 ghi ĐẦM thêm Tổ 4 trong khi SƠN vẫn giữ Tổ 4 — huynh xác nhận
+  18/11/2026 là **ghi nhầm, ĐẦM không có Tổ 4**, không sửa gì thêm; Tổ 4
+  vẫn về SƠN, Trùn Quế (Tổ 4) vẫn 2 phương án như cũ.
 - Bản Map-12 soạn lại theo format mới lưu tại
   ~/workspace/your_files/Map-12-soan-lai.txt.
 
