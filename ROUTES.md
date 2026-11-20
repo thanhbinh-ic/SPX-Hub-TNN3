@@ -355,6 +355,29 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Bản Map-12 soạn lại theo format mới lưu tại
   ~/workspace/your_files/Map-12-soan-lai.txt.
 
+## Cập nhật Map-13.txt (20/11/2026, chỉ bản web)
+- File huynh gửi tên Map-127a30a2.txt, nội dung = Map-12 + 7 luật mới
+  nên ghi là Map-13. 2 luật chỉ định mới, nhận theo tên hoặc địa chỉ:
+  - Hoàng Dương (Sn 67 tổ 3) → ĐỖ THỊ NHUNG [123498]
+  - An Tâm (524 Đường 3/2 Tích Lương) → BÙI VĂN TUẤN [53634] — lưu ý
+    "524 Đường 3/2" không có tiền tố "Số" nên parser không bắt được số
+    nhà, luật này nhận bằng chuỗi như luật Đỉnh Yến (có ranh biên trái
+    để không nhầm với 1524)
+- Mục mới "Hàng shop của LÊ TUẤN ANH" — 5 shop chỉ định về
+  LÊ TUẤN ANH [139148], nhận theo tên hoặc địa chỉ:
+  - Dream Tears (Số Nhà 12, Ngõ 168, Tổ 6)
+  - Eviici (Số nhà 888, ngõ 287 đường Thống Nhất, khu TĐC số 3, tổ 3)
+  - Evii (Số nhà 888, khu TĐC số 3, tổ Tân Lập 3)
+  - Zuba Toys (Số 1142, Đường 3 Tháng 2)
+  - Lan anh (Số nhà 13 đường Lê Hữu Trác, tổ 9)
+- Ranh giới đã kiểm chứng: "Tổ 3" trần vẫn về SƠN; "Ngõ 67" kèm phường
+  Tích Lương không về TRUNG (luật ngõ 67/210/711 chỉ nhận khi có khu
+  Phú Xá hoặc không ghi khu vực/phường); "Số nhà 888, khu TĐC số 3,
+  tổ 3" không ngõ, không Tân Lập thì về SƠN theo tổ 3 (thiếu chi tiết
+  phân biệt Eviici/Evii).
+- Bản Map-13 soạn lại theo format mới lưu tại
+  ~/workspace/your_files/Map-13-soan-lai.txt.
+
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
