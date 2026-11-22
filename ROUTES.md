@@ -378,6 +378,13 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Bản Map-13 soạn lại theo format mới lưu tại
   ~/workspace/your_files/Map-13-soan-lai.txt.
 
+## Giao diện (22/11/2026, chỉ bản web)
+- Header đổi sang nền gradient cam SPX
+  `linear-gradient(-180deg, #f53d2d, #f63)`, chữ trắng, padding 30px 20px
+  (cả tiêu đề lẫn dòng thông tin Hub).
+- Toàn bộ chữ nội dung căn đều (`text-align: justify` trên body); bảng
+  tuyến, nút bấm và ô thả ảnh giữ căn cũ vì là bảng số liệu và nút chức năng.
+
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
 - Khi chủ tuyến nghỉ, đơn tự chuyển sang rider gần nhất cùng phường theo thứ tự cover trong code (ví dụ: Sơn nghỉ → Tuấn; Tuấn nghỉ → Sơn rồi Hà; Nhung nghỉ → Hiện; Trung nghỉ → Mai rồi Nhung). Nếu không còn rider gần nào thì chuyển sang người cover dự phòng theo phường (Phú Xá → ĐẶNG TIẾN TRUNG; Tân Lập / Tích Lương → LÊ TUẤN ANH); nếu người cover dự phòng cũng nghỉ thì chuyển tiếp theo chuỗi cover của phường đó.
