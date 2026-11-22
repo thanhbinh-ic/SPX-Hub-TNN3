@@ -10,8 +10,8 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <style>
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#f6f6f6;color:#222;text-align:justify}
-header{background:linear-gradient(-180deg,#f53d2d,#f63);color:#fff;padding:30px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-header h1{margin:0;font-size:20px} header p{margin:6px 0 0;color:#fff}
+header{background:#eaf1f8;color:#16324f;padding:16px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+header h1{margin:0;font-size:20px} header p{margin:6px 0 0;color:#44586e}
 .header-info{text-align:right;max-width:520px;font-size:14px}
 main{max-width:980px;margin:0 auto;padding:16px}
 .card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:20px;margin-bottom:28px}
@@ -725,11 +725,22 @@ let mapLayerIdx=0, mapSwitching=false;
 function mapUseLayer(i){ map.eachLayer(l=>{ if(l instanceof L.TileLayer) map.removeLayer(l); }); mapLayers[i].addTo(map); }
 mapLayers.forEach((ly,i)=>{ ly.on("tileerror",()=>{ if(mapSwitching||i!==mapLayerIdx) return; if(mapLayerIdx<mapLayers.length-1){ mapSwitching=true; mapLayerIdx++; mapUseLayer(mapLayerIdx); setTimeout(()=>{ mapSwitching=false; },2000); } }); });
 mapUseLayer(0);
-// Ép Leaflet tính lại kích thước sau khi trang dựng xong và khi đổi cửa sổ:
-// bản đồ hay bị lệch/mất nền khi khởi tạo lúc khung chưa có kích thước cuối.
-function fixMapSize(){ map.invalidateSize(); }
+// Ép Leaflet tính lại kích thước và tải lại tile sau khi trang dựng xong
+// và khi quay lại tab: bản đồ hay bị trống nền khi tải lần đầu, vì
+// invalidateSize() chỉ tính lại kích thước chứ không tải lại tile khi
+// kích thước không đổi — phải redraw() lớp tile mới ép tải lại.
+// Thử lại vài lần vì tile CDN lúc đầu có thể chưa về kịp.
+let mapTilesOK=false;
+mapLayers.forEach(ly=>ly.on("load",()=>{ mapTilesOK=true; }));
+function fixMapSize(){
+  map.invalidateSize();
+  if(!mapTilesOK) map.eachLayer(l=>{ if(l instanceof L.TileLayer) l.redraw(); });
+}
 if(document.readyState==="complete"){ fixMapSize(); } else { window.addEventListener("load",fixMapSize); }
 setTimeout(fixMapSize,300);
+setTimeout(fixMapSize,1500);
+setTimeout(fixMapSize,4000);
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden) fixMapSize(); });
 window.addEventListener("resize",fixMapSize);
 
 const pins=[

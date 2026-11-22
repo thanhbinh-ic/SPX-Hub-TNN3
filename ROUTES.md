@@ -379,11 +379,17 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   ~/workspace/your_files/Map-13-soan-lai.txt.
 
 ## Giao diện (22/11/2026, chỉ bản web)
-- Header đổi sang nền gradient cam SPX
-  `linear-gradient(-180deg, #f53d2d, #f63)`, chữ trắng, padding 30px 20px
-  (cả tiêu đề lẫn dòng thông tin Hub).
 - Toàn bộ chữ nội dung căn đều (`text-align: justify` trên body); bảng
   tuyến, nút bấm và ô thả ảnh giữ căn cũ vì là bảng số liệu và nút chức năng.
+- Header từng đổi sang gradient cam SPX ngày 22/11 nhưng nhìn chói mắt
+  nên đã back lại như cũ ngay trong ngày: nền `#eaf1f8`, chữ `#16324f`,
+  padding 16px 20px.
+- Fix map trống khi tải trang (22/11/2026): trước đây `fixMapSize()` chỉ
+  gọi `invalidateSize()` nên khi tile chưa tải được lúc đầu thì map vẫn
+  trống, phải zoom mới hiện. Nay `fixMapSize()` gọi thêm `redraw()` lớp
+  tile để ép tải lại, thử lại ở 300ms / 1500ms / 4000ms sau khi tải trang
+  và khi quay lại tab; dừng thử lại khi một lớp tile đã tải xong
+  (sự kiện `load` của tile layer).
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
