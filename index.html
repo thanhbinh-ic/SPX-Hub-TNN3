@@ -583,7 +583,7 @@ function render(){
 $("find").onclick=render;
 $("pupType").onchange=render;
 $("hasReturn").onchange=render;
-$("clear").onclick=()=>{$("addr").value="";$("out").innerHTML="";$("preview").innerHTML="";};
+$("clear").onclick=()=>{$("addr").value="";$("hasReturn").checked=false;$("pupType").value="";$("out").innerHTML="";$("preview").innerHTML="";};
 document.querySelectorAll(".test").forEach(el=>el.onclick=()=>{$("addr").value=el.dataset.t; $("hasReturn").checked=/hoan hang|tra tien|tra hang/i.test(el.dataset.t); render();});
 // Tien xu ly anh truoc OCR: phong to, xam hoa, nhi phan hoa Otsu (chu den tren
 // nen trang) -> Tesseract doc chinh xac hon, nhat la chu xam nho tren anh chup
