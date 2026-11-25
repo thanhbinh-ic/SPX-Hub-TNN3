@@ -420,7 +420,19 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   `rgba(255,255,255,.7)`; cuối sidebar có nút thu gọn ☰. Các mục menu
   chỉ để trưng, bấm vào không làm gì (theo yêu cầu). Trên màn hình hẹp
   sidebar thành ngăn kéo trượt từ trái (rộng tối đa 360px), mở bằng nút
-  ☰ ở topbar, đóng bằng nút ☰ cuối sidebar hoặc bấm ra ngoài.
+  ☰ ở topbar, đóng bằng nút ☰ cuối sidebar hoặc bấm ra ngoài. Sửa
+  theo kết quả kiểm chứng live (25/11/2026): đầu sidebar về đúng
+  141px như console thật (thêm `box-sizing:border-box` toàn trang +
+  padding dòng hub 10px/9px), và gom rule `li{margin-bottom:6px}`
+  chỉ áp cho mục Luật để các hàng menu đúng 40px không hở 6px —
+  sau sửa đủ 19 mục + nút thu gọn hiện hết trong viewport 1920×1031
+  không cần cuộn sidebar. Hai điểm trình kiểm chứng nêu nhưng KHÔNG
+  sửa vì bản gốc cũng vậy (đã đối chiếu code thật): icon trùng nhau
+  là của hệ thống gốc (Ticket Management dùng chung icon box với
+  Pickup, Auto Sorting Machine chung icon ¥ với Finance, Parcel
+  Sweeper chung icon người với Workforce, Report Center chung icon
+  clipboard với Case Management); tên "Parcel Sweeper Management"
+  cũng bị cắt "…" ngay trong ảnh gốc huynh gửi.
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
