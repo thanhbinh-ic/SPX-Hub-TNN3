@@ -379,8 +379,8 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   ~/workspace/your_files/Map-13-soan-lai.txt.
 
 ## Giao diện (22/11/2026, chỉ bản web)
-- Toàn bộ chữ nội dung căn đều (`text-align: justify` trên body); bảng
-  tuyến, nút bấm và ô thả ảnh giữ căn cũ vì là bảng số liệu và nút chức năng.
+- Toàn bộ chữ nội dung từng căn đều (`text-align: justify` trên body), nay
+  bỏ để theo đúng console SPX (căn trái).
 - Header từng đổi sang gradient cam SPX ngày 22/11 nhưng nhìn chói mắt
   nên đã back lại như cũ ngay trong ngày: nền `#eaf1f8`, chữ `#16324f`,
   padding 16px 20px.
@@ -392,6 +392,20 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   (sự kiện `load` của tile layer).
 - Nút Xóa ở mục 2 (22/11/2026): ngoài việc xóa văn bản, kết quả và ảnh
   xem trước, nay còn bỏ tick ô hoàn/trả và đưa PUP Type về "Chưa chọn".
+- Nhái style console SPX (25/11/2026, theo file HTML thật của
+  spx.shopee.vn và CSS `ssc-ui-vue/2.1.10` tải từ CDN Shopee): font
+  Roboto; sidebar tối `#0e1723` rộng 256px (đầu sidebar cao 141px có logo
+  SPX cam + tag LIVE, mục đang chọn chữ trắng đậm + vạch cam 4px bên
+  trái); topbar trắng cao 56px chứa breadcrumb `Hub Thái Nguyên /
+  Đẩy hàng theo tuyến`; nền nội dung `#f5f6f9`, card trắng viền
+  `#ecf0f4` bo 4px; tiêu đề mục có vạch cam 2×10px trước chữ; nút kiểu
+  SSC cao 32px bo 4px (nút chính cam `#ee4d2d`, hover `#e44a2b`);
+  ô nhập/select bo 2px; bảng tuyến đầu bảng nền `#f5f6f9`, viền
+  `#ecf0f4`; tag thử nhanh nền `#ecf0f4` bo 2px; hộp kết quả viền trái
+  xanh `#3274f7`, cảnh báo nền `#fff8db` viền trái `#ffb014`.
+  Sidebar là menu neo tới các mục của chính trang này (không phải menu
+  thật của console SPX); màn hình hẹp (≤900px) thì sidebar ẩn đi,
+  bảng tuyến cuộn ngang trong card.
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
