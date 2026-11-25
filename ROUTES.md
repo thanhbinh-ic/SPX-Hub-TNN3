@@ -406,6 +406,21 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   Sidebar là menu neo tới các mục của chính trang này (không phải menu
   thật của console SPX); màn hình hẹp (≤900px) thì sidebar ẩn đi,
   bảng tuyến cuộn ngang trong card.
+- Sidebar làm lại 1:1 theo ảnh console thật (25/11/2026, commit sau
+  `b6d4e82c`): dùng đúng logo SPX SEA và các icon SVG gốc lấy từ file
+  HTML thật của spx.shopee.vn (logo `icon-spx-sea-logo` 65×26, tag LIVE
+  nền xanh `#3274F7` chữ trắng đậm, ô Search Menu nền `#222933` viền
+  `#646B76`, dòng chọn hub `15-TNN Thai Nguyen 3 Hub` + mũi tên xuống,
+  đủ 19 mục menu thật theo đúng thứ tự trong ảnh — Dashboard, Pickup,
+  Inbound, Outbound, Return, Ticket Management, Exception Handling,
+  CCTV Management, Operation Support, Case Management, Finance, Order
+  Management, LineHaul, Workforce Management, Auto Sorting Machine,
+  To 3PL, Report Center, Parcel Sweeper Management, Delivery — mỗi mục
+  có icon gốc + mũi tên xuống bên phải, hàng cao 40px, chữ
+  `rgba(255,255,255,.7)`; cuối sidebar có nút thu gọn ☰. Các mục menu
+  chỉ để trưng, bấm vào không làm gì (theo yêu cầu). Trên màn hình hẹp
+  sidebar thành ngăn kéo trượt từ trái (rộng tối đa 360px), mở bằng nút
+  ☰ ở topbar, đóng bằng nút ☰ cuối sidebar hoặc bấm ra ngoài.
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
