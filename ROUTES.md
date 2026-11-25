@@ -394,7 +394,7 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   xem trước, nay còn bỏ tick ô hoàn/trả và đưa PUP Type về "Chưa chọn".
 - Nhái style console SPX (25/11/2026, theo file HTML thật của
   spx.shopee.vn và CSS `ssc-ui-vue/2.1.10` tải từ CDN Shopee): font
-  Roboto; sidebar tối `#0e1723` rộng 256px (đầu sidebar cao 141px có logo
+  Roboto; sidebar tối `#222933` rộng 256px (đầu sidebar cao 141px có logo
   SPX cam + tag LIVE, mục đang chọn chữ trắng đậm + vạch cam 4px bên
   trái); topbar trắng cao 56px chứa breadcrumb `Hub Thái Nguyên /
   Đẩy hàng theo tuyến`; nền nội dung `#f5f6f9`, card trắng viền
@@ -416,17 +416,26 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   CCTV Management, Operation Support, Case Management, Finance, Order
   Management, LineHaul, Workforce Management, Auto Sorting Machine,
   To 3PL, Report Center, Parcel Sweeper Management, Delivery — mỗi mục
-  có icon gốc + mũi tên xuống bên phải, hàng cao 40px, chữ
-  `rgba(255,255,255,.7)`; cuối sidebar có nút thu gọn ☰. Các mục menu
+  có icon gốc + mũi tên xuống bên phải, hàng cao 40px cách nhau 10px
+  (bước 50px, đúng như ảnh gốc đo được), icon 24×20, thụt trái 17px,
+  mũi tên cách mép phải 12px, chữ `rgba(255,255,255,.7)`; dòng chọn hub
+  căn giữa; thanh cuộn sidebar ẩn như bản gốc; cuối sidebar có nút thu
+  gọn ☰. Các mục menu
   chỉ để trưng, bấm vào không làm gì (theo yêu cầu). Trên màn hình hẹp
   sidebar thành ngăn kéo trượt từ trái (rộng tối đa 360px), mở bằng nút
   ☰ ở topbar, đóng bằng nút ☰ cuối sidebar hoặc bấm ra ngoài. Sửa
   theo kết quả kiểm chứng live (25/11/2026): đầu sidebar về đúng
   141px như console thật (thêm `box-sizing:border-box` toàn trang +
   padding dòng hub 10px/9px), và gom rule `li{margin-bottom:6px}`
-  chỉ áp cho mục Luật để các hàng menu đúng 40px không hở 6px —
-  sau sửa đủ 19 mục + nút thu gọn hiện hết trong viewport 1920×1031
-  không cần cuộn sidebar. Hai điểm trình kiểm chứng nêu nhưng KHÔNG
+  chỉ áp cho mục Luật để các hàng menu không hở 6px. Sửa theo so sánh
+  từng pixel với ảnh gốc (25/11/2026, sau khi huynh gửi ảnh đặt cạnh):
+  nền sidebar đúng là `#222933` (trước đây nhầm `#0e1723` — màu đó chỉ
+  là nền của submenu khi mở rộng trong file HTML thật), bước hàng đúng
+  50px (hàng 40px + hở 10px), icon 24×20 thụt trái 17px, mũi tên cách
+  mép phải 12px, dòng chọn hub căn giữa, ẩn thanh cuộn sidebar. Với
+  bước 50px thì sidebar cũng phải cuộn như bản gốc (ảnh gốc cao 1029px
+  cũng chỉ hiện tới Report Center) — bản trước đó ép đủ 19 mục không
+  cần cuộn là sai so với gốc nên đã bỏ. Hai điểm trình kiểm chứng nêu nhưng KHÔNG
   sửa vì bản gốc cũng vậy (đã đối chiếu code thật): icon trùng nhau
   là của hệ thống gốc (Ticket Management dùng chung icon box với
   Pickup, Auto Sorting Machine chung icon ¥ với Finance, Parcel
