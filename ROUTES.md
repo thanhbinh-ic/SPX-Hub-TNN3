@@ -131,7 +131,7 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   Chú ý: Lê Thanh Tuấn (HUB khác) khác với LÊ THANH HÀ và LÊ TUẤN ANH của HUB này,
   và không có trong bảng tuyến hay chuỗi cover của HUB này.
 - Trần Lương Computer Shop, 335 phố Hương (Phường Tích Lương) → đẩy cho
-  NGUYỄN TRUNG ĐỨC (15-TNN Thái Nguyên 8 Hub) — đổi luật từ 07/11/2026 theo
+  NGUYỄN TRUNG ĐỨC [9319] (15-TNN Thái Nguyên 8 Hub) — đổi luật từ 07/11/2026 theo
   file Map-3.txt; trước đó địa chỉ này về LÊ TUẤN ANH theo dự phòng Tích Lương.
   Luật lạc tuyến này chạy trước luật dự phòng, áp cho mọi loại hàng và cả khi
   có chữ hoàn/trả.
@@ -377,6 +377,38 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
   phân biệt Eviici/Evii).
 - Bản Map-13 soạn lại theo format mới lưu tại
   ~/workspace/your_files/Map-13-soan-lai.txt.
+
+## Cập nhật Map-14.txt (26/11/2026, chỉ bản web)
+- File huynh gửi tên Map-6cec8494.txt, nội dung = Map-13 + 8 luật mới
+  nên ghi là Map-14. 7 luật chỉ định mới, nhận theo tên hoặc địa chỉ:
+  - Đoàn Thị Mai (Toà Nhà Tân Phú, Trường Mầm Non Baby House Đường 3/2)
+    → NGUYỄN HỮU HIỆN [36689]
+  - Gia Dụng H&N (Sau Trường Mầm Non Hoa Mai Phú Xá, Ngõ 83, Tổ Phú Xá 9)
+    → ĐỖ THỊ NHUNG [123498] — riêng địa chỉ này; Tổ 9 Phú Xá nói chung
+    vẫn về HÀ NGỌC MAI [164091]
+  - Linh Liêu (Xưởng Loa, Ngách 28 Ngõ 226, Tân Lập)
+    → NGUYỄN XUÂN THẮNG [44207]
+  - Phạm Ngọc Minh (Số 6, Ngõ 226 Đường 3/2, Tổ 10 Tân Lập)
+    → NGUYỄN XUÂN THẮNG [44207]
+  - Nguyễn Thị Ánh Tuyết (Đường 3/2 Tổ 12 Tân Lập, Số nhà 547b)
+    → PHẠM THỊ HIÊN [52224]
+  - Shop loa DIY - Mixdiy S (Ngách 28, Ngõ 226, Tổ 7)
+    → NGUYỄN XUÂN THẮNG [44207]
+  - Phạm Tùng Lâm (Xưởng loa Mixdiy S, Ngõ 2, Tổ 7)
+    → NGUYỄN XUÂN THẮNG [44207]
+- 1 luật lạc tuyến mới: Gia linh (Quán Karaoke Thuỷ Top)
+  → TRẦN NGỌC LINH [89708] (15-TNN Thái Nguyên 8 Hub), áp mọi loại
+  hàng kể cả khi có chữ trả hàng — cùng mục lạc tuyến như Trần Lương
+  (335 phố Hương → Hub 8).
+- Ranh giới đã kiểm chứng: 3 luật ở Ngõ 226 phải đặt TRƯỚC luật Ngõ 226
+  chung (về ĐỨC) vì địa chỉ Linh Liêu / Phạm Ngọc Minh có nhắc "Tân Lập"
+  nên luật chung sẽ bắt trước nếu đặt sau; Ngách 28 Ngõ 226 dùng chung
+  cho cả Linh Liêu và Mixdiy S (cùng địa chỉ, cùng về THẮNG); luật Ngõ 226
+  chung và luật Thuỳ Dương (Sn 3A Ngõ 226) vẫn đúng; "Tổ Phú Xá 9" trần
+  vẫn về MAI; "Ngõ 83, Tổ 8" không về NHUNG (luật Gia Dụng H&N đòi Tổ 9).
+- Kiểm thử 24 ca (14 ca mới + 10 ca hồi quy) đều đúng.
+- Bản Map-14 soạn lại theo format mới lưu tại
+  ~/workspace/your_files/Map-14-soan-lai.txt.
 
 ## Giao diện (22/11/2026, chỉ bản web)
 - Toàn bộ chữ nội dung từng căn đều (`text-align: justify` trên body), nay
