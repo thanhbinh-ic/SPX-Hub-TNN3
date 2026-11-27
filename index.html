@@ -51,11 +51,22 @@ a{color:#3274f7;text-decoration:none}
 .topbar-menu-btn{display:none}
 /* Cot phai */
 .console-main{flex:1;margin-left:256px;min-width:0}
-.topbar{height:56px;background:#fff;border-bottom:1px solid #ecf0f4;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px;position:sticky;top:0;z-index:50}
-.ssc-breadcrumb{display:flex;align-items:center;gap:8px;font-size:14px;color:#959ba4;white-space:nowrap;overflow:hidden}
+.topbar{height:56px;background:#fff;border-bottom:1px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 16px 0 24px;position:sticky;top:0;z-index:50}
+.ssc-breadcrumb{display:flex;align-items:center;gap:12px;font-size:14px;color:#595959;white-space:nowrap;overflow:hidden}
 .ssc-breadcrumb .sep{color:#959ba4}
-.ssc-breadcrumb .current{color:#303844;overflow:hidden;text-overflow:ellipsis}
-.topbar-info{font-size:13px;color:#7e8692;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ssc-breadcrumb .current{color:#262626;overflow:hidden;text-overflow:ellipsis}
+/* Cum hanh dong phai header, nhai header console SPX (AWB Print): chuong, task, ngon ngu, avatar + ten user */
+.header-actions{display:flex;align-items:center;gap:32px;margin-left:auto}
+.ha-icon{display:inline-flex;align-items:center;justify-content:center;color:#303844}
+.ha-bell{width:18px;height:21px}
+.ha-task{width:15px;height:17px}
+.ha-lang{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:#303844;white-space:nowrap}
+.ha-user{display:inline-flex;align-items:center}
+.ha-avatar{flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:#d9d9d9;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;margin-right:10px}
+.ha-avatar svg{width:32px;height:32px}
+.ha-username{font-size:14px;line-height:20px;color:#262626;max-width:150px;text-align:left}
+.ha-chevron{width:16px;height:16px;color:#303844;flex:0 0 16px}
+.ha-user .ha-chevron{margin-left:16px}
 main{padding:16px 24px 32px}
 .page-title{font-size:20px;font-weight:700;color:#303844;margin:8px 0 16px}
 .card{background:#fff;border:1px solid #ecf0f4;border-radius:4px;padding:20px 24px;margin-bottom:16px;scroll-margin-top:70px}
@@ -103,7 +114,7 @@ hr{border:0;border-top:1px solid #ecf0f4;margin:16px 0}
   .topbar-menu-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;flex:0 0 32px;background:none;border:0;cursor:pointer;color:#303844;padding:0;margin:0}
   .topbar-menu-btn svg{width:20px;height:20px}
   .console-main{margin-left:0}
-  .topbar-info{display:none}
+  .header-actions{display:none}
   main{padding:12px 16px 24px}
   .card{padding:16px}
   .topbar{padding:0 16px}
@@ -180,7 +191,7 @@ hr{border:0;border-top:1px solid #ecf0f4;margin:16px 0}
 <header class="topbar">
 <button class="topbar-menu-btn" id="menuBtn" aria-label="Mở menu"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path></svg></button>
 <nav class="ssc-breadcrumb"><span>Hub Thái Nguyên</span><span class="sep">/</span><span class="current">Đẩy hàng theo tuyến</span></nav>
-<div class="topbar-info">Hub: Tổ dân phố số 5, Phường Tích Lương — 21.5439521, 105.8440779</div>
+<div class="header-actions"><span class="ha-icon"><svg class="ha-bell" viewBox="0 0 18 21" fill="none"><path d="M14.7176 6.75402V14.0601C14.7176 14.272 14.8153 14.472 14.9824 14.6023L16.5661 15.8368C16.8241 16.038 16.6819 16.4517 16.3547 16.4517H1.11924C0.792123 16.4517 0.64991 16.038 0.9079 15.8368L2.49159 14.6023C2.6587 14.472 2.75641 14.272 2.75641 14.0601V6.75402C2.75641 3.45104 5.43401 0.773438 8.73699 0.773438C12.04 0.773438 14.7176 3.45104 14.7176 6.75402Z" stroke="#303844" stroke-width="1.54688"/><path d="M6.74414 18.0312C6.74414 19.1322 7.63667 20.0248 8.73767 20.0248C9.83866 20.0248 10.7312 19.1322 10.7312 18.0312H6.74414Z" fill="#303844"/></svg></span><span class="ha-icon"><svg class="ha-task" viewBox="0 0 16 18" fill="none" stroke="#303844" stroke-width="1.4"><rect x="1" y="2.5" width="14" height="14.5" rx="1.5"/><rect x="5.5" y="1" width="5" height="3" rx="1" fill="#fff"/><path d="M4 8h8M4 11.5h8"/></svg></span><span class="ha-lang">English<svg class="ha-chevron" viewBox="0 0 24 24" fill="currentColor"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></span><span class="ha-user"><span class="ha-avatar"><svg viewBox="0 0 32 32" fill="#fff"><circle cx="16" cy="11" r="5.5"/><path d="M7 27c.8-5 4.5-8 9-8s8.2 3 9 8z"/></svg></span><span class="ha-username">[Ops267343]NÔNG THANH BÌNH</span><svg class="ha-chevron" viewBox="0 0 24 24" fill="currentColor"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></span></div>
 </header>
 <main>
 <h1 class="page-title">Đẩy hàng theo tuyến</h1>
