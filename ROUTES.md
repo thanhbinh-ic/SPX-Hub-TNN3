@@ -477,18 +477,24 @@ framework để Other / Static, không cần lệnh build, file chạy là `inde
 - Header nhái lại theo trang AWB Print thật (27/11/2026, đo live trên
   spx.shopee.vn/#/order/awb-print + file HTML header huynh gửi): topbar
   cao 56px nền trắng, viền dưới 1px `#e8e8e8`, padding trái 24px phải
-  16px; breadcrumb 14px, mục đầu `#595959`, mục hiện tại `#262626`,
+  16px; breadcrumb 14px, mục đầu `#959ba4`, mục hiện tại `#262626`,
   dấu "/" `#959ba4`, khoảng cách giữa các mục 12px; bên phải là cụm
   hành động: chuông dùng đúng symbol gốc `icon-notification-outline`
-  (18×21, nét `#303844`), icon task hình clipboard viền (15×17, nét
-  `#303844`), chữ "English" 14px + mũi tên xuống 16px, avatar tròn
-  32px nền `#d9d9d9` có icon người trắng, tên `[Ops267343]NÔNG THANH
-  BÌNH` 14px `#262626` line-height 20px rộng tối đa 150px nên xuống
-  2 dòng như bản gốc, + mũi tên xuống 16px; các khối cách nhau 32px,
-  avatar cách tên 10px, tên cách mũi tên 16px. Cụm này chỉ để trưng,
-  bấm vào không làm gì (như menu sidebar); màn hình hẹp (≤900px) thì
-  ẩn cả cụm. Dòng thông tin địa chỉ hub ở topbar cũ đã bỏ (địa chỉ hub
-  vẫn còn trong mục bản đồ).
+  (hiển thị 13×15 — đo theo pixel ảnh gốc, KHÔNG dùng kích thước tự
+  nhiên 18×21 của symbol vì sẽ to hơn bản gốc), icon task hình
+  clipboard viền (13×15, nét `#303844`), chữ "English" 14px + mũi tên
+  xuống 16px, avatar tròn 32px nền `#d9d9d9` có icon người trắng, tên
+  `[Ops267343]NÔNG THANH BÌNH` 14px `#262626` line-height 24px (bước
+  dòng 23,5px theo pixel ảnh gốc) rộng tối đa 150px nên xuống 2 dòng
+  như bản gốc, + mũi tên xuống 16px; các khối cách nhau 32px, avatar
+  cách tên 10px, tên cách mũi tên 16px. Cụm này chỉ để trưng, bấm vào
+  không làm gì (như menu sidebar); màn hình hẹp (≤900px) thì ẩn cả
+  cụm. Dòng thông tin địa chỉ hub ở topbar cũ đã bỏ (địa chỉ hub vẫn
+  còn trong mục bản đồ). Sửa lần 2 (27/11/2026, sau khi huynh gửi ảnh
+  đặt cạnh): chuông 18×21 → 13×15, task 15×17 → 13×15, line-height tên
+  20px → 24px, breadcrumb mục đầu `#595959` → lại `#959ba4` (đo pixel
+  ảnh gốc cho thấy mục đầu là xám nhạt, lần đầu muội nghe báo cáo đo
+  "xám đậm" rồi đổi sai).
 
 ## Đánh dấu nghỉ và người cover (thêm 01/11/2026, chỉ bản web)
 - Bảng tuyến đầy đủ có thêm cột "Nghỉ": tích vào rider nghỉ hôm đó, hệ thống sẽ không đẩy đơn cho rider đó nữa.
